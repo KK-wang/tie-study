@@ -41,7 +41,7 @@ module.exports = {
   ],
   optimization: {
     chunkIds: 'deterministic', // 分包的命名，测试打包可以改为 named，
-    usedExports: true, // tree-shaking。
+    usedExports: true, // 开启 tree-shaking。
     minimize: true,
     // minimizer 使用 webpack 默认配置的 minimizer，不需要编写 terser 文件。
     runtimeChunk: {
