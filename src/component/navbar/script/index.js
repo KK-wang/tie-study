@@ -6,13 +6,12 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 import '../style/main';
+import $ from 'jquery';
+const options = $('.options');
+options.on('click', () => {
+  const classArr = options.attr('class').split(" ");
+  if (classArr.indexOf('open-list') === -1)
+    options.addClass('open-list');
+  else options.removeClass('open-list');
 
-console.log(4);
-
-console.log(7);
-
-console.log(9);
-
-console.log(10);
-
-console.log(1);
+});

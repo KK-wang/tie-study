@@ -8,9 +8,59 @@
   <body>
     <div id="nav-bar">
       <div class="web-logo">
-
+        <img class="logo" src="<%= require('@/assets/img/navbar/logo.png').default %>" alt="">
+        <span class="keyword">铁</span>思汇
       </div>
-
+      <div class="course underline">课程中心</div>
+      <div class="cloud-note underline">云笔记</div>
+      <div class="search">
+        <div class="options">
+          <span class="choice">课程</span>
+          <svg class="icon" viewBox="0 0 1024 1024"><path d="M904 332c0-8.189-3.124-16.379-9.372-22.628-12.497-12.496-32.759-12.496-45.256 0L512 646.745 174.628 309.372c-12.497-12.496-32.758-12.496-45.255 0-12.497 12.498-12.497 32.758 0 45.256l360 360c12.497 12.496 32.758 12.496 45.255 0l360-360C900.876 348.379 904 340.189 904 332z"></path></svg>
+          <div class="option-list">
+            <div class="option active">课程</div>
+            <div class="option">笔记</div>
+            <div class="option">同学</div>
+          </div>
+        </div>
+        <input class="input" type="text">
+        <div class="search-btn">
+          <img class="icon" src="<%= require('@/assets/svg/navbar/search.svg').default %>" alt="">
+          <span class="tips">搜索</span>
+        </div>
+      </div>
+      <div class="message active">
+        <svg viewBox="0 0 1024 1024" class="icon"><path d="M594.917 144.399c0-43.804-37.123-79.478-82.916-79.478-45.7 0-82.918 35.585-82.918 79.478 0 4.473 0.386 8.86 1.13 13.133-114.498 38.254-208.43 155.73-208.43 294.718v109.423s0 157.59-40.389 158.964c-24.082 0-42.528 17.792-42.528 39.74 0 22.1 18.557 39.738 41.452 39.738h663.366c23.005 0 41.451-17.791 41.451-39.737 0-22.104-18.557-39.741-41.45-39.741-41.466 0-41.466-157.854-41.466-157.854v-110.52c0-139.166-87.828-256.69-208.409-294.828a76.963 76.963 0 0 0 1.107-13.036z m41.46 695.39c-0.123 65.905-55.285 119.29-124.377 119.29-68.617 0-124.255-53.164-124.379-119.29h248.757z"></path></svg>
+      </div>
+      <div class="avatar">
+        <img class="image" src="<%= require('@/assets/img/navbar/avatar.jpg').default %>" alt="">
+        <div class="panel">
+          <div class="brief-info">
+            <div class="stu-name">
+              <img src="<%= require('@/assets/svg/navbar/stu-name.svg').default %>" alt="">
+              <span>王兴浩</span>
+            </div>
+            <div class="stu-id">
+              <img src="<%= require('@/assets/svg/navbar/stu-id.svg').default %>" alt="">
+              <span>8209190414</span>
+            </div>
+          </div>
+          <div class="btn-group">
+            <span class="my-course btn">我的课程</span>
+            <span class="profile btn">个人信息</span>
+          </div>
+          <div class="his-record">
+            <div class="last-watch">
+              <img src="<%= require('@/assets/svg/navbar/his-record.svg').default %>" alt="">
+              <span>uni-app小程序开发</span>
+            </div>
+            <div class="his-btn-group">
+              <div class="btn">更多记录</div>
+              <div class="btn">继续</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
