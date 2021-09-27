@@ -26,6 +26,8 @@ function commonConfig(isProduction) {
     entry: {
       // 配置多入口。
       navbar: './src/component/navbar/script/index.js',
+      index: './src/page/index/script/index.js',
+      footer: './src/component/footer/script/index.js'
     },
     output: {
       filename: 'js/[name].[hash:6].bundle.js',
@@ -35,6 +37,14 @@ function commonConfig(isProduction) {
       getHtmlPlugin({
         path: 'component/navbar/index.html',
         chunk: 'navbar'
+      }),
+      getHtmlPlugin({
+        path: 'page/index/index.html',
+        chunk: 'index'
+      }),
+      getHtmlPlugin({
+        path: 'component/footer/index.html',
+        chunk: 'footer'
       }),
       new DefinePlugin({
         BASE_URL: "'../'",

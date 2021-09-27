@@ -1,0 +1,25 @@
+.footer {
+  height: 200px;
+  background-color: black;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+
+  .info {
+    width: 1152px;
+
+    span {
+      display: block;
+      margin-top: 2em;
+      width: 100%;
+      float: left;
+    }
+
+    a {
+      margin-top: 2em;
+      margin-right: 1em;
+      display: block;
+      float: left;
+    }
+  }
+}
