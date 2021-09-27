@@ -14,9 +14,11 @@ function getHtmlPlugin(option) {
   return new HtmlWebpackPlugin({
     template: `./src/${option.path}`,
     filename: `./html/${option.chunk}.html`,
-    chunks: option.chunk,
+    chunks: [option.chunk], /* 记得加中括号。*/
     // 输出的 html 文件引入资源文件的入口 chunk。
     // 这个 chunk 和多入口的配置相关。
+    inject: true,
+    hash: true
   });
 }
 
@@ -26,8 +28,8 @@ function commonConfig(isProduction) {
     entry: {
       // 配置多入口。
       navbar: './src/component/navbar/script/index.js',
-      index: './src/page/index/script/index.js',
-      footer: './src/component/footer/script/index.js'
+      sidebar: './src/component/sidebar/script/index.js',
+      course: './src/page/course/script/index.js',
     },
     output: {
       filename: 'js/[name].[hash:6].bundle.js',
@@ -39,12 +41,12 @@ function commonConfig(isProduction) {
         chunk: 'navbar'
       }),
       getHtmlPlugin({
-        path: 'page/index/index.html',
-        chunk: 'index'
+        path: 'component/sidebar/index.html',
+        chunk: 'sidebar'
       }),
       getHtmlPlugin({
-        path: 'component/footer/index.html',
-        chunk: 'footer'
+        path: 'page/course/index.html',
+        chunk: 'course'
       }),
       new DefinePlugin({
         BASE_URL: "'../'",
@@ -61,6 +63,7 @@ function commonConfig(isProduction) {
         {
           test: /\.js$/i,
           exclude: /node_modules/,
+          // 排除对 node_modules 文件夹中 js 文件的 babel-loader 转化。
           use: 'babel-loader',
         },
         {
