@@ -1,5 +1,6 @@
+
 .banner-box {
-  border-top: 2px solid #ccc;
+  margin-top: 1.5em;
   border-bottom: 2px solid #ccc;
   height: 500px;
   background-color:#fff;
@@ -180,6 +181,7 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  margin-bottom: 1.5em;
 
   .sort-title {
     font-size: 26px;
@@ -197,6 +199,7 @@
   }
 
   .sort-box {
+    margin-top: 1.5em;
     width: 1152px;
     background-color: #fff;
     display: flex;
@@ -254,8 +257,6 @@
     }
   }
 }
-
-
 
 .tip {
   position: fixed;

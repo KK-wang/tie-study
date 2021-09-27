@@ -14,7 +14,7 @@ function getHtmlPlugin(option) {
   return new HtmlWebpackPlugin({
     template: `./src/${option.path}`,
     filename: `./html/${option.chunk}.html`,
-    chunks: [option.chunk, 'navbar', 'sidebar'],
+    chunks: [option.chunk, 'navbar', 'sidebar', 'footer'],
     /* 这里的中括号意思是，
      * 只将 chunks 中写明的 chunk 代码加入到 html 中（例如 js、css 等等），
      * 其余的均不加入。*/
