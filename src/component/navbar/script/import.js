@@ -10,7 +10,7 @@ if (process.env.NODE_ENV === 'development') {
 import $ from 'jquery';
 
 export default function () {
-  const options = $('.options');
+  const options = $('.search > .options');
   options.on('click', () => {
     const classArr = options.attr('class').split(" ");
     if (classArr.indexOf('open-list') === -1)

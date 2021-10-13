@@ -21,7 +21,7 @@ function getHtmlPlugin(option) {
     // 输出的 html 文件引入资源文件的入口 chunk。
     // 这个 chunk 和多入口的配置相关。
     inject: true,
-    hash: true
+    hash: true,
   });
 }
 
@@ -32,7 +32,9 @@ function commonConfig(isProduction) {
       // 配置多入口。
       navbar: './src/component/navbar/script/index.js',
       sidebar: './src/component/sidebar/script/index.js',
+      footer: './src/component/footer/script/index.js',
       course: './src/page/course/script/index.js',
+      index: './src/page/index/script/index.js',
     },
     output: {
       filename: 'js/[name].[hash:6].bundle.js',
@@ -48,8 +50,16 @@ function commonConfig(isProduction) {
         chunk: 'sidebar'
       }),
       getHtmlPlugin({
+        path: 'component/footer/index.html',
+        chunk: 'footer'
+      }),
+      getHtmlPlugin({
         path: 'page/course/index.html',
         chunk: 'course'
+      }),
+      getHtmlPlugin({
+        path: 'page/index/index.html',
+        chunk: 'index'
       }),
       new DefinePlugin({
         BASE_URL: "'../'",
