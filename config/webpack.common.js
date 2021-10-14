@@ -14,11 +14,14 @@ function getHtmlPlugin(option) {
   return new HtmlWebpackPlugin({
     template: `./src/${option.path}`,
     filename: `./html/${option.chunk}.html`,
-    chunks: [option.chunk, 'navbar', 'sidebar', 'footer'], /* 这里的中括号意思是，只将 chunks 中写明的 chunk 代码加入到 html 中（例如 js、css 等等），其余的均不加入。*/
+    chunks: [option.chunk, 'navbar', 'sidebar', 'footer'],
+    /* 这里的中括号意思是，
+     * 只将 chunks 中写明的 chunk 代码加入到 html 中（例如 js、css 等等），
+     * 其余的均不加入。*/
     // 输出的 html 文件引入资源文件的入口 chunk。
     // 这个 chunk 和多入口的配置相关。
     inject: true,
-    hash: true
+    hash: true,
   });
 }
 
@@ -29,9 +32,9 @@ function commonConfig(isProduction) {
       // 配置多入口。
       navbar: './src/component/navbar/script/index.js',
       sidebar: './src/component/sidebar/script/index.js',
+      footer: './src/component/footer/script/index.js',
       course: './src/page/course/script/index.js',
       index: './src/page/index/script/index.js',
-      footer: './src/component/footer/script/index.js'
     },
     output: {
       filename: 'js/[name].[hash:6].bundle.js',
@@ -47,16 +50,16 @@ function commonConfig(isProduction) {
         chunk: 'sidebar'
       }),
       getHtmlPlugin({
+        path: 'component/footer/index.html',
+        chunk: 'footer'
+      }),
+      getHtmlPlugin({
         path: 'page/course/index.html',
         chunk: 'course'
       }),
       getHtmlPlugin({
         path: 'page/index/index.html',
         chunk: 'index'
-      }),
-      getHtmlPlugin({
-        path: 'component/footer/index.html',
-        chunk: 'footer'
       }),
       new DefinePlugin({
         BASE_URL: "'../'",

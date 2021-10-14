@@ -10,6 +10,8 @@ module.exports = {
     port: 8899,
     hot: "only",
     // 启用热模块替换功能，在构建失败时不刷新页面作为回退。
+    watchFiles: ['./src/page/**/*.html', './src/component/**/*.html'],
+    // 监视项目中的 .html 文件，当它们发生变化时，自动去刷新页面。
     proxy: {
       "/api": {
         target: "http://120.77.83.8:8084",
