@@ -1,6 +1,7 @@
 import '../style/main'
 import './nav'
 import './banner'
+import './sortbox'
 
 import $ from 'jquery'
 import navbarJS from '@/component/navbar/script/import.js';
