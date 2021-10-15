@@ -1,3 +1,5 @@
+let arrow = import('@/assets/img/arrow.png')
+
 window.addEventListener('load', () => {
   //系统化学习路线
   let systems = [
@@ -8,15 +10,20 @@ window.addEventListener('load', () => {
     {systemId: '', systemName: 'Linux运维', cover: ''},
     {systemId: '', systemName: '软件测试核心技术', cover: ''}
   ]
+
   let systemNav = document.getElementsByClassName('system-nav')[0]
+  let content = document.getElementsByClassName('sort-content')[0]
+
+  let roundboxFragment = document.createDocumentFragment()
+  let courseFragment = document.createDocumentFragment()
+
   for(let system of systems) {
-    let content = document.getElementsByClassName('sort-content')[0]
     //系统化学习
     let roundBox = document.createElement('div')
     roundBox.classList.add('round-box')
     let text = document.createTextNode(system.systemName)
     roundBox.appendChild(text)
-    systemNav.appendChild(roundBox)
+    roundboxFragment.appendChild(roundBox)
 
     //每个体系中的课程
     let courses = document.createElement('div')
@@ -32,6 +39,10 @@ window.addEventListener('load', () => {
     let moreSpan = document.createElement('span')
     moreSpan.classList.add('more')
     moreSpan.appendChild(document.createTextNode('更多'))
+
+    let moreImg = document.createElement('img')
+    moreImg.src = arrow
+    moreSpan.appendChild(moreImg)
 
     sortTitle.appendChild(titleSpan)
     sortTitle.appendChild(moreSpan)
@@ -71,9 +82,10 @@ window.addEventListener('load', () => {
 
       courses.appendChild(classBox)
     }
-    content.appendChild(courses)
+    courseFragment.appendChild(courses)
   }
-
+  systemNav.appendChild(roundboxFragment)
+  content.appendChild(courseFragment)
 
 
 })
