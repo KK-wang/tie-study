@@ -11,11 +11,12 @@
   .web-logo {
     display: flex;
     height: 75px;
-    width: 155px;
+    width: 175px;
     align-items: center;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 26px;
     cursor: pointer;
+
 
     &:hover {
       .logo {
@@ -23,7 +24,7 @@
       }
       .keyword {
         color: $themeColor;
-        transform: scale(1.5);
+        transform: scale(1.2);
       }
     }
 
@@ -46,6 +47,9 @@
   .underline {
     cursor: pointer;
     position: relative;
+    font-size: 26px;
+    font-weight: bold;
+
 
     &::before {
       content: '';
@@ -85,96 +89,17 @@
     height: 30px;
     border: 1px solid #BBBBBB;
     border-radius: 30px;
-    width: 280px;
+    width: 450px;
     position: relative;
-
-    .options {
-      position: absolute;
-      left: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 60px;
-      height: 100%;
-      cursor: pointer;
-
-      .choice {
-        font-size: 10px;
-        margin-right: 2px;
-        user-select: none;
-      }
-
-      .icon {
-        height: 15px;
-        transition: transform .5s;
-        transform: rotate(180deg);
-      }
-
-      .option-list {
-        position: absolute;
-        width: 40px;
-        height: 0;
-        background-color: #FDF6E6;
-        top: 24px;
-        transition: height .5s;
-        overflow: hidden;
-        border-top: none;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        .option {
-          padding: 3px;
-          width: 41px;
-          height: 20px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          user-select: none;
-          font-size: 10px;
-          color: $themeColor;
-          transition: color .5s, background-color .5s;
-          font-weight: bold;
-
-          &:not(:last-child) {
-            border-bottom: 1px solid;
-          }
-
-          &:hover {
-            color: white;
-            background-color: $themeColor;
-          }
-
-          &.active {
-            background-color: $themeColor;
-            color: white;
-          }
-
-        }
-
-      }
-
-      &.open-list {
-        .icon {
-          transform: rotate(0);
-        }
-        .option-list {
-          height: 60px;
-        }
-
-      }
-
-
-
-    }
 
     .input {
       all: unset;
-      position: absolute;
       height: calc(100% + 1px);
-      width: 150px;
+      width: 370px;
       left: 60px;
+      padding-left: 10px;
+      padding-right: 5px;
+      background-color: transparent;
     }
 
     .search-btn {
@@ -208,15 +133,16 @@
 
     }
   }
+
   .message {
-    width: 30px;
-    height: 30px;
+    width: 45px;
+    height: 45px;
     position: relative;
     cursor: pointer;
 
     .icon {
       fill: #898585;
-      width: 25px;
+      width: 40px;
     }
 
     &.active::after {
