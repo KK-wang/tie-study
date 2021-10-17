@@ -5,8 +5,6 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
-// 优化打包后的文件的体积。
-
 import $ from 'jquery';
 
 export default function () {
