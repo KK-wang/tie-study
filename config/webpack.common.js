@@ -35,6 +35,7 @@ function commonConfig(isProduction) {
       footer: './src/component/footer/script/index.js',
       course: './src/page/course/script/index.js',
       index: './src/page/index/script/index.js',
+      video: './src/page/video/script/index.js'
     },
     output: {
       filename: 'js/[name].[hash:6].bundle.js',
@@ -60,6 +61,10 @@ function commonConfig(isProduction) {
       getHtmlPlugin({
         path: 'page/index/index.html',
         chunk: 'index'
+      }),
+      getHtmlPlugin({
+        path: 'page/video/index.html',
+        chunk: 'video'
       }),
       new DefinePlugin({
         BASE_URL: "'../'",

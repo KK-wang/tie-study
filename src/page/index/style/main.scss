@@ -63,13 +63,14 @@
         display: flex;
         align-content: space-evenly;
         justify-content: center;
+        overflow: auto;
 
         div {
           height: 30px;
           line-height: 30px;
           font-size: 14px;
           margin-top: 0;
-          width: 100%;
+          width: 136px;
           text-align: center;
           color: #8F8E94;
         }
@@ -77,10 +78,10 @@
 
 
         .active {
-          color: black;
+          color: rgb(0,77,153);
           font-weight: bolder;
           border: transparent;
-          border-right: 4px solid #004D99;
+          border-right: 2px solid rgb(0,77,153);
         }
 
       }
