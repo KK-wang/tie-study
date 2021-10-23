@@ -1,0 +1,224 @@
+@import "src/common/style/base";
+
+html {
+  height: 100%;
+
+  body {
+    height: 100%;
+    min-height: 500px;
+
+    .container {
+      height: 100%;
+      width: 100%;
+      display: flex;
+    }
+
+    .player {
+      height: 100%;
+      left: 0;
+      background-color: bisque;
+      position: relative;
+      flex: auto;
+
+      .fold {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0;
+        height: 60px;
+        width: 30px;
+        background-color: #8F8E94;
+        display: flex;
+        align-items: center;
+        span {
+          display: none;
+        }
+        .active {
+          display: block !important;
+        }
+
+        svg {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .video-sidebar {
+      border-left: 1px solid #8F8E94;
+      height: 100%;
+      width: 350px;
+
+      .options {
+        width: 100%;
+        height: 50px;
+        background-color: rgb(210,213,218);
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+
+        .active {
+          border: 1px solid #999B9C;
+          color: white;
+          background-color: rgb(153, 155, 156);
+          .unactive-icon {
+            display: none !important;
+          }
+
+          .active-icon {
+            display: block !important;
+          }
+        }
+
+        .op {
+          width: 70px;
+          height: 35px;
+          line-height: 35px;
+          border-radius: 5px;
+          cursor: pointer;
+
+          .active-icon {
+            display: none;
+          }
+
+          .unactive-icon {
+            display: block;
+          }
+
+          span {
+            display: block;
+            float:left;
+            position: relative;
+            top: 4px;
+            margin-left: 0.4em;
+            margin-right: 0.2em;
+            svg {
+              cursor: pointer;
+            }
+          }
+          div {
+            cursor: pointer;
+          }
+        }
+      }
+
+      .directory-content {
+        height: calc(100% - 50px);
+        background-color: #fff;
+
+        .chapter {
+
+          .chapter-title {
+            height: 60px;
+            display: flex;
+            align-items: center;
+
+            .order {
+              text-align: center;
+              width: 30px;
+              height: 30px;
+              line-height: 30px;
+              border: 1px solid black;
+              border-radius: 90%;
+            }
+
+            .title-content {
+              font-weight: bold;
+            }
+
+            span {
+              display: block;
+              margin-left: 1em;
+            }
+          }
+
+          .active {
+            background-color: rgb(58, 62, 73) !important;
+            color: white !important;
+
+            .title {
+              color: white !important;
+            }
+          }
+
+          .lesson {
+            height: 40px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: rgb(153,155,156);
+
+            span {
+              margin-left: 1em;
+            }
+
+            .circle {
+              content: "";
+              display: block;
+              width: 20px;
+              height: 20px;
+              border: 1px solid black;
+              background-color: #fff;
+              border-radius: 90%;
+            }
+
+            .title {
+              color: black;
+            }
+
+            .time {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+          }
+        }
+      }
+
+      .comments-content {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        .comment {
+          width: 320px;
+          padding: 1em;
+          border-bottom: 1px solid #8F8E94;
+          display: flex;
+
+          .avatar {
+            flex: 0 0 5%;
+            margin-right: 1em;
+          }
+          .info {
+            flex: 0 0 75%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+
+            .name {
+              flex: 1 1 40%;
+            }
+            .date {
+              flex: 1 1 60%;
+              font-size: 12px;
+              color: #8F8E94;
+            }
+            .content {
+              font-size: 14px;
+              font-weight: bold;
+            }
+          }
+          .opt {
+            flex: 0 0 10%;
+            font-size: 12px;
+            display: flex;
+            align-items: flex-end;
+          }
+        }
+      }
+
+    }
+  }
+}

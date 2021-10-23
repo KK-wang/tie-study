@@ -16,6 +16,14 @@ let baseSorts = [{
   categoryId: 4,
   name: '项目实战',
   level: 1
+}, {
+  categoryId: 4,
+  name: '项目实战',
+  level: 1
+},{
+  categoryId: 4,
+  name: '项目实战',
+  level: 1
 }]
 
 class SortTree {
@@ -96,7 +104,7 @@ window.addEventListener('load', () => {
       if(node.info.level !== -1 && node.children === null) {
         //通过网络请求获取子目录
         node.children = []
-        for(let baseSort of baseSorts) {
+        for(let i = 0; i < 3; i++) {
           let child = new SortTree({
             categoryId: 1,
             name: "前端技术栈",
