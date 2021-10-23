@@ -18,7 +18,7 @@ $(document).ready(() => {
   $('.nav-bar').load('http://localhost:8899/html/navbar.html #nav-bar', undefined, () => {
     navbarJS()
   });
-  $('.side-bar').load('http://localhost:8899/html/sidebar.html #side-bar', undefined, () => {
+  $('#side-bar-container').load('http://localhost:8899/html/sidebar.html #side-bar', undefined, () => {
     sidebarJS();
   })
 })

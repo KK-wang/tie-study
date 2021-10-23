@@ -10,5 +10,10 @@ if (process.env.NODE_ENV === 'development') {
 import $ from 'jquery';
 
 export default function () {
-
+  $('.web-logo').on('click', () => {
+    window.location.href = 'http://localhost:8899/html/index.html';
+  });
+  $('.course').on('click', () => {
+    window.location.href = 'http://localhost:8899/html/course.html'
+  });
 }

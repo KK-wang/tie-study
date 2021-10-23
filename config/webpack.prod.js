@@ -46,7 +46,7 @@ module.exports = {
     // 将 runtime.js 文件内嵌到 html 中，减少 HTTP 的请求次数。
     /* 上述配置无法将 runtime 内嵌到 html 中，现在先略去吧。*/
     new HtmlSkipAssetsPlugin({
-      skipAssets: [/navbar.+[.]js/, /sidebar.+[.]js/, /footer.+[.]js/]
+      skipAssets: [/navbar.+[.]js/, /sidebar.+[.]js/, /footer.+[.]js/, /login.+[.]js/]
     }),
     /* HtmlSkipAssetsPlugin 是一个比较吊的插件，
      * 它能够指定某些 webpack 输出的文件不被 html-webpack-plugin 自动注入进生成的 html 中。

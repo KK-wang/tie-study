@@ -14,7 +14,7 @@ function getHtmlPlugin(option) {
   return new HtmlWebpackPlugin({
     template: `./src/${option.path}`,
     filename: `./html/${option.chunk}.html`,
-    chunks: [option.chunk, 'navbar', 'sidebar', 'footer'],
+    chunks: [option.chunk, 'navbar', 'sidebar', 'footer', 'login'],
     /* 这里的中括号意思是，
      * 只将 chunks 中写明的 chunk 代码加入到 html 中（例如 js、css 等等），
      * 其余的均不加入。*/
@@ -33,8 +33,10 @@ function commonConfig(isProduction) {
       navbar: './src/component/navbar/script/index.js',
       sidebar: './src/component/sidebar/script/index.js',
       footer: './src/component/footer/script/index.js',
+      login: './src/component/login/script/index.js',
       course: './src/page/course/script/index.js',
       index: './src/page/index/script/index.js',
+      register: './src/page/register/script/index.js'
     },
     output: {
       filename: 'js/[name].[hash:6].bundle.js',
@@ -54,12 +56,20 @@ function commonConfig(isProduction) {
         chunk: 'footer'
       }),
       getHtmlPlugin({
+        path: 'component/login/index.html',
+        chunk: 'login'
+      }),
+      getHtmlPlugin({
         path: 'page/course/index.html',
         chunk: 'course'
       }),
       getHtmlPlugin({
         path: 'page/index/index.html',
         chunk: 'index'
+      }),
+      getHtmlPlugin({
+        path: 'page/register/index.html',
+        chunk: 'register'
       }),
       new DefinePlugin({
         BASE_URL: "'../'",
@@ -104,6 +114,20 @@ function commonConfig(isProduction) {
                 limit: 10 * 1024,
               }
             },
+          ]
+        },
+        {
+          test: /\.(woff2?|eot|ttf|otf)$/i,
+          exclude: /node_modules/,
+          // 排除 node_modules 目录下的文件
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: '[name].[hash:6].[ext]',
+                outputPath: 'font',
+              }
+            }
           ]
         }
       ]

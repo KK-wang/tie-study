@@ -1,0 +1,255 @@
+@import "@/common/style/base.scss";
+
+#login {
+  position: fixed;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.42);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .login-box {
+    background-color: #ffffff;
+    width: 600px;
+    height: 350px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .login-main-content {
+      width: 90%;
+      height: 75%;
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+      position: relative;
+
+      input[type='radio'] {
+        position: absolute;
+        clip: rect(0, 0, 0, 0);
+
+        &:checked + .login-choice {
+          color: $themeColor;
+          border-color: $themeColor;
+          & + .login-panel {
+            display: flex;
+          }
+        }
+
+      }
+
+      .enter-info-input-with-svg {
+        position: relative;
+
+        &:not(:first-child) {
+          margin-top: 20px;
+        }
+
+        .enter-info-input {
+          all: unset;
+          border: 1px solid #999999;
+          width: 360px;
+          height: 40px;
+          font-size: 16px;
+          padding-left: 45px;
+          padding-right: 10px;
+          letter-spacing: 1px;
+
+          &:focus {
+            border-color: $themeColor;
+            color: $themeColor;
+
+            & + svg {
+              fill: $themeColor;
+            }
+
+          }
+
+        }
+
+
+        svg {
+          width: 30px;
+          position: absolute;
+          fill: #999999;
+          top: 50%;
+          left: 10px;
+          transform: translateY(-50%);
+        }
+
+      }
+
+      input[type='button'] {
+        all: unset;
+        width: 417px;
+        height: 40px;
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        font-size: 20px;
+        background-color: $themeColor;
+        margin-top: 15px;
+        cursor: pointer;
+      }
+
+      .login-option {
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 425px;
+
+        .login-free {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+
+          input {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            cursor: pointer;
+          }
+
+          label {
+            user-select: none;
+            cursor: pointer;
+          }
+        }
+
+        a {
+          user-select: none;
+          color: #004D99;
+          &:visited {
+            color: #004D99;
+          }
+          &:active {
+            color: #ff3838;
+          }
+        }
+      }
+
+      .login-choice {
+        cursor: pointer;
+        font-size: 22px;
+        width: 180px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 3px solid #999999;
+        color: #999999;
+      }
+
+      .login-panel {
+        position: absolute;
+        display: none;
+        width: 550px;
+        height: 220px;
+        top: 60px;
+        margin-top: 10px;
+      }
+
+      .stuID-login-panel {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+      }
+
+      .phoneNum-login-panel {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        .message-verification {
+          width: 417px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .enter-info-input-with-svg-container {
+            position: relative;
+
+            input[type='text'] {
+              width: 200px;
+            }
+
+          }
+
+          .get-message-btn-in-login {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #999999;
+            height: 40px;
+            width: 140px;
+            color: #999999;
+            user-select: none;
+            cursor: no-drop;
+            &.active {
+              border-color: $themeColor;
+              color: $themeColor;
+              cursor: pointer;
+            }
+
+          }
+
+        }
+
+
+      }
+
+      .wx-login-panel {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        color: #101010;
+        font-size: 18px;
+
+        .QRCode-container {
+          width: 160px;
+          height: 160px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border: 1px solid #999999;
+          margin-top: 15px;
+          user-select: none;
+
+          img {
+            width: 130px;
+            height: 130px;
+          }
+
+        }
+
+      }
+
+    }
+
+    .register-link {
+      margin-top: 25px;
+      a {
+        user-select: none;
+        color: #004D99;
+        &:visited {
+          color: #004D99;
+        }
+        &:active {
+          color: #ff3838;
+        }
+      }
+
+    }
+  }
+
+}
+
+
+

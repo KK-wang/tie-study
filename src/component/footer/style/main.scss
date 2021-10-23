@@ -1,3 +1,5 @@
+@import "@/common/style/base.scss";
+
 #footer {
   height: 200px;
   background-color: black;
@@ -7,6 +9,7 @@
 
   .info {
     width: 1152px;
+    position: relative;
 
     span {
       display: block;
@@ -20,6 +23,18 @@
       margin-right: 1em;
       display: block;
       float: left;
+      transition: color .5s;
+      cursor: pointer;
+      &:hover {
+        color: lighten(#004D99, 10%);
+      }
+    }
+
+    .copyright {
+      position: absolute;
+      color: #8F8E94;
+      font-size: 16px;
+      bottom: 40px;
     }
   }
 }

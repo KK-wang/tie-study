@@ -1,4 +1,4 @@
-let arrow = import('@/assets/img/arrow.png')
+import morePic from '@/assets/img/index/arrow.png';
 
 window.addEventListener('load', () => {
   //系统化学习路线
@@ -41,7 +41,7 @@ window.addEventListener('load', () => {
     moreSpan.appendChild(document.createTextNode('更多'))
 
     let moreImg = document.createElement('img')
-    moreImg.src = arrow
+    moreImg.src = morePic;
     moreSpan.appendChild(moreImg)
 
     sortTitle.appendChild(titleSpan)
@@ -86,6 +86,4 @@ window.addEventListener('load', () => {
   }
   systemNav.appendChild(roundboxFragment)
   content.appendChild(courseFragment)
-
-
 })

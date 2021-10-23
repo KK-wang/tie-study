@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="login">
+  <div class="login-box">
+    <div class="login-main-content">
+      <input type="radio" id="stuID-login" name="login-way" checked>
+      <label class="login-choice" for="stuID-login">学号登录</label>
+      <div class="stuID-login-panel login-panel">
+        <div class="enter-info-input-with-svg">
+          <input type="text" class="enter-info-input" placeholder="中南大学学号">
+          <svg viewBox="0 0 1024 1024"><path d="M938.304 884.032s-27.84-61.44-125.568-195.072a2859.136 2859.136 0 0 0-91.52-116.8A308.48 308.48 0 0 1 512 654.72a308.864 308.864 0 0 1-209.92-83.136 2891.584 2891.584 0 0 0-92.032 117.44c-97.728 133.696-125.568 195.072-125.568 195.072-16.768 38.208-2.368 75.904 35.456 75.904h782.976c37.824 0 54.912-41.472 35.392-75.968zM512 591.168c140.672 0 254.72-118.016 254.72-263.552C766.72 182.016 652.672 64 512 64S257.28 182.016 257.28 327.552c0 145.6 114.048 263.616 254.72 263.616z"></path></svg>
+        </div>
+        <div class="enter-info-input-with-svg">
+          <input type="password" class="enter-info-input" placeholder="密码">
+          <svg viewBox="0 0 1024 1024"><path d="M288 384v-74.666667c0-123.722667 100.266667-224 224-224s224 100.224 224 224v74.666667h10.677333C811.445333 384 864 436.597333 864 501.333333v320c0 64.821333-52.469333 117.333333-117.322667 117.333334H277.333333C212.554667 938.666667 160 886.069333 160 821.333333V501.333333c0-64.821333 52.469333-117.333333 117.322667-117.333333H288z m64 0h320v-74.666667c0-88.426667-71.605333-160-160-160-88.384 0-160 71.626667-160 160v74.666667zM224 501.333333v320c0 29.397333 23.914667 53.333333 53.322667 53.333334H746.666667A53.269333 53.269333 0 0 0 800 821.333333V501.333333c0-29.397333-23.914667-53.333333-53.322667-53.333333H277.333333A53.269333 53.269333 0 0 0 224 501.333333z" p-id="3472"></path></svg>
+        </div>
+        <div class="login-option">
+          <div class="login-free">
+            <input type="checkbox" id="is-login-free-in-stuID">
+            <label for="is-login-free-in-stuID">七天内免登录</label>
+          </div>
+          <a href="#">忘记密码</a>
+        </div>
+        <input type="button" value="登录">
+      </div>
+      <input type="radio" id="phoneNum-login" name="login-way">
+      <label class="login-choice" for="phoneNum-login">手机登录</label>
+      <div class="phoneNum-login-panel login-panel">
+        <div class="enter-info-input-with-svg">
+          <input type="text" class="enter-info-input" placeholder="账户绑定的手机号">
+          <svg viewBox="0 0 1024 1024"><path d="M797.328 80v864h-564V80h564m0-80h-564a80 80 0 0 0-80 80v864a80 80 0 0 0 80 80h564a80 80 0 0 0 80-80V80a80 80 0 0 0-80-80z"></path><path d="M182.336 708h666v80H182.336zM568 906h-105.328a40 40 0 1 1 0-80H568a40 40 0 1 1 0 80z"></path></svg>
+        </div>
+        <div class="enter-info-input-with-svg message-verification">
+          <div class="enter-info-input-with-svg-container">
+            <input type="text" class="enter-info-input" placeholder="短信验证码" maxlength="6">
+            <svg viewBox="0 0 1024 1024"><path d="M934.4 160S697.6 134.4 531.2 6.4c-12.8-6.4-25.6-6.4-38.4 0C326.4 134.4 89.6 160 89.6 160c-12.8 0-25.6 12.8-25.6 25.6C64 192 64 358.4 115.2 544c32 108.8 76.8 204.8 128 275.2 70.4 96 166.4 160 262.4 198.4 102.4-32 198.4-102.4 262.4-198.4 51.2-76.8 96-166.4 128-275.2 64-185.6 64-345.6 64-358.4 0-12.8-12.8-25.6-25.6-25.6z m-204.8 243.2l-230.4 256c-6.4 6.4-12.8 12.8-25.6 12.8-6.4 0-19.2 0-25.6-6.4l-147.2-128c-19.2-19.2-19.2-38.4-6.4-51.2 6.4-12.8 19.2-12.8 25.6-12.8 6.4 0 19.2 0 19.2 6.4l121.6 108.8 211.2-224c12.8-12.8 32-19.2 51.2-6.4 6.4 6.4 12.8 12.8 12.8 25.6 0 0 0 12.8-6.4 19.2z"></path></svg>
+          </div>
+          <div class="get-message-btn-in-login active">获取验证码</div>
+        </div>
+        <div class="login-option">
+          <div class="login-free">
+            <input type="checkbox" id="is-login-free-in-phoneNum">
+            <label for="is-login-free-in-phoneNum">七天内免登录</label>
+          </div>
+          <a href="#">忘记密码</a>
+        </div>
+        <input type="button" value="登录">
+      </div>
+      <input type="radio" id="wx-login" name="login-way">
+      <label class="login-choice" for="wx-login">微信登录</label>
+      <div class="wx-login-panel login-panel">
+        微信扫码登录，极速更安全
+        <div class="QRCode-container">
+          <img src="" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="register-link">
+      <a href="http://localhost:8899/html/register.html">还没有账号? 点击前往注册!</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

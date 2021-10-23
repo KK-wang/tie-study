@@ -6,6 +6,7 @@
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
 </head>
 <body>
+<div id="login-container"></div>
 <div id="nav-bar-container"></div>
 <div class="main-content">
   <div class="navigation">
@@ -61,7 +62,10 @@
       </div>
       <div class="panel">
         <div class="panel-li">
-          <div class="panel-li-introduce"></div>
+          <div class="panel-li-introduce-container">
+            <div class="panel-li-introduce"></div>
+          </div>
+          <!-- 加这一层 container 是为了使两边的高度不在趋于一致。-->
           <div class="course-additional-info">
             <div class="course-belong-to">
               <span class="course-additional-info-title">所属系列课程</span>
@@ -169,285 +173,287 @@
             </div>
           </div>
           <div class="catalog-and-evaluate">
-            <div class="panel-li-catalog">
-              <span class="catalog-tips">目录</span>
-              <div class="chapter">
-                <input type="checkbox" id="chapter1">
-                <label for="chapter1">
-                  <span>章节</span>
-                  <div class="chapter-serial-number"></div>
-                  <span>webpack初体验</span>
-                  <img src="<%= require('@/assets/svg/course/down.svg').default %>" alt="">
-                </label>
-                <div class="classes">
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+            <div class="panel-li-catalog-container">
+              <div class="panel-li-catalog">
+                <span class="catalog-tips">目录</span>
+                <div class="chapter">
+                  <input type="checkbox" id="chapter1">
+                  <label for="chapter1">
+                    <span>章节</span>
+                    <div class="chapter-serial-number"></div>
+                    <span>webpack初体验</span>
+                    <img src="<%= require('@/assets/svg/course/down.svg').default %>" alt="">
+                  </label>
+                  <div class="classes">
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
                     </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
-                  </div>
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
                     </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
-                  </div>
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
                     </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
-                  </div>
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
                     </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
-                  </div>
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
                     </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
-                  </div>
-                </div>
-              </div>
-              <div class="chapter">
-                <input type="checkbox" id="chapter2">
-                <label for="chapter2">
-                  <span>章节</span>
-                  <div class="chapter-serial-number"></div>
-                  <span>webpack初体验</span>
-                  <img src="<%= require('@/assets/svg/course/down.svg').default %>" alt="">
-                </label>
-                <div class="classes">
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
-                    </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
-                  </div>
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
-                    </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
-                  </div>
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
-                    </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
-                  </div>
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
-                    </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
-                  </div>
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
-                    </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
                   </div>
                 </div>
-              </div>
-              <div class="chapter">
-                <input type="checkbox" id="chapter3">
-                <label for="chapter3">
-                  <span>章节</span>
-                  <div class="chapter-serial-number"></div>
-                  <span>webpack初体验</span>
-                  <img src="<%= require('@/assets/svg/course/down.svg').default %>" alt="">
-                </label>
-                <div class="classes">
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                <div class="chapter">
+                  <input type="checkbox" id="chapter2">
+                  <label for="chapter2">
+                    <span>章节</span>
+                    <div class="chapter-serial-number"></div>
+                    <span>webpack初体验</span>
+                    <img src="<%= require('@/assets/svg/course/down.svg').default %>" alt="">
+                  </label>
+                  <div class="classes">
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
                     </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
-                  </div>
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
                     </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
-                  </div>
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
                     </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
-                  </div>
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
                     </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
-                  </div>
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
                     </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
-                  </div>
-                </div>
-              </div>
-              <div class="chapter">
-                <input type="checkbox" id="chapter4">
-                <label for="chapter4">
-                  <span>章节</span>
-                  <div class="chapter-serial-number"></div>
-                  <span>webpack初体验</span>
-                  <img src="<%= require('@/assets/svg/course/down.svg').default %>" alt="">
-                </label>
-                <div class="classes">
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
-                    </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
-                  </div>
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
-                    </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
-                  </div>
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
-                    </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
-                  </div>
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
-                    </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
-                  </div>
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
-                    </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
                   </div>
                 </div>
-              </div>
-              <div class="chapter">
-                <input type="checkbox" id="chapter5">
-                <label for="chapter5">
-                  <span>章节</span>
-                  <div class="chapter-serial-number"></div>
-                  <span>webpack初体验</span>
-                  <img src="<%= require('@/assets/svg/course/down.svg').default %>" alt="">
-                </label>
-                <div class="classes">
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                <div class="chapter">
+                  <input type="checkbox" id="chapter3">
+                  <label for="chapter3">
+                    <span>章节</span>
+                    <div class="chapter-serial-number"></div>
+                    <span>webpack初体验</span>
+                    <img src="<%= require('@/assets/svg/course/down.svg').default %>" alt="">
+                  </label>
+                  <div class="classes">
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
                     </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
+                    </div>
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
+                    </div>
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
+                    </div>
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
+                    </div>
                   </div>
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                </div>
+                <div class="chapter">
+                  <input type="checkbox" id="chapter4">
+                  <label for="chapter4">
+                    <span>章节</span>
+                    <div class="chapter-serial-number"></div>
+                    <span>webpack初体验</span>
+                    <img src="<%= require('@/assets/svg/course/down.svg').default %>" alt="">
+                  </label>
+                  <div class="classes">
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
                     </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
+                    </div>
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
+                    </div>
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
+                    </div>
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
+                    </div>
                   </div>
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                </div>
+                <div class="chapter">
+                  <input type="checkbox" id="chapter5">
+                  <label for="chapter5">
+                    <span>章节</span>
+                    <div class="chapter-serial-number"></div>
+                    <span>webpack初体验</span>
+                    <img src="<%= require('@/assets/svg/course/down.svg').default %>" alt="">
+                  </label>
+                  <div class="classes">
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
                     </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
-                  </div>
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
                     </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
-                  </div>
-                  <div class="class-li">
-                    <span>课时</span>
-                    <div class="class-li-state active">
-                      <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
                     </div>
-                    <span>为什么会出现webpack</span>
-                    <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
-                    <span>03:30</span>
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
+                    </div>
+                    <div class="class-li">
+                      <span>课时</span>
+                      <div class="class-li-state active">
+                        <img src="<%= require('@/assets/svg/course/yes.svg').default %>" alt="">
+                      </div>
+                      <span>为什么会出现webpack</span>
+                      <img src="<%= require('@/assets/svg/course/video.svg').default %>" alt="">
+                      <span>03:30</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -495,10 +501,6 @@
     </div>
   </div>
 </div>
-
-
-
-
 <div id="side-bar-container"></div>
 <div id="footer-container"></div>
 </body>

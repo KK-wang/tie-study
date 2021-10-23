@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>铁思汇</title>
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <style>
+    @font-face {
+      font-family: 'tie-project-font-en';
+      src: url('<%= require("@/assets/font/tie-project-font-one.woff2").default %>') format('woff2'),
+      url('<%= require("@/assets/font/tie-project-font-one.woff").default %>') format('woff');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'tie-project-font-zh';
+      src: url('<%= require("@/assets/font/tie-project-font-two.woff2").default %>') format('woff2'),
+      url('<%= require("@/assets/font/tie-project-font-two.woff").default %>') format('woff');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+  </style>
+  <style id="register-form-bg-size-style"></style>
+</head>
+<body>
+  <img class="register-bg-img" src="<%= require('@/assets/img/register/register-bg.png').default %>" alt="">
+  <div class="register-main-content">
+    <div class="web-logo">
+      <div class="web-logo-img">
+        <img src="<%= require('@/assets/img/navbar/logo.png').default %>" alt="">
+      </div>
+      <div class="web-logo-project-name-group">
+        <div class="name-zh">铁思汇</div>
+        <div class="name-en">Tie-Study</div>
+      </div>
+      <div class="split-line">|账户注册</div>
+    </div>
+    <div class="register-form-container">
+      <div class="register-form active">
+        <img class="register-form-bg register-form-bg-size" src="<%= require('@/assets/img/register/register-bg.png').default %>" alt="">
+        <img class="csu-logo" src="<%= require('@/assets/img/register/csu-logo.png').default %>" alt="">
+        <div class="register-form-input">
+          <input type="text" id="csu-stu-id" autofocus required>
+          <label for="csu-stu-id">中南大学学号</label>
+          <svg viewBox="0 0 1024 1024"><path d="M976.384 399.36c0-1.536 0-2.56-0.512-4.096V394.24c0-1.024-0.512-2.048-0.512-3.072v-0.512c-0.512-2.56-2.048-5.12-3.072-7.168 0 0 0-0.512-0.512-0.512-1.536-2.56-3.072-4.608-5.12-6.144l-0.512-0.512c-1.024-1.024-2.048-1.536-3.072-2.56h-0.512c-1.024-1.024-2.56-1.536-3.584-2.048l-432.128-226.304c-9.216-4.608-20.48-4.608-29.696 0L65.024 371.2c-10.752 5.632-16.896 16.384-16.896 28.16s6.656 22.528 16.896 28.16l140.288 73.216v252.928c1.024 12.288 7.68 24.576 19.456 36.352 44.032 43.008 180.224 93.184 280.576 93.184h7.68c91.136-2.56 306.176-60.928 306.176-133.12V500.736l93.696-49.152V788.48c0 17.408 14.336 31.744 31.744 31.744 17.408 0 31.744-14.336 31.744-31.744V399.36z m-221.184 344.576c-23.04 23.552-146.944 72.704-244.224 75.264-94.208 2.56-220.16-51.2-242.176-75.264v-209.92l228.352 119.808c4.608 2.56 9.728 3.584 14.848 3.584s10.24-1.024 14.848-3.584l228.352-119.808v209.92zM512 589.824L148.48 399.36l363.52-190.464L875.52 399.36l-363.52 190.464z" ></path><path d="M512.256 525.00992l-219.38176-114.944 219.38176-114.944 219.38176 114.944-219.38176 114.944z"></path></svg>
+        </div>
+        <div class="register-form-input">
+          <input type="password" id="csu-password" required>
+          <label for="csu-password">教务系统密码</label>
+          <svg viewBox="0 0 1024 1024"><path d="M725.4 928.3H299.7c-88 0-159.6-71.6-159.6-159.6V555.8c0-88 71.6-159.6 159.6-159.6h425.7c88 0 159.6 71.6 159.6 159.6v212.8c0 88.1-71.6 159.7-159.6 159.7zM299.7 460c-52.8 0-95.8 43-95.8 95.8v212.8c0 52.8 43 95.8 95.8 95.8h425.7c52.8 0 95.8-43 95.8-95.8V555.8c0-52.8-43-95.8-95.8-95.8H299.7z"></path><path d="M778.6 406.8h-63.9c0-110.9-90.2-244.8-202.2-244.8S310.3 296 310.3 406.8h-63.9c0-142.7 116.2-308.6 266.1-308.6s266.1 165.9 266.1 308.6z"></path></svg>
+        </div>
+        <div class="btn-group">
+          <button class="register-form-btn validate-btn-in-first-form">
+            <span>验证</span>
+            <img src="<%= require('@/assets/svg/register/next-step.svg').default %>" alt="">
+          </button>
+        </div>
+      </div>
+      <div class="register-form validate-result-register-form">
+        <img class="register-form-bg register-form-bg-size" src="<%= require('@/assets/img/register/register-bg.png').default %>" alt="">
+        <img class="loading-gif active" src="<%= require('@/assets/img/register/loading.gif').default %>" alt="">
+        <div class="validate-result"></div>
+      </div>
+      <div class="register-form">
+        <img class="register-form-bg register-form-bg-size" src="<%= require('@/assets/img/register/register-bg.png').default %>" alt="">
+        <div class="third-register-form-title">
+          请填写您的个人信息（非必填）
+        </div>
+        <div class="register-form-input">
+          <input type="text" id="user-e-mail" autofocus required>
+          <label for="user-e-mail">邮箱地址</label>
+          <svg viewBox="0 0 1024 1024"><path d="M860.7 192.6h-697c-27.5 0-49.8 22.3-49.8 49.8V780c0 27.5 22.3 49.8 49.8 49.8h697c3.7 0 7.4-0.4 11-1.2 6.3 0 12.3-2.3 16.9-6.5v-1.5c13.5-9.1 21.7-24.3 21.9-40.6V242.3c0-27.5-22.3-49.7-49.8-49.7zM512.2 556L169.9 248.6h686.6L512.2 556zM163.7 309.8l229.5 206.4-229.5 228.7V309.8z m266.6 238.7l66.2 59.5c9.4 8.4 23.7 8.4 33.1 0l70.5-63 215.8 235H198.8l231.5-231.5z m206.3-36.8l224-199.1v443.1l-224-244z m0 0"></path></svg>
+        </div>
+        <div class="register-form-input">
+          <input type="text" id="phoneNum" required>
+          <label for="phoneNum">手机号</label>
+          <svg viewBox="0 0 1024 1024"><path d="M245.344 64h536.704a85.344 85.344 0 0 1 85.312 85.344v725.312A85.344 85.344 0 0 1 782.08 960H245.344A85.344 85.344 0 0 1 160 874.656V149.344A85.344 85.344 0 0 1 245.344 64z m-2.816 70.72v636.64h542.304V134.752H242.56z m271.168 778.112a47.168 47.168 0 1 0 0-94.304 47.168 47.168 0 0 0 0 94.304z"></path></svg>
+        </div>
+        <div class="register-form-input">
+          <input type="text" id="QQNum" required>
+          <label for="QQNum">QQ号</label>
+          <svg viewBox="0 0 1024 1024"><path d="M824.8 613.2c-16-51.4-34.4-94.6-62.7-165.3C766.5 262.2 689.3 112 511.5 112 331.7 112 256.2 265.2 261 447.9c-28.4 70.8-46.7 113.7-62.7 165.3-34 109.5-23 154.8-14.6 155.8 18 2.2 70.1-82.4 70.1-82.4 0 49 25.2 112.9 79.8 159-26.4 8.1-85.7 29.9-71.6 53.8 11.4 19.3 196.2 12.3 249.5 6.3 53.3 6 238.1 13 249.5-6.3 14.1-23.8-45.3-45.7-71.6-53.8 54.6-46.2 79.8-110.1 79.8-159 0 0 52.1 84.6 70.1 82.4 8.5-1.1 19.5-46.4-14.5-155.8z"></path></svg>
+        </div>
+        <div class="upload-avatar">
+          <input type="file" id="upload-avatar-uploader" required>
+          <svg viewBox="0 0 1024 1024"><path d="M526.336 68.608q91.136 0 171.008 32.768t139.264 89.6 93.696 133.632 34.304 163.84q0 88.064-35.328 164.864t-96.768 134.144q-19.456 21.504-51.2 21.504-22.528 0-41.984-13.312-43.008-27.648-61.952-57.856t-27.648-62.464-12.288-65.536-14.848-66.56-36.352-67.072-76.288-67.584q-25.6-16.384-48.128-24.576t-45.056-14.848-44.032-14.336-45.056-23.552-48.64-41.984-52.736-69.12q25.6-36.864 60.928-65.024t75.264-47.616 81.92-29.184 81.92-9.728zM570.368 545.792q14.336 31.744 19.968 61.44t8.704 57.344 8.704 52.736 20.48 48.128 42.496 44.032 76.8 39.424q3.072 3.072 5.12 11.776t5.12 19.968 9.728 26.112 19.968 30.208q-92.16 22.528-171.008 25.6t-158.72-20.48q9.216-22.528 13.312-40.96t5.12-34.304 0.512-30.208-1.536-29.696q-2.048-29.696-20.992-36.864t-44.032-3.584-50.176 12.288-40.448 10.752q-17.408 3.072-36.352 4.608t-35.328-1.024-26.112-9.728-6.656-22.528q2.048-12.288 4.608-28.672t2.56-33.792-5.632-33.28-19.968-27.136q-6.144-4.096-19.968-10.752t-26.112-14.848-18.432-16.384 3.072-16.384q20.48-15.36 41.984-34.816t32.768-41.984q5.12-10.24 6.144-21.504t-0.512-20.992-3.584-17.408-2.048-12.8-4.096-13.312-8.192-22.528-6.144-35.84 2.048-54.272q-26.624 7.168-37.888 30.72t-7.168 58.368q-16.384-24.576-17.408-45.568t6.656-37.888 22.528-30.208 31.232-22.528q26.624 57.344 57.856 86.016t65.536 43.52 69.12 21.504 68.096 19.968 63.488 39.424 54.784 78.336z"></path></svg>
+          <div class="avatar-title">头像</div>
+          <label for="upload-avatar-uploader">
+            <img src="<%= require('@/assets/svg/register/upload.svg').default %>" alt="">
+          </label>
+          <div class="avatar-tips">支持jpg、png和gif格式的图片，建议文件小于20M</div>
+        </div>
+        <div class="btn-group">
+          <button class="register-form-btn validate-btn-in-first-form">
+            <span>确认</span>
+            <img src="<%= require('@/assets/svg/register/submit.svg').default %>" alt="">
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
