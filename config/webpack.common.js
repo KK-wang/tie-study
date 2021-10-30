@@ -36,9 +36,10 @@ function commonConfig(isProduction) {
       login: './src/component/login/script/index.js',
       course: './src/page/course/script/index.js',
       index: './src/page/index/script/index.js',
-      register: './src/page/register/script/index.js'
+      register: './src/page/register/script/index.js',
       video: './src/page/video/script/index.js',
-      cart: './src/page/cart/script/index.js'
+      cart: './src/page/cart/script/index.js',
+      payment: './src/page/payment/script/index.js'
     },
     output: {
       filename: 'js/[name].[hash:6].bundle.js',
@@ -80,6 +81,10 @@ function commonConfig(isProduction) {
       getHtmlPlugin({
         path: 'page/cart/index.html',
         chunk: 'cart'
+      }),
+      getHtmlPlugin({
+        path: 'page/payment/index.html',
+        chunk: 'payment'
       }),
       new DefinePlugin({
         BASE_URL: "'../'",
