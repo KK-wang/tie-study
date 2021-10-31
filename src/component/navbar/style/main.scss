@@ -185,12 +185,18 @@
       border-radius: 50%;
       width: 75px;
       height: 75px;
+      padding: 10px;
       cursor: pointer;
       transition: transform .5s, box-shadow .5s;
       transform-origin: top;
       object-fit: cover;
       position: relative;
       z-index: 1000;
+      background-color: #FFFFFf;
+
+      &.trueAvatar {
+        padding: 0;
+      }
     }
 
     .panel {
@@ -199,7 +205,7 @@
       visibility: hidden;
       position: absolute;
       width: 150px;
-      height: 175px;
+      height: 205px;
       border-radius: 10px;
       border: 2px solid $themeColor;
       transition: visibility .5s, opacity .5s, transform .5s;
@@ -308,6 +314,21 @@
 
         }
 
+      }
+
+      .quit-btn {
+        cursor: pointer;
+        color: white;
+        background-color: $themeColor;
+        padding: 5px;
+        display: inline-block;
+        font-size: 10px;
+        border-radius: 5px;
+        transition: background-color .5s;
+        margin-top: 5px;
+        &:hover {
+          background-color: lighten($themeColor, 15%);
+        }
       }
 
 

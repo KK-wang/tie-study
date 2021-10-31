@@ -4,8 +4,7 @@ module.exports = {
   devServer: {
     /* 需要注意一下，现在使用的 webpack-dev-server 版本已经是 v4 了，
     很多配置都改变了，需要我们重新阅读一下官方文档。 */
-    open: ['/html/cart.html'],
-    // 打开默认的文件，即这里访问的网址是 http://127.0.0.1:8899/html/navbar.html。
+    open: ['/html/index.html'],
     host: 'localhost',
     port: 8899,
     hot: "only",
@@ -13,10 +12,10 @@ module.exports = {
     watchFiles: ['./src/page/**/*.html', './src/component/**/*.html'],
     // 监视项目中的 .html 文件，当它们发生变化时，自动去刷新页面。
     proxy: {
-      "/api": {
-        target: "http://120.77.83.8:8084",
+      "/devAPI": {
+        target: "http://192.168.2.20:8088",
         pathRewrite: {
-          "^/api": ""
+          "^/devAPI": ""
         },
         secure: false,
         changeOrigin: true

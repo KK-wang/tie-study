@@ -409,7 +409,7 @@ body {
       }
 
       &:last-child {
-        height: 115%;
+        height: 128%;
 
         .third-register-form-title {
           color: #ffffff;
@@ -449,6 +449,10 @@ body {
               }
               ~ .avatar-title {
                 color: #ffffff;
+              }
+
+              ~ label {
+                padding: 3px;
               }
             }
 

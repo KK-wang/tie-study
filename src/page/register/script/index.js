@@ -9,10 +9,11 @@ import '../style/main.scss'
 import $ from 'jquery';
 import { controlRegisterFormBgStyle, controlValidateResultStyle } from './control-style';
 import controlAnimation from './control-register-animation';
+import { linkToHomePage } from "./network";
 
 $(document).ready(() => {
   controlRegisterFormBgStyle();
   controlValidateResultStyle();
   controlAnimation();
-
+  linkToHomePage();
 });

@@ -8,12 +8,14 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
-import $ from 'jquery'
+import $ from 'jquery';
 import navbarJS from '@/component/navbar/script/import.js';
 import sidebarJS from '@/component/sidebar/script/import.js';
+import loginJS from '@/component/login/script/import.js';
 $(document).ready(() => {
   $('.footer').load('http://localhost:8899/html/footer.html #footer', undefined, () => {})
   $('.nav-bar').load('http://localhost:8899/html/navbar.html #nav-bar', undefined, () => {
-    navbarJS()
+    navbarJS();
   });
-})
+
+});

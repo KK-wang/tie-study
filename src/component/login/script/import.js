@@ -1,6 +1,13 @@
 import $ from 'jquery';
+import { loginByStuID } from '@/api/login/loginByStuID';
 
 export default function () {
+  const stuIDLoginPanelBtn = document.querySelector('.stuID-login-panel input[type="button"]');
+  stuIDLoginPanelBtn.addEventListener('click', () => {
+    // 学号登录。
+    loginByStuIDInvoker().then();
+  });
+
   const getMsgBtn = $('.get-message-btn-in-login');
   let timer = null;
   getMsgBtn.on('click', () => {
@@ -26,5 +33,17 @@ export default function () {
     // module.default() 即为导入模块默认导出的东西。
     module.default();
   });
+}
 
+async function loginByStuIDInvoker() {
+  const stuIdInput = document.querySelector('.stuID-login-panel .enter-info-input[type="text"]'),
+    passwordInput = document.querySelector('.stuID-login-panel .enter-info-input[type="password"]');
+  let stuID = stuIdInput.value, password = passwordInput.value;
+  try {
+    const res = await loginByStuID(stuID, password);
+    window.$store.userAvatarSetter(res.data.avatar);
+    window.location.reload();
+  } catch (e) {
+    console.log(e);
+  }
 }

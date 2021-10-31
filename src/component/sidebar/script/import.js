@@ -5,8 +5,12 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
-import $ from 'jquery';
-
 export default function () {
-
+  document.querySelector('.shortcut:first-child').addEventListener('click', () => {
+    window.location.href = 'http://localhost:8899/html/cart.html';
+  });
+  document.querySelector('.shortcut:last-child').addEventListener('click', () => {
+    // 瞬间回到顶部。
+    document.documentElement.scrollTop = 0;
+  });
 }

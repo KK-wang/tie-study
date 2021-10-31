@@ -77,6 +77,12 @@
           width: 0;
           top: 0;
           right: 0;
+
+          &.unEnd {
+            border-top: 40px solid $themeColor;
+            border-right: 40px solid $themeColor;
+          }
+
         }
         span {
           color: #ffffff;
@@ -210,10 +216,11 @@
 
       }
 
-      #catalog:not(:target) + :not(:target) + :not(:target) ~ .choices .choice-li:nth-child(1),
+      #catalog:not(:target) + :not(:target) + :not(:target) + :not(:target) ~ .choices .choice-li:nth-child(1),
       #catalog:target ~ .choices .choice-li:nth-child(2),
       #note:target ~ .choices .choice-li:nth-child(3),
-      #question:target ~ .choices .choice-li:nth-child(4),{
+      #question:target ~ .choices .choice-li:nth-child(4),
+      #announcement:target ~ .choices .choice-li:nth-child(5) {
         background-color: $themeColor;
         color: #ffffff;
         border-radius: 10px;
@@ -221,11 +228,12 @@
 
       #catalog:target ~ .panel .panel-li:nth-child(2),
       #note:target ~ .panel .panel-li:nth-child(3),
-      #question:target ~ .panel .panel-li:nth-child(4),{
+      #question:target ~ .panel .panel-li:nth-child(4),
+      #announcement:target ~ .panel .panel-li:nth-child(5) {
         display: block;
       }
 
-      #catalog:not(:target) + :not(:target) + :not(:target) ~ .panel .panel-li:nth-child(1) {
+      #catalog:not(:target) + :not(:target) + :not(:target) + :not(:target) ~ .panel .panel-li:nth-child(1) {
         display: flex;
       }
 
@@ -295,6 +303,7 @@
 
                     img {
                       width: 40px;
+                      height: 40px;
                     }
 
                     .stu-info {
@@ -408,7 +417,7 @@
               .learning-progress-bar-fill {
                 background-color: $themeColor;
                 height: 100%;
-                width: 540px;
+                width: 0;
               }
             }
 
@@ -585,19 +594,15 @@
                       justify-content: center;
                       align-items: flex-start;
 
-                      img {
-                        display: none;
-                      }
-
-                      &.active {
+                      &.full {
                         background-color: $themeColor;
                         border-color: $themeColor;
-                        img {
-                          display: block;
-                          width: 20px;
-                        }
                       }
 
+                      &.half-full {
+                        background: linear-gradient(to right, transparent 0%, transparent 50%, $themeColor 51%, $themeColor 100%);
+                        border-color: $themeColor;
+                      }
                     }
 
                     span:nth-child(3) {
@@ -732,6 +737,13 @@
 
         &:nth-child(4) {
           .panel-li-question {
+            height: 500px;
+            background-color: #ffffff;
+          }
+        }
+
+        &:nth-child(5) {
+          .panel-li-announcement {
             height: 500px;
             background-color: #ffffff;
           }

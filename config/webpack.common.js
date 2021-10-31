@@ -36,7 +36,7 @@ function commonConfig(isProduction) {
       login: './src/component/login/script/index.js',
       course: './src/page/course/script/index.js',
       index: './src/page/index/script/index.js',
-      register: './src/page/register/script/index.js'
+      register: './src/page/register/script/index.js',
       video: './src/page/video/script/index.js',
       cart: './src/page/cart/script/index.js'
     },

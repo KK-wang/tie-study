@@ -13,4 +13,18 @@ function throttle (fn, delay) {
   }
 }
 
-export {throttle}
+function getQuery () {
+  const urlQueryArr = window.location.search.slice(1).split('&');
+  const queryObj = {};
+  for (let urlQuery of urlQueryArr) {
+    let keyValue = urlQuery.split('=');
+    queryObj[keyValue[0]] = keyValue[1];
+  }
+  return queryObj;
+}
+
+
+export {
+  throttle,
+  getQuery
+}

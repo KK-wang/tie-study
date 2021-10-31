@@ -35,9 +35,4 @@ export default function () {
   validateBtnInFirstForm.addEventListener('click', () => {
     activeRegisterForm.classList.add('fade-out');
   }, false);
-
-
-
-
-
 }
