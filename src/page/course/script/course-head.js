@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import {getQuery} from "../../../common/script/utils/index";
+import {getQuery} from "../../../common/script/utils/commonUtils";
 import getCourseHeadData from "../../../api/course/getCourseHead";
 
 function collection() {
@@ -16,12 +16,13 @@ export default async function fillDataInfo() {
   try {
     const res = await getCourseHeadData(parseInt(query.courseId));
     const data = res.data;
+    console.log(data, "headData");
     const navigation = document.querySelector('.navigation');
     // 获取 navigation 信息。
     navigation.innerHTML = `
-      <span>首页</span>
-      <span>${data.systemList[0].systemName || ''}</span>
-      <span>${data.title}</span>
+      <span>首页 > </span>
+      <span>${data.courseSystems[0].title || ''} > </span>
+      <span>${data.title || '深入浅出Webpack'}</span>
     `;
 
     // 获取课程封面信息。
@@ -58,7 +59,6 @@ export default async function fillDataInfo() {
     coursePrice.textContent = `￥${data.price}`;
 
     // 获取是否购买课程。
-    data.isSale = false
     if (data.isSale) {
       collection();
       // 购买了。
@@ -78,8 +78,8 @@ export default async function fillDataInfo() {
 
     // 获取系列课程。
     let systemStr = ''
-    for (let system of data.systemList) {
-      systemStr += `<div class="system-course-li">${system.systemName}</div>`;
+    for (let system of data.courseSystems) {
+      systemStr += `<div class="system-course-li">${system.title}</div>`;
     }
     const systemCourse = document.querySelector('.system-course');
     systemCourse.innerHTML = systemStr;

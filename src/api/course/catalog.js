@@ -20,7 +20,20 @@ function getLesson(chapterId) {
   });
 }
 
+function submitEva(courseId, content, stars) {
+  return request({
+    url: '/api/course/comment',
+    method: 'post',
+    data: {
+      courseId,
+      content,
+      stars
+    }
+  });
+}
+
 export {
   getChapter,
-  getLesson
+  getLesson,
+  submitEva,
 }

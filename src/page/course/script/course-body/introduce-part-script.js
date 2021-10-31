@@ -1,5 +1,5 @@
 import {getCourseEvaluation} from "../../../../api/course/introduction";
-import {getQuery} from "../../../../common/script/utils";
+import {getQuery} from "../../../../common/script/utils/commonUtils";
 
 export default async function evaluation() {
   const getCourseEvaluationApiParams = {

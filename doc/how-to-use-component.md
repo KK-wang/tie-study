@@ -21,8 +21,8 @@ $(document).ready(() => {
 ```text
 -component
     -script
-        import.js // 组件的业务 js 代码，需要在具体的 page 中引入，不需要在 ./index.js 中引入，为了优化打包后的 js 体积。
-        index.js // 用于形成打包后 html 的入口 js 文件，其中只需要 import.js 代码即可。
+        import.js // 组件的业务 js 代码，需要在具体的 page 中引入，不需要在 ./commonUtils.js 中引入，为了优化打包后的 js 体积。
+        commonUtils.js // 用于形成打包后 html 的入口 js 文件，其中只需要 import.js 代码即可。
     -style
         main.scss // 组件的样式。
     index.html // 组件的 html。

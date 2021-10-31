@@ -469,7 +469,7 @@
               padding: 20px;
               width: 710px;
               margin-right: 40px;
-              counter-reset: chapter-nums;
+              counter-reset: chapter-nums classes-nums;
 
               .catalog-tips {
                 font-size: 24px;
@@ -557,10 +557,10 @@
                 .classes {
                   max-height: 0;
                   transition: max-height 1s cubic-bezier(1,0,0,1);
-                  counter-reset: classes-nums;
                   overflow: hidden;
 
                   .class-li {
+                    all: unset;
                     display: flex;
                     align-items: center;
                     margin-top: 20px;

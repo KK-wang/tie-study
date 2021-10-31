@@ -1,7 +1,6 @@
 window.addEventListener('load', () => {
   let folder = document.querySelector('.folder')
   let methods = document.querySelector('.others')
-  console.log(methods)
   folder.addEventListener('click', () => {
     if(methods.style.display === 'none') {
       methods.style.display = 'block'
@@ -10,6 +9,6 @@ window.addEventListener('load', () => {
       methods.style.display = 'none'
       folder.textContent = '展开'
     }
-
-  })
-})
+  });
+  document.querySelector('.payment-avatar').src = window.$store.userAvatar;
+});

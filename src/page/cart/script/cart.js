@@ -1,4 +1,4 @@
-import {throttle} from "../../../common/script/utils";
+import {throttle} from "../../../common/script/utils/commonUtils";
 
 let selectAllBtn = document.querySelector('.select-all')
 let checkBtn = document.querySelector('.check')
@@ -110,4 +110,7 @@ window.addEventListener('load', () => {
     }
   }
 
+  document.querySelector('.check').addEventListener('click', () => {
+    window.location.href = 'http://localhost:8899/html/payment.html';
+  });
 })

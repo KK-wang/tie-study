@@ -16,7 +16,7 @@ export default function () {
     window.location.href = 'http://localhost:8899/html/index.html';
   });
   $('.course').on('click', () => {
-    window.location.href = 'http://localhost:8899/html/course.html?courseId=1234'
+    window.location.href = 'http://localhost:8899/html/course.html?courseId=1'
   });
   if (getCookie("token") !== undefined) {
     // localStorage 返回的数据全部都是字符串。

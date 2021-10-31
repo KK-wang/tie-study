@@ -1,6 +1,5 @@
 import { realInfoVerification } from "../../../api/register/realInfoVerification";
 import {uploadAvatar, registerInfo} from "../../../api/register/finishRegister";
-import {loginByStuID} from "../../../api/login/loginByStuID";
 
 async function registerUser () {
   const stuID = document.querySelector('.register-form:first-child .register-form-input #csu-stu-id'),
@@ -18,7 +17,7 @@ function linkToHomePage() {
   });
 }
 
-function finishRegister(sno, trueName, academy, majorClass) {
+function finishRegister(sno, truename, academy, majorClass) {
   const submitBtn = document.querySelector('.register-form:last-child .btn-group button'),
     usernameInput = document.querySelector('#username'),
     passwordInput = document.querySelector('#password'),
@@ -69,7 +68,7 @@ function finishRegister(sno, trueName, academy, majorClass) {
       const avatarURL = await uploadAvatar(avatarFormData);
       const userInfo = {
         sno,
-        trueName,
+        truename,
         academy,
         majorClass,
         nickname: usernameValue,
