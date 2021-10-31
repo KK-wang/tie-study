@@ -1,4 +1,6 @@
 window.addEventListener('load', () => {
+  document.querySelector('.payment-avatar').src = window.$store.userAvatar
+
   let folder = document.querySelector('.folder')
   let methods = document.querySelector('.others')
   console.log(methods)
