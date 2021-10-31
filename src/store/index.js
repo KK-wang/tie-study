@@ -8,7 +8,8 @@ class Store {
 
   userAvatarSetter(userAvatar) {
     this.userAvatar = userAvatar;
-    document.querySelector('.nav-bar .avatar .image').src = userAvatar;
+    const navBarAvatar = document.querySelector('.nav-bar .avatar .image');
+    if (navBarAvatar) navBarAvatar.src = userAvatar;
     // 全局状态管理不能用代理，代理是 proxy 的改变会走 handler，被 proxy 的对象不会走 handler。
   }
 

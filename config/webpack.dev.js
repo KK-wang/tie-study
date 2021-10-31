@@ -12,10 +12,18 @@ module.exports = {
     watchFiles: ['./src/page/**/*.html', './src/component/**/*.html'],
     // 监视项目中的 .html 文件，当它们发生变化时，自动去刷新页面。
     proxy: {
-      "/devAPI": {
+      "/innerDevAPI": {
         target: "http://192.168.2.20:8088",
         pathRewrite: {
-          "^/devAPI": ""
+          "^/innerDevAPI": ""
+        },
+        secure: false,
+        changeOrigin: true
+      },
+      "/outerDevAPI": {
+        target: "http://project.sumixer.com:8088",
+        pathRewrite: {
+          "^/outerDevAPI": ""
         },
         secure: false,
         changeOrigin: true
