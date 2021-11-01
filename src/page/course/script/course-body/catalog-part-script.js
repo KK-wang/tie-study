@@ -37,7 +37,8 @@ async function generateChapterAndLesson() {
     // 使用 innerHTML 添加 DOM。
     const chapterParent = document.querySelector('.catalog-and-evaluate .panel-li-catalog-container .panel-li-catalog');
 
-    for (let i = 0; i < data.length; i++, console.log(i)) {
+    for (let i = 0; i < data.length; i++) {
+      /* await 也会阻塞 for 循环的执行，只有在 await 等到结果之后，for 循环才会再继续下去。*/
       const chapter = document.createElement('div');
       chapter.classList.add('chapter');
       chapter.innerHTML = `
