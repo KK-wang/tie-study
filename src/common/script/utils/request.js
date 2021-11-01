@@ -3,7 +3,7 @@ import { getCookie, setCookie } from "./cookie";
 
 const request = axios.create({
   // baseURL: '/innerDevAPI', // 访问内网。
-  baseURL: '/outerDevAPI', // 访问外网。
+  baseURL: '/outerDevAPI', // 访问公网。
   timeout: 5000,
   validateStatus: status => status < 500
 });

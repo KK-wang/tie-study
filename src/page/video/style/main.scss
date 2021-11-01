@@ -16,9 +16,113 @@ html {
     .player {
       height: 100%;
       left: 0;
-      background-color: bisque;
+      background-color: #68696E;
       position: relative;
       flex: auto;
+
+      .back-to-course {
+        margin-top: 10px;
+        background-color: #A0A3A5;
+        width: 140px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        cursor: pointer;
+
+        span {
+          position: relative;
+          right: 10px;
+          color: #595A5C;
+          font-weight: bold;
+        }
+
+        img {
+          width: 25px;
+        }
+
+      }
+
+      .video-title {
+        margin-top: 20px;
+        display: flex;
+        margin-left: 30px;
+        justify-content: flex-start;
+        width: 400px;
+
+        .video-title-chapter {
+          width: 80px;
+          border-top-left-radius: 20px;
+          border-bottom-left-radius: 20px;
+          height: 30px;
+          background-color: darken(#8B8D92, 5%);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .video-title-lesson {
+          position: relative;
+          right: 10px;
+          width: 70px;
+          height: 30px;
+          background-color: #010101;
+          color: #FFFFFF;
+          border-top-left-radius: 20px;
+          border-bottom-left-radius: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          span {
+            position: absolute;
+            border-radius: 50%;
+            background-color: $themeColor;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            right: -30px;
+          }
+
+        }
+
+        .video-title-lesson-title {
+          position: relative;
+          left: 40px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 30px;
+          color: #FFFFFf;
+          font-weight: bold;
+        }
+
+      }
+
+      .ali-player-demo {
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        transform: translateY(calc(-50% + 30px));
+        height: 80%;
+
+        //.player-content {
+        //  background-color: #004D99;
+        //  position: absolute;
+        //  top: 50%;
+        //  transform: translateY(-50%);
+        //  height: 80%;
+        //  width: 100%;
+        //  img {
+        //    position: relative;
+        //    width: 100%;
+        //    height: 100%;
+        //  }
+        //}
+
+      }
 
       .fold {
         position: absolute;
@@ -153,6 +257,10 @@ html {
             color: rgb(153,155,156);
             cursor: pointer;
             transition: background-color .5s;
+
+            &.active {
+              background-color: #c4c4c4;
+            }
 
             &:hover {
               background-color: #c4c4c4;

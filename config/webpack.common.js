@@ -139,7 +139,7 @@ function commonConfig(isProduction) {
             {
               loader: 'file-loader',
               options: {
-                name: '[name].[hash:6].[ext]',
+                name: '[name].[contenthash:6].[ext]',
                 outputPath: 'font',
               }
             }
