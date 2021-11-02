@@ -4,7 +4,11 @@ import img3 from '../../../assets/img/index/3.png'
 import {getBanners} from "../../../api/index/system";
 
 window.addEventListener('load', () => {
-  let banner = getBanners()
+  getBanners().then(res => {
+    console.log(res)
+  }).catch(err => {
+    console.log(err)
+  })
   let arr = [img1, img2, img3, img1, img2, img3, img1]
   let index = 0
   let img = document.querySelector(".bannerimg")

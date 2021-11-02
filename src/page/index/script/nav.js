@@ -1,4 +1,11 @@
 import '../../../component/footer/script/index'
+import {getSort} from "../../../api/index/sort";
+
+getSort().then(res => {
+  console.log(res)
+}).catch(err => {
+  console.log(err)
+})
 
 let baseSorts = [{
   categoryId: 1,

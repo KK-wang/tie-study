@@ -186,11 +186,11 @@
 
     .classbox {
       margin-top: 0.75em;
-      flex: 1;
+      width: calc((100% - 4.5em) / 4);
 
       .classpic {
         border-radius: 5px;
-        background-color:crimson;
+        background-color: bisque;
         height: 120px;
       }
 

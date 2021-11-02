@@ -1,43 +1,48 @@
 import morePic from '@/assets/img/index/arrow.png';
-import {getSystems} from "../../../api/index/system";
+import {getSystems, getCoursesInSys} from "../../../api/index/system";
+import {format} from "../../../common/script/utils";
 
-window.addEventListener('load', () => {
-  let a = getSystems()
-  console.log(a)
-  //系统化学习路线
-  let systems = [
-    {systemId: '', systemName: '前后端通用技术', cover: ''},
-    {systemId: '', systemName: '全栈项目实践', cover: ''},
-    {systemId: '', systemName: '后端技术进阶', cover: ''},
-    {systemId: '', systemName: '前端技术栈进阶', cover: ''},
-    {systemId: '', systemName: 'Linux运维', cover: ''},
-    {systemId: '', systemName: '软件测试核心技术', cover: ''}
-  ]
+let response
+let systems
+let allCoursesInfo = []
+async function generateSystems() {
+  response = await getSystems()
+  console.log(response)
+  systems = response.data.slice(0, 6)
 
   let systemNav = document.getElementsByClassName('system-nav')[0]
   let content = document.getElementsByClassName('sort-content')[0]
 
   let roundboxFragment = document.createDocumentFragment()
-  let courseFragment = document.createDocumentFragment()
 
+
+  //推荐的体系
   for(let system of systems) {
+    let link = document.createElement('a')
+    link.href = `#${system.title}`
     //系统化学习
     let roundBox = document.createElement('div')
-    roundBox.classList.add('round-box')
-    let text = document.createTextNode(system.systemName)
+    link.classList.add('round-box')
+    let text = document.createTextNode(system.title)
     roundBox.appendChild(text)
-    roundboxFragment.appendChild(roundBox)
+    link.appendChild(roundBox)
+    roundboxFragment.appendChild(link)
+  }
+  systemNav.appendChild(roundboxFragment)
 
+  for (let system of systems)  {
     //每个体系中的课程
+    //头部
     let courses = document.createElement('div')
     courses.classList.add('sort-box')
 
     let sortTitle = document.createElement('div')
     sortTitle.classList.add('sort-title')
+    sortTitle.id = system.title
 
     let titleSpan = document.createElement('span')
     titleSpan.classList.add('title')
-    titleSpan.appendChild(document.createTextNode(system.systemName))
+    titleSpan.appendChild(document.createTextNode(system.title))
 
     let moreSpan = document.createElement('span')
     moreSpan.classList.add('more')
@@ -51,44 +56,59 @@ window.addEventListener('load', () => {
     sortTitle.appendChild(moreSpan)
     courses.appendChild(sortTitle)
 
-    let coursesInfo = [
-      {courseId: '', title: 'Vue从入门到精通', subTitle: 'Vue从入门到精通', cover: '', price: '39.9'},
-      {courseId: '', title: 'Vue从入门到精通', subTitle: 'Vue从入门到精通', cover: '', price: '39.9'},
-      {courseId: '', title: 'Vue从入门到精通', subTitle: 'Vue从入门到精通', cover: '', price: '39.9'},
-      {courseId: '', title: 'Vue从入门到精通', subTitle: 'Vue从入门到精通', cover: '', price: '39.9'}
-    ]
+    //具体课程
+    let courseData = await getCoursesInSys({
+      systemId: system.courseSystemId,
+      headTime: format(new Date(), "yyyy-MM-dd hh:mm:ss"),
+      pageNum: 1,
+      pageSize: 4
+    })
+    let coursesInfo = courseData.data
+    console.log(coursesInfo)
+    if(coursesInfo[0] !== null) {
+      for(let courseInfo of coursesInfo) {
+        let link = document.createElement('a')
+        link.href = `http://localhost:8899/html/course.html?courseId=${courseInfo.courseId}`
 
-    for(let i = 0; i < 4; i++) {
-      let classBox = document.createElement('div')
-      classBox.classList.add('classbox')
+        let classBox = document.createElement('div')
+        classBox.classList.add('classbox')
 
-      let classPic = document.createElement('div')
-      classPic.classList.add('classpic')
-      classPic.appendChild(document.createTextNode('a'))
+        //课程封面
+        let classPic = document.createElement('div')
+        classPic.classList.add('classpic')
+        classPic.appendChild(document.createTextNode('a'))
 
-      let classnameSpan = document.createElement('span')
-      classnameSpan.classList.add('classname')
-      classnameSpan.appendChild(document.createTextNode(coursesInfo[i].title))
+        link.appendChild(classPic)
 
-      let classintroSpan = document.createElement('span')
-      classintroSpan.classList.add('classintro')
-      classintroSpan.appendChild(document.createTextNode(coursesInfo[i].subTitle))
+        let classnameSpan = document.createElement('span')
+        classnameSpan.classList.add('classname')
+        classnameSpan.appendChild(document.createTextNode(courseInfo.title))
 
-      let priceSpan = document.createElement('span')
-      priceSpan.classList.add('price')
-      priceSpan.appendChild(document.createTextNode(coursesInfo[i].price))
+        let classintroSpan = document.createElement('span')
+        classintroSpan.classList.add('classintro')
+        classintroSpan.appendChild(document.createTextNode(courseInfo.subtitle))
 
-      classBox.appendChild(classPic)
-      classBox.appendChild(classnameSpan)
-      classBox.appendChild(classintroSpan)
-      classBox.appendChild(priceSpan)
+        let priceSpan = document.createElement('span')
+        priceSpan.classList.add('price')
+        priceSpan.appendChild(document.createTextNode('￥' + courseInfo.price))
 
-      courses.appendChild(classBox)
+        classBox.appendChild(link)
+        classBox.appendChild(classnameSpan)
+        classBox.appendChild(classintroSpan)
+        classBox.appendChild(priceSpan)
+
+        courses.appendChild(classBox)
+      }
+    } else {
+      let tips = document.createElement('div')
+      tips.innerHTML = '该体系下暂无课程'
+      courses.appendChild(tips)
     }
-    courseFragment.appendChild(courses)
+    content.appendChild(courses)
   }
-  systemNav.appendChild(roundboxFragment)
-  content.appendChild(courseFragment)
+}
 
 
+window.addEventListener('load', () => {
+  generateSystems().then(r => {})
 })

@@ -8,9 +8,18 @@ export function getSystems() {
   })
 }
 
+export function getCoursesInSys(params) {
+  return request({
+    url: '/api/course/system',
+    method: 'get',
+    params
+  })
+
+}
+
 export function getBanners() {
   return request({
-    url: 'api/carousel',
+    url: '/api/course/carousel',
     method: 'get',
     params: {}
   })
