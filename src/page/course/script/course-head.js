@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import {getQuery} from "../../../common/script/utils/commonUtils";
 import getCourseHeadData from "../../../api/course/getCourseHead";
+import addCourseToCart from "../../../api/course/addCourseToCart";
 
 function collection() {
   const collection = $('.collection');
@@ -8,6 +9,17 @@ function collection() {
     const classList = collection.attr('class').split(" ");
     if (classList.indexOf('active') !== -1) collection.removeClass('active');
     else collection.addClass('active');
+  });
+}
+
+function cart(courseId) {
+  document.querySelector('.add-cart').addEventListener('click', async () => {
+    try {
+      const res = await addCourseToCart(courseId);
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
   });
 }
 
@@ -67,6 +79,7 @@ export default async function fillDataInfo() {
       while (buttonGroup.firstChild) buttonGroup.removeChild(buttonGroup.firstChild);
     } else {
       // 没有购买。
+      cart(parseInt(query.courseId));
       const collection = document.querySelector('.collection');
       // 无须定位父节点,通过parentNode属性直接删除自身。
       collection.parentNode.removeChild(collection);
