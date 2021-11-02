@@ -25,7 +25,8 @@ function renderProgressBar(halfFull, full, total, continueTitle) {
 
 async function generateChapterAndLesson() {
   try {
-    const res = await getChapter(parseInt(getQuery().courseId));
+    const courseId = parseInt(getQuery().courseId);
+    const res = await getChapter(courseId);
     // getChapter 获取章节。
     const data = res.data;
     console.log(data, "chapter");
@@ -70,7 +71,7 @@ async function generateChapterAndLesson() {
       for (let j = 0; j < lessonData.length; j++) {
         const lesson = document.createElement('a');
         lesson.classList.add('class-li');
-        lesson.setAttribute("href", `http://localhost:8899/html/video.html?lessonId=${lessonData[j].lessonId}&courseId=${checkbox.value}`);
+        lesson.setAttribute("href", `http://localhost:8899/html/video.html?lessonId=${lessonData[j].lessonId}&courseId=${courseId}`);
         // 这里应当设置一个自定义属性，保存一下 lessonId。
         lesson.innerHTML = `
           <span>课时</span>

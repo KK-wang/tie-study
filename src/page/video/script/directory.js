@@ -5,10 +5,6 @@ import {getChapter, getLesson} from "../../../api/course/catalog";
 window.addEventListener('load', () => {
   let videoSidebar = document.querySelector('.video-sidebar');
 
-  // console.log(chapters[0]);
-  // let chapters = document.querySelectorAll('.chapter');
-  // chapters[0].childNodes[1].classList.add('active');
-
   options[0].addEventListener('click', () => {
     videoSidebar.style.width = '350px';
     contents[0].style.display = 'block';
@@ -28,35 +24,9 @@ async function generateDirectory(courseId) {
 
   const directoryContent = document.querySelector('.directory-content');
   try {
-    // const chapterRes = await getChapter(parseInt(courseId));
-    // const chapterData = chapterRes.data;
-    const chapterData = [
-      {
-        chapterId: "1",
-        sort: 4,
-        title: "String1"
-      },
-      {
-        chapterId: "2",
-        sort: 2,
-        title: "String2"
-      },
-      {
-        chapterId: "3",
-        sort: 1,
-        title: "String3"
-      },
-      {
-        chapterId: "4",
-        sort: 3,
-        title: "String4"
-      },
-      {
-        chapterId: "5",
-        sort: 5,
-        title: "String5"
-      },
-    ];
+    const chapterRes = await getChapter(parseInt(courseId));
+    const chapterData = chapterRes.data;
+
     chapterData.sort((a, b) => parseInt(a.sort) - parseInt(b.sort));
     // 章节排序，这是必要的，后端返回来的数据并不是有序的。
     let wholeLessonIndex = 1;
@@ -65,46 +35,9 @@ async function generateDirectory(courseId) {
       const chapterEle = document.createElement('div');
       chapterEle.classList.add('chapter');
       let chapterEleChildrenHTML = `<div class="chapter-title"><span>章节</span><span class="order">${i + 1}</span><span class="title-content">${chapterData[i].title}</span></div>`;
-      // const lessonRes = await getLesson(parseInt(chapterData[i].chapterId));
-      // const lessonData = lessonRes.data;
-      const lessonData = [
-        {
-          lessonId: 1,
-          title: 'title1',
-          type: 0,
-          length: '22:32',
-          isStudied: 2,
-          sort: 4,
-          ossId: 1,
-        },
-        {
-          lessonId: 2,
-          title: 'title2',
-          type: 0,
-          length: '22:32',
-          isStudied: 2,
-          sort: 3,
-          ossId: 2,
-        },
-        {
-          lessonId: 3,
-          title: 'title3',
-          type: 0,
-          length: '22:32',
-          isStudied: 1,
-          sort: 2,
-          ossId: 3,
-        },
-        {
-          lessonId: 4,
-          title: 'title4',
-          type: 0,
-          length: '22:32',
-          isStudied: 0,
-          sort: 1,
-          ossId: 4,
-        },
-      ];
+      const lessonRes = await getLesson(parseInt(chapterData[i].chapterId));
+      const lessonData = lessonRes.data;
+
       lessonData.sort((a, b) => parseInt(a.sort) - parseInt(b.sort));
       for (let j = 0; j < lessonData.length; j++) {
         // 这里的渲染还有一些问题，需要我们给当前播放的 <a> 一个高亮标识。
