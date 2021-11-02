@@ -1,4 +1,5 @@
-import {throttle} from "../../../common/script/utils/commonUtils";
+import {throttle, format} from "../../../common/script/utils";
+import {getCartItems} from "../../../api/cart/getCartItems";
 
 let selectAllBtn = document.querySelector('.select-all')
 let checkBtn = document.querySelector('.check')
@@ -8,14 +9,20 @@ let emptyCart = document.querySelector('.empty-cart')
 let sum = document.querySelector('.money')
 let courseNum = document.querySelector('.title > span > span')
 let money = Number(sum.innerHTML)
-let cartItems = [
-  {courseId: "int", cover: "String", title: "String", price: 33, createdTime: "Date"},
-  {courseId: "int", cover: "String", title: "String", price: 1, createdTime: "Date"},
-  {courseId: "int", cover: "String", title: "String", price: 2, createdTime: "Date"},
-  {courseId: "int", cover: "String", title: "String", price: 9.9, createdTime: "Date"}
-]
+let cartItems = []
 
 window.addEventListener('load', () => {
+  let time1 = format(new Date(), "yyyy-MM-dd hh:mm:ss")
+
+  getCartItems({
+    headTime: time1,
+    pageNum: 1,
+    pageSize: 10
+  }).then((res) => {
+    cartItems = res.data.cartItemVOList
+  })
+
+  console.log(cartItems)
   let formHTML = ""
   for(let cartItem of cartItems) {
     money = (money * 1000 + cartItem.price * 1000) / 1000
@@ -110,7 +117,4 @@ window.addEventListener('load', () => {
     }
   }
 
-  document.querySelector('.check').addEventListener('click', () => {
-    window.location.href = 'http://localhost:8899/html/payment.html';
-  });
 })

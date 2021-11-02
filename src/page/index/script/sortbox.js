@@ -1,6 +1,9 @@
 import morePic from '@/assets/img/index/arrow.png';
+import {getSystems} from "../../../api/index/system";
 
 window.addEventListener('load', () => {
+  let a = getSystems()
+  console.log(a)
   //系统化学习路线
   let systems = [
     {systemId: '', systemName: '前后端通用技术', cover: ''},
