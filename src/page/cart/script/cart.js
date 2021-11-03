@@ -10,27 +10,37 @@ let sum = document.querySelector('.money')
 let courseNum = document.querySelector('.title > span > span')
 let money = Number(sum.innerHTML)
 let cartItems = []
+let opts, checkboxes
+let time1 = format(new Date(), "yyyy-MM-dd hh:mm:ss")
 
-window.addEventListener('load', () => {
-  let time1 = format(new Date(), "yyyy-MM-dd hh:mm:ss")
+function calcSum(value) {
+  for(let i = 0; i < cartItems.length; i++) {
+    if(Number(cartItems[i].courseId) === value) {
+      money = (money * 1000 - cartItems[i].price * 1000) / 1000
+      sum.innerHTML = money
+      cartItems.splice(i, 1)
+      break
+    }
+  }
+}
 
-  getCartItems({
+async function generateCartItems() {
+  let res = await getCartItems({
     headTime: time1,
     pageNum: 1,
     pageSize: 10
-  }).then((res) => {
-    cartItems = res.data.cartItemVOList;
-    console.log(cartItems)
-    let formHTML = ""
-    for(let cartItem of cartItems) {
-      money = (money * 1000 + cartItem.price * 1000) / 1000
-      formHTML += `<div class="cart-row cart-item">
+  })
+  cartItems = res.data.cartItemVOList
+
+  //生成购物车中的商品
+  let formHTML = ""
+  for(let cartItem of cartItems) {
+    money = (money * 1000 + cartItem.price * 1000) / 1000
+    formHTML += `<div class="cart-row cart-item">
         <label>
           <input class="select" type="checkbox" value="${cartItem.courseId}">
         </label>
-        <div class="cover">
-          ${cartItem.cover}
-        </div>
+        <img src="${cartItem.cover}" class="cover" alt="加载中"/>
         <div class="name">
           ${cartItem.title}
         </div>
@@ -44,25 +54,26 @@ window.addEventListener('load', () => {
           <svg t="1634461628889" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5217" width="20" height="20"><path d="M840 288H688v-56c0-40-32-72-72-72h-208C368 160 336 192 336 232V288h-152c-12.8 0-24 11.2-24 24s11.2 24 24 24h656c12.8 0 24-11.2 24-24s-11.2-24-24-24zM384 288v-56c0-12.8 11.2-24 24-24h208c12.8 0 24 11.2 24 24V288H384zM758.4 384c-12.8 0-24 11.2-24 24v363.2c0 24-19.2 44.8-44.8 44.8H332.8c-24 0-44.8-19.2-44.8-44.8V408c0-12.8-11.2-24-24-24s-24 11.2-24 24v363.2c0 51.2 41.6 92.8 92.8 92.8h358.4c51.2 0 92.8-41.6 92.8-92.8V408c-1.6-12.8-12.8-24-25.6-24z" p-id="5218" fill="#8F8E94"></path><path d="M444.8 744v-336c0-12.8-11.2-24-24-24s-24 11.2-24 24v336c0 12.8 11.2 24 24 24s24-11.2 24-24zM627.2 744v-336c0-12.8-11.2-24-24-24s-24 11.2-24 24v336c0 12.8 11.2 24 24 24s24-11.2 24-24z" p-id="5219" fill="#8F8E94"></path></svg>
         </div>
 </div>`
-    }
-    cartItemsDiv.innerHTML = formHTML
-    sum.innerHTML = money
-    courseNum.innerHTML = cartItems.length;
+  }
+  cartItemsDiv.innerHTML = formHTML
+  sum.innerHTML = money
+  courseNum.innerHTML = cartItems.length
 
-    if(!cartItems.length) {
-      emptyCart.style.display = 'flex'
-    }
-  });
+  if(cartItems.length) {
+    emptyCart.style.display = 'none'
+  }
 
-  let opts = document.querySelectorAll('.opt')
-  let checkboxes = document.querySelectorAll('.select')
+  opts = document.querySelectorAll('.opt')
+  checkboxes = document.querySelectorAll('.select')
 
+  //绑定选择全部商品事件
   selectAllBtn.addEventListener('click', () => {
     for(let checkbox of checkboxes) {
       checkbox.checked = selectAllBtn.checked !== false;
     }
   })
 
+  //绑定选择商品事件
   checkBtn.addEventListener('click', throttle(function () {
     let cartItems = []
     for (let checkbox of checkboxes) {
@@ -73,47 +84,72 @@ window.addEventListener('load', () => {
     console.log(cartItems)
   }, 1000))
 
-  function calcSum(value) {
-    for(let i = 0; i < cartItems.length; i++) {
-      if(cartItems[i].courseId === value) {
-        money = (money * 1000 - cartItems[i].price * 1000) / 1000
-        sum.innerHTML = money
-        cartItems.splice(i, 1)
-        break
-      }
-    }
-  }
-
-  deleteBtn.addEventListener('click', throttle(function () {
+  //绑定删除所选商品事件
+  deleteBtn.addEventListener('click', throttle(async function () {
     let deleteItems = []
+    let deleteNodes = []
     for (let i = 0; i < checkboxes.length; i++) {
       if(checkboxes[i].checked) {
-        deleteItems.push(checkboxes[i].value)
-        calcSum(checkboxes[i].value)
-        if(!cartItems.length) {
-          emptyCart.style.display = 'flex'
-        }
-        checkboxes[i].parentNode.parentNode.remove()
+        deleteItems.push(Number(checkboxes[i].value))
+        deleteNodes.push(checkboxes[i].parentNode.parentNode)
       }
     }
-    courseNum.innerHTML = cartItems.length
-    checkboxes = document.querySelectorAll('.select')
-    opts = document.querySelectorAll('.opt')
-  }, 1000))
+    let deleteRes = await deleteCartItem({cartItems: deleteItems.join()})
 
-  for(let opt of opts) {
-    opt.onclick = (event) => {
-      let value = event.currentTarget.parentNode.querySelector('input').value
-      calcSum(value)
+    //如果删除成功
+    if(deleteRes.code === 204) {
+      let len = deleteNodes.length
+      //删除节点
+      for(let i = 0; i < len; i++) {
+        calcSum(deleteItems[i])
+        deleteNodes.shift().remove()
+      }
       if(!cartItems.length) {
         emptyCart.style.display = 'flex'
       }
-      event.currentTarget.onclick = null
-      event.currentTarget.parentNode.remove()
       courseNum.innerHTML = cartItems.length
       checkboxes = document.querySelectorAll('.select')
       opts = document.querySelectorAll('.opt')
     }
+
+  }, 1000))
+
+  //绑定删除指定商品事件
+  for(let opt of opts) {
+    opt.onclick = async (event) => {
+      let value = Number(event.currentTarget.parentNode.querySelector('input').value)
+      let self = event.target.parentNode.parentNode
+      let deleteRes = await deleteCartItem({cartItems: value})
+      if(deleteRes.code === 204) {
+        calcSum(value)
+        if(!cartItems.length) {
+          emptyCart.style.display = 'flex'
+        }
+        self.onclick = null
+        self.parentNode.remove()
+        courseNum.innerHTML = cartItems.length
+        checkboxes = document.querySelectorAll('.select')
+        opts = document.querySelectorAll('.opt')
+      }
+    }
   }
+}
+
+window.addEventListener('load', () => {
+
+  generateCartItems().then(r => {})
+
+  // getCartItems({
+  //   headTime: time1,
+  //   pageNum: 1,
+  //   pageSize: 10
+  // }).then((res) => {
+  //
+  //
+  // })
+
+
+
+
 
 })
