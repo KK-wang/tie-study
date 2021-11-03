@@ -5,7 +5,12 @@ export function deleteCartItem(params) {
     url: '/api/cart/items',
     method: 'delete',
     params
-  })
+  });
+}
 
-
+export function clearCart() {
+  return request({
+    url: '/api/cart',
+    method: 'delete',
+  });
 }
