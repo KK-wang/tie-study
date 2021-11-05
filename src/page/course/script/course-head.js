@@ -45,6 +45,9 @@ export default async function fillDataInfo() {
     if (data.isEnd) courseImgInnerHTML += '<div class="course-state"></div><span>完结</span>';
     else courseImgInnerHTML += '<div class="course-state unEnd"></div><span>连载</span>';
     courseImg.innerHTML = courseImgInnerHTML;
+    /* 将课程封面信息保存在 sessionStorage 中。*/
+    sessionStorage.setItem("course-cover", data.cover);
+    // sessionStorage 真实牛逼。
 
     // 获取课程标题信息。
     const courseTitle = document.querySelector('.course-info .course-title');

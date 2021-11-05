@@ -75,8 +75,10 @@ async function generateSystems() {
 
         //课程封面
         let classPic = document.createElement('div')
-        classPic.classList.add('classpic')
-        classPic.appendChild(document.createTextNode('a'))
+        classPic.classList.add('classpic');
+        const img = document.createElement('img');
+        img.src = courseInfo.cover;
+        classPic.appendChild(img);
 
         link.appendChild(classPic)
 

@@ -10,44 +10,44 @@ export default async function evaluation() {
     pageSize: 3
   };
   try {
-    // const res = await getCourseEvaluation(getCourseEvaluationApiParams);
+    const res = await getCourseEvaluation(getCourseEvaluationApiParams);
     // 后端接口还没写。
-    // const evaluationList = res.data.commentList;
+    const evaluationList = res.data.commentList;
 
     // 更新所有的头像。
-    // const avatars = document.querySelectorAll('.course-evaluation-content-li .course-evaluation-content-li-head img');
-    // for (let i = 0; i < avatars.length; i++) {
-    //   avatars[i].src = evaluationList[i].avatar;
-    // }
+    const avatars = document.querySelectorAll('.course-evaluation-content-li .course-evaluation-content-li-head img');
+    for (let i = 0; i < avatars.length; i++) {
+      avatars[i].src = evaluationList[i].avatar;
+    }
 
     // 更新所有的 stu-info。
-    // const stuInfos = document.querySelectorAll('.course-evaluation-content-li .course-evaluation-content-li-head .stu-info');
-    // for (let i = 0; i < stuInfos.length; i++) {
-    //   stuInfos[i].querySelector('span:first-child').textContent = evaluationList[i].nickname;
-    //   stuInfos[i].querySelector('span:last-child').textContent = `学习${evaluationList[i].studiedNum}个课时评价`;
-    // }
+    const stuInfos = document.querySelectorAll('.course-evaluation-content-li .course-evaluation-content-li-head .stu-info');
+    for (let i = 0; i < stuInfos.length; i++) {
+      stuInfos[i].querySelector('span:first-child').textContent = evaluationList[i].nickname;
+      stuInfos[i].querySelector('span:last-child').textContent = `学习${evaluationList[i].studiedNum}个课时评价`;
+    }
 
     // 更新所有的 stars。
-    // const stars = document.querySelectorAll('.course-evaluation-content-li .course-evaluation-content-li-head .stars');
-    // for (let i = 0; i < stars.length; i++) {
-    //   for (let star of stars[i].children) {
-    //     star.classList.add('active');
-    //     evaluationList[i].star--;
-    //     if (evaluationList[i].star === 0) break;
-    //   }
-    // }
+    const stars = document.querySelectorAll('.course-evaluation-content-li .course-evaluation-content-li-head .stars');
+    for (let i = 0; i < stars.length; i++) {
+      for (let star of stars[i].children) {
+        star.classList.add('active');
+        evaluationList[i].star--;
+        if (evaluationList[i].star === 0) break;
+      }
+    }
 
     // 更新所有的评价内容。
-    // const evaluationBodies = document.querySelectorAll('.course-evaluation-content-li .course-evaluation-content-li-body');
-    // for (let i = 0; i < evaluationBodies.length; i++) {
-    //   evaluationBodies[i].textContent = evaluationList[i].content;
-    // }
+    const evaluationBodies = document.querySelectorAll('.course-evaluation-content-li .course-evaluation-content-li-body');
+    for (let i = 0; i < evaluationBodies.length; i++) {
+      evaluationBodies[i].textContent = evaluationList[i].content;
+    }
 
     // 更新所有的评价时间。
-    // const evaluationTimes = document.querySelectorAll('.course-evaluation-content-li .course-evaluation-content-li-footer');
-    // for (let i = 0; i < evaluationTimes.length; i++) {
-    //   evaluationTimes[i].textContent = evaluationList[i].content;
-    // }
+    const evaluationTimes = document.querySelectorAll('.course-evaluation-content-li .course-evaluation-content-li-footer');
+    for (let i = 0; i < evaluationTimes.length; i++) {
+      evaluationTimes[i].textContent = evaluationList[i].content;
+    }
   } catch (e) {
     console.log(e);
   }

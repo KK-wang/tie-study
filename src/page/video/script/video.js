@@ -38,7 +38,7 @@ window.addEventListener('load', async () => {
       playauth:`${videoData.playouth}`,
       // playAuth 是视频播放的唯一凭证，每个播放凭证都绑定了用户的身份标识，不同用户的播放凭证不能互换，
       // 否则无法正常播放视频。另外，播放凭证是有时效性的（默认100秒）。
-      cover:'http://localhost:8899/img/webpack.556695.png', // 这个 cover 是视频封面，需要填写正确的图片 URL 地址。
+      cover: sessionStorage.getItem('course-cover'), // 这个 cover 是视频封面，需要填写正确的图片 URL 地址。
       // videoHeight: `${videoContentHeight}px`,
       // videoWidth: `${videoContentWidth}px`,
       videoWidth: '100%',

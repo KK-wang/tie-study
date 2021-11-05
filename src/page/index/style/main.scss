@@ -191,8 +191,13 @@
 
       .classpic {
         border-radius: 5px;
-        background-color: bisque;
-        height: 120px;
+
+        img {
+          border-radius: 5px;
+          height: 100%;
+          width: 100%;
+        }
+
       }
 
       .classname {

@@ -94,12 +94,20 @@
       .order-info {
         width: 95%;
         .course {
+          all: unset;
+          cursor: pointer;
           display: flex;
+          transition: background-color .5s;
+          padding: 10px;
+
+          &:hover {
+            background-color: #c4c4c4;
+          }
+
           .cover {
             background-color: rgb(141,20,252);
             width: 120px;
             height: 60px;
-
           }
           .name {
             font-size: 14px;

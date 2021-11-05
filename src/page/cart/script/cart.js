@@ -1,6 +1,6 @@
 import {throttle, format} from "../../../common/script/utils";
 import {getCartItems} from "../../../api/cart/getCartItems";
-import {deleteCartItem} from "../../../api/cart/deleteCartItem";
+import {clearCart, deleteCartItem} from "../../../api/cart/deleteCartItem";
 
 let selectAllBtn = document.querySelector('.select-all')
 let checkBtn = document.querySelector('.check')
@@ -42,15 +42,9 @@ async function generateCartItems() {
           <input class="select" type="checkbox" value="${cartItem.courseId}">
         </label>
         <img src="${cartItem.cover}" class="cover" alt="加载中"/>
-        <div class="name">
-          ${cartItem.title}
-        </div>
-        <div class="date">
-          ${cartItem.createdTime}
-        </div>
-        <div class="price">
-          ${cartItem.price}
-        </div>
+        <div class="name">${cartItem.title}</div>
+        <div class="date">${cartItem.createdTime}</div>
+        <div class="price">${cartItem.price}</div>
         <div class="opt">
           <svg t="1634461628889" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5217" width="20" height="20"><path d="M840 288H688v-56c0-40-32-72-72-72h-208C368 160 336 192 336 232V288h-152c-12.8 0-24 11.2-24 24s11.2 24 24 24h656c12.8 0 24-11.2 24-24s-11.2-24-24-24zM384 288v-56c0-12.8 11.2-24 24-24h208c12.8 0 24 11.2 24 24V288H384zM758.4 384c-12.8 0-24 11.2-24 24v363.2c0 24-19.2 44.8-44.8 44.8H332.8c-24 0-44.8-19.2-44.8-44.8V408c0-12.8-11.2-24-24-24s-24 11.2-24 24v363.2c0 51.2 41.6 92.8 92.8 92.8h358.4c51.2 0 92.8-41.6 92.8-92.8V408c-1.6-12.8-12.8-24-25.6-24z" p-id="5218" fill="#8F8E94"></path><path d="M444.8 744v-336c0-12.8-11.2-24-24-24s-24 11.2-24 24v336c0 12.8 11.2 24 24 24s24-11.2 24-24zM627.2 744v-336c0-12.8-11.2-24-24-24s-24 11.2-24 24v336c0 12.8 11.2 24 24 24s24-11.2 24-24z" p-id="5219" fill="#8F8E94"></path></svg>
         </div>
@@ -72,23 +66,40 @@ async function generateCartItems() {
     for(let checkbox of checkboxes) {
       checkbox.checked = selectAllBtn.checked !== false;
     }
-  })
+  });
 
   //绑定选择商品事件
-  checkBtn.addEventListener('click', throttle(function () {
-    let cartItems = []
-    for (let checkbox of checkboxes) {
-      if(checkbox.checked) {
-        cartItems.push(checkbox.value)
+  checkBtn.addEventListener('click', throttle(async function () {
+    const cartItems = document.querySelectorAll('.cart-item'),
+      itemsInfo = []
+    for (let item of cartItems) {
+      const itemInfo = {
+        courseId: item.querySelector('label input').value,
+        courseCover: item.querySelector('img').src,
+        courseTitle: item.querySelector('.name').textContent,
+        price: item.querySelector('.price').textContent
       }
+      itemsInfo.push(itemInfo);
     }
-    console.log(cartItems)
-  }, 1000))
+    if (itemsInfo.length !== 0) {
+      sessionStorage.setItem("paymentData", JSON.stringify(itemsInfo));
+      try {
+        const res = await clearCart();
+        // 将要生成订单，因此需要清空购物车。
+        console.log(res);
+        window.location.href = 'http://localhost:8899/html/payment.html';
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      console.log('没有商品');
+    }
+  }, 1000));
 
   //绑定删除所选商品事件
   deleteBtn.addEventListener('click', throttle(async function () {
-    let deleteItems = []
-    let deleteNodes = []
+    let deleteItems = [];
+    let deleteNodes = [];
     for (let i = 0; i < checkboxes.length; i++) {
       if(checkboxes[i].checked) {
         deleteItems.push(Number(checkboxes[i].value))
@@ -138,19 +149,6 @@ async function generateCartItems() {
 
 window.addEventListener('load', () => {
 
-  generateCartItems().then(r => {})
-
-  // getCartItems({
-  //   headTime: time1,
-  //   pageNum: 1,
-  //   pageSize: 10
-  // }).then((res) => {
-  //
-  //
-  // })
-
-
-
-
+  generateCartItems().then(r => {});
 
 })
