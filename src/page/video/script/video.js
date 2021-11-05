@@ -22,10 +22,9 @@ window.addEventListener('load', async () => {
 
     document.querySelector('.video-title-lesson span').textContent = videoData.sort;
     document.querySelector('.video-title-lesson-title').textContent = videoData.title;
+    sessionStorage.setItem("video-lessonId", videoData.lessonId);
     // 通过节点间的关系来访问结点能够提高 DOM 性能。
-    // const playerDiv = document.querySelector('.player'),
-    //   videoContentWidth = playerDiv.clientWidth,
-    //   videoContentHeight = playerDiv.clientHeight * 0.64;
+
     const player = new Aliplayer({
       id: 'ali-player-container',
       // 播放器外层容器的 DOM 元素 ID。
@@ -46,7 +45,7 @@ window.addEventListener('load', async () => {
       autoplay: false
     });
 
-    const chapterRes = getChapter(parseInt(courseId));
+    const chapterRes = await getChapter(parseInt(courseId));
     const curChapter = chapterRes.data.filter((val) => val.chapterId === videoData.parentId);
     document.querySelector('.video-title-chapter span').textContent = curChapter[0].sort;
   } catch (e) {
