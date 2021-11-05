@@ -39,7 +39,6 @@
     height: 412px;
     width: 1152px;
     position: relative;
-    background-color:cornflowerblue;
     box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.3);
     border-radius: 0 0 8px 8px;
 
@@ -97,20 +96,22 @@
     }
 
     .menu {
-      margin-top: 0px;
+      margin-top: 0;
       position: absolute;
       top: 40px;
       right: 20px;
-      height: 315px;
       width: 240px;
       opacity: 0.6;
       background-color:black;
+
+      .menu-item + .menu-item {
+        border-top: 1px solid #bbbbbb;
+      }
 
       .menu-item {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 0px;
         height: 45px;
         color: white;
         text-align: center;
