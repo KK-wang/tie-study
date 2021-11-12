@@ -9,6 +9,7 @@ async function generateSystems() {
   try {
     response = await getSystems()
     systems = response.data.slice(0, 6)
+    console.log(systems)
 
     let systemNav = document.getElementsByClassName('system-nav')[0]
     let content = document.getElementsByClassName('sort-content')[0]
@@ -57,13 +58,7 @@ async function generateSystems() {
       courses.appendChild(sortTitle)
 
       //具体课程
-      let courseData = await getCoursesInSys({
-        systemId: system.courseSystemId,
-        headTime: format(new Date(), "yyyy-MM-dd hh:mm:ss"),
-        pageNum: 1,
-        pageSize: 4
-      })
-      let coursesInfo = courseData.data
+      let coursesInfo = system.courses
       if(coursesInfo[0] !== null) {
         for(let courseInfo of coursesInfo) {
           let link = document.createElement('a')
