@@ -13,16 +13,6 @@ function throttle (fn, delay) {
   }
 }
 
-function getQuery () {
-  const urlQueryArr = window.location.search.slice(1).split('&');
-  const queryObj = {};
-  for (let urlQuery of urlQueryArr) {
-    let keyValue = urlQuery.split('=');
-    queryObj[keyValue[0]] = keyValue[1];
-  }
-  return queryObj;
-}
-
 //日期格式化
 function format(date, fmt) {
   let o = {
@@ -47,6 +37,5 @@ function format(date, fmt) {
 
 export {
   throttle,
-  getQuery,
   format
 }

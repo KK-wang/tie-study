@@ -18,6 +18,7 @@ window.addEventListener('load', () => {
     // 展示当前被选中的课时，旨在提高用户使用体验。
     const activeLessonId = sessionStorage.getItem("video-lessonId");
     document.querySelector('a[lessonId="' + activeLessonId +'"]').classList.add('active');
+    // 属性选择器的值记着加引号 ""。
   });
   // 页面打开后默认显示目录页面
   // 生成目录。

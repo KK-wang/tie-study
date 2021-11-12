@@ -1,11 +1,11 @@
 import axios from "axios";
+import message from "./message";
 import { getCookie, setCookie } from "./cookie";
 
 const request = axios.create({
   // baseURL: '/innerDevAPI', // 访问内网。
   baseURL: '/outerDevAPI', // 访问公网。
   timeout: 5000,
-  validateStatus: status => status < 500
 });
 
 const tokenFree = [
@@ -29,9 +29,12 @@ request.interceptors.request.use(config => {
  */
 
 request.interceptors.response.use(res => {
-  console.log("res ", res);
   if (res.status !== 200) {
-    // 服务端响应非 200 就会来到这里。
+    // 服务端响应非 200（例如 500）就会来到这里。
+    message({
+      message: `${res.status}: ${res.statusText}`,
+      type: 'error'
+    });
     return Promise.reject(res.status);
   } else {
     if (String(res.data.code).charAt(0) !== '2') {
@@ -46,8 +49,11 @@ request.interceptors.response.use(res => {
     }
   }
 }, err => {
-  console.log("err ", err);
-  // 网络故障或者服务端响应 500 就会来到这里。
+  message({
+    message: '网络故障，请稍后重试',
+    type: 'error'
+  });
+  // 网络故障就会来到这里。
   return Promise.reject(err);
 });
 

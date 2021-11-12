@@ -19,32 +19,21 @@ function controlRegisterFormBgStyle() {
   });
 }
 
-function controlValidateResultStyle() {
-  // 接下来将要使用到一个比较高级的原生 JS-API: MutationObserver。
-  // 当某个 DOM 发生改变时，它可以检测
-  const validateResultRegisterForm = document.querySelector('.validate-result-register-form');
-  const validateResultObserver = new MutationObserver(async (mutationRecords) => {
-    if (validateResultRegisterForm.classList.contains('active') && validateResultRegisterForm.classList.contains('fade-out-to-right') ||
-      !validateResultRegisterForm.classList.contains('active') && !validateResultRegisterForm.classList.contains('fade-out-to-right') ||
-      validateResultRegisterForm.classList.contains('active') && validateResultRegisterForm.classList.contains('fade-out')) {
-      // 防止出现重复调用。
-      return;
-    }
-    try {
-      const validateResult = document.querySelector('.validate-result'),
-        loadingGif = document.querySelector('.loading-gif'),
-        activeRegisterForm = document.querySelector('.register-form:nth-child(2)');
-        // res = await new Promise((resolve, reject) => {
-        //   loadingGif.classList.add('active');
-        //   validateResult.classList.remove('active');
-        //   setTimeout(() => { resolve("201"); }, 3000);
-        // });
-      const res = await registerUser();
-      console.log(res);
-      switch (res.code) {
-        /* 如果用户输入的学号密码无误且尚未注册，那么执行下面的代码：*/
-        case 201:
-          validateResult.innerHTML = `
+async function controlValidateResultStyle() {
+  try {
+    const validateResult = document.querySelector('.validate-result'),
+      activeRegisterForm = document.querySelector('.register-form:nth-child(2)');
+    // res = await new Promise((resolve, reject) => {
+    //   loadingGif.classList.add('active');
+    //   validateResult.classList.remove('active');
+    //   setTimeout(() => { resolve("201"); }, 3000);
+    // });
+    const res = await registerUser();
+    console.log(res);
+    switch (res.code) {
+      /* 如果用户输入的学号密码无误且尚未注册，那么执行下面的代码：*/
+      case 201:
+        validateResult.innerHTML = `
           <div class="validate-result-title">查询到如下信息, 请确认是否是您本人</div>
           <table class="register-result-table">
             <tr>
@@ -71,23 +60,23 @@ function controlValidateResultStyle() {
             </button>
           </div>
           `;
-          const validateResultLeftBtn = validateResult.querySelector('.register-form-btn:first-child'),
-            validateResultRightBtn = validateResult.querySelector('.register-form-btn:last-child'),
-            leftBtnFunc = (event) => {
-              activeRegisterForm.classList.add('fade-out-to-right');
-              validateResultLeftBtn.removeEventListener('click', leftBtnFunc, false);
-              validateResultRightBtn.removeEventListener('click', rightBtnFunc, false);
-              // 移除绑定的事件以提高页面性能。
-            },
-            rightBtnFunc = (event) => {
-              activeRegisterForm.classList.add('fade-out');
-              finishRegister(res.data.sno, res.data.trueName, res.data.academy, res.data.majorClass);
-            };
-          validateResultLeftBtn.addEventListener('click', leftBtnFunc, false);
-          validateResultRightBtn.addEventListener('click', rightBtnFunc, false);
-          break;
-        case 400:
-          validateResult.innerHTML = `
+        const validateResultLeftBtn = validateResult.querySelector('.register-form-btn:first-child'),
+          validateResultRightBtn = validateResult.querySelector('.register-form-btn:last-child'),
+          leftBtnFunc = (event) => {
+            activeRegisterForm.classList.add('fade-out-to-right');
+            validateResultLeftBtn.removeEventListener('click', leftBtnFunc, false);
+            validateResultRightBtn.removeEventListener('click', rightBtnFunc, false);
+            // 移除绑定的事件以提高页面性能。
+          },
+          rightBtnFunc = (event) => {
+            activeRegisterForm.classList.add('fade-out');
+            finishRegister(res.data.sno, res.data.trueName, res.data.academy, res.data.majorClass);
+          };
+        validateResultLeftBtn.addEventListener('click', leftBtnFunc, false);
+        validateResultRightBtn.addEventListener('click', rightBtnFunc, false);
+        break;
+      case 400:
+        validateResult.innerHTML = `
             <div class="validate-result-title" style="font-size: 30px; margin-bottom: 60px;">学号和密码不匹配</div>
             <div class="btn-group">
               <button class="register-form-btn">
@@ -96,13 +85,13 @@ function controlValidateResultStyle() {
               </button>
             </div>
             `;
-          const validateResultLeftBtnAtNotMatch = validateResult.querySelector('.register-form-btn');
-          validateResultLeftBtnAtNotMatch.addEventListener('click', () => {
-            activeRegisterForm.classList.add('fade-out-to-right');
-          });
-          break;
-        case 10001:
-          validateResult.innerHTML = `
+        const validateResultLeftBtnAtNotMatch = validateResult.querySelector('.register-form-btn');
+        validateResultLeftBtnAtNotMatch.addEventListener('click', () => {
+          activeRegisterForm.classList.add('fade-out-to-right');
+        });
+        break;
+      case 10001:
+        validateResult.innerHTML = `
             <div class="validate-result-title" style="font-size: 30px; margin-bottom: 60px;">该学号已经被注册过了</div>
             <div class="btn-group">
               <button class="register-form-btn">
@@ -111,19 +100,17 @@ function controlValidateResultStyle() {
               </button>
             </div>
           `;
-          const validateResultLeftBtnAtHasDone = validateResult.querySelector('.register-form-btn');
-          validateResultLeftBtnAtHasDone.addEventListener('click', () => {
-            activeRegisterForm.classList.add('fade-out-to-right');
-          });
-          break;
-      }
-      loadingGif.classList.remove('active');
-      validateResult.classList.add('active');
-    } catch (e) {
-      console.log(e);
+        const validateResultLeftBtnAtHasDone = validateResult.querySelector('.register-form-btn');
+        validateResultLeftBtnAtHasDone.addEventListener('click', () => {
+          activeRegisterForm.classList.add('fade-out-to-right');
+        });
+        break;
     }
-  });
-  validateResultObserver.observe(validateResultRegisterForm, { attributes: true });
+    loadingGif.classList.remove('active');
+    validateResult.classList.add('active');
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 export {

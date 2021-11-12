@@ -7,13 +7,11 @@ if (process.env.NODE_ENV === 'development') {
 
 import '../style/main.scss'
 import $ from 'jquery';
-import { controlRegisterFormBgStyle, controlValidateResultStyle } from './control-style';
-import controlAnimation from './control-register-animation';
-import { linkToHomePage } from "./network";
+import Register from "./register";
 
 $(document).ready(() => {
-  controlRegisterFormBgStyle();
-  controlValidateResultStyle();
-  controlAnimation();
-  linkToHomePage();
+  new Register();
+
+
+
 });

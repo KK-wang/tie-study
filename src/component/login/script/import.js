@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import { loginByStuID } from '@/api/login/loginByStuID';
+import message from "../../../common/script/utils/message";
 
 export default function () {
   const stuIDLoginPanelBtn = document.querySelector('.stuID-login-panel input[type="button"]');
@@ -41,9 +42,18 @@ async function loginByStuIDInvoker() {
   let stuID = stuIdInput.value, password = passwordInput.value;
   try {
     const res = await loginByStuID(stuID, password);
-    window.$store.userAvatarSetter(res.data.avatar);
-    window.location.reload();
+    message({
+      message: '登录成功',
+      type: 'success',
+      onclose() {
+        window.$store.userAvatarSetter(res.data.avatar);
+        window.location.reload();
+      }
+    });
   } catch (e) {
-    console.log(e);
+    message({
+      message: `${e.code}: ${e.msg}`,
+      type: 'error'
+    });
   }
 }

@@ -4,7 +4,8 @@ import {getSort} from "../../../api/index/sort";
 getSort({}).then(res => {
   console.log(res)
 }).catch(err => {
-  console.log(err)
+  console.log(err);
+  // 分类还没有去做。
 })
 
 let baseSorts = [{
