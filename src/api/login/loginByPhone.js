@@ -9,3 +9,13 @@ export function loginByPhone(phone, code) {
     }
   });
 }
+
+export function getVerificationCode(phone) {
+  return request({
+    url: "/api/user/verification/phone",
+    method: "get",
+    params: {
+      phone
+    }
+  });
+}
