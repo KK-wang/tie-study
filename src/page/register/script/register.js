@@ -1,45 +1,41 @@
 import {registerInfo, uploadAvatar} from "../../../api/register/finishRegister";
 import message from "../../../common/script/utils/message";
+import Verify from "./verify";
+import Verification from "../../../common/script/utils/verification";
 
 export default class Register {
   constructor() {
     // 创建表单元素。
     this.submitBtn = document.querySelector('.register-form:last-child .btn-group button');
     this.avatarInput = document.querySelector('#upload-avatar-uploader');
+    this.verifyLink = document.querySelector('.verify-link');
 
-    // 绑定事件。
+    // 实名信息。
+    this.verifiedInfo = {
+      sno: undefined,
+      truename: undefined,
+      academy: undefined,
+      majorClass: undefined,
+      // axios 不会发送 undefined 的数据。
+    };
+
     this.avatarInput.addEventListener("change", this.previewAvatar.bind(this));
     // 图片上传触发 change 事件。
     /* 这是使用 bind 是为了强制绑定 this。*/
     this.submitBtn.addEventListener("click", this.submitRegister.bind(this));
+    this.verifyLink.addEventListener("click", this.verify.bind(this));
   }
 
   previewAvatar() {
     /* 实现图片本地预览的关键代码。*/
-    const file = this.avatarInput.files[0],
-      size = file.size / 1024,
-      // file.size 是以 Byte 为单位的。
-      fileType = file.type;
-
-    if (fileType !== 'image/jpeg' && fileType !== 'image/png') {
+    const file = this.avatarInput.files[0], validateInfo = Verification.validateAvatar(file);
+    if (validateInfo !== undefined) {
       message({
-        message: `只支持 jpg 和 png 格式，不支持 ${fileType} 格式`,
+        message: validateInfo,
         type: "warning",
-        duration: 1200
+        duration: 1500,
       });
-      return;
-    }
-
-    if (size > 256) {
-      message({
-        message: `图片大小应在 256KB 以下，当前图片大小为 ${size.toFixed(2)}KB`,
-        type: "warning",
-        duration: 1200
-      });
-      return;
-    }
-
-    if(window.FileReader) {
+    } else if(window.FileReader) {
       const fr = new FileReader();
       fr.onloadend = function(e) {
         document.getElementById("upload-avatar-uploader-img").src = e.target.result;
@@ -54,18 +50,18 @@ export default class Register {
       emailValue = document.querySelector('#user-e-mail').value,
       phoneNumValue = document.querySelector('#phoneNum').value,
       avatarFormData = new FormData();
-
+    if (!this.validateForm(usernameValue, passwordValue, phoneNumValue, emailValue)) return;
     try {
-      // avatarFormData.append("sno", sno);
+      avatarFormData.append("sno", this.verifiedInfo.sno);
       /* 虽然网站接入了外部用户，但是用户主键依然是学号，非外校用户会生成一个学号。*/
       avatarFormData.append("multipartFile", this.avatarInput.files[0]);
       // 通过 append 给 FormData 对象传入属性是该对象私有的，无法直接访问。
       const avatarURL = await uploadAvatar(avatarFormData);
       const userInfo = {
-        // sno,
-        // truename,
-        // academy,
-        // majorClass,
+        son: this.verifiedInfo.sno,
+        truename: this.verifiedInfo.truename,
+        academy: this.verifiedInfo.academy,
+        majorClass: this.verifiedInfo.majorClass,
         nickname: usernameValue,
         password: passwordValue,
         email: emailValue,
@@ -85,8 +81,72 @@ export default class Register {
       // 在这里给出注册异常。
       message({
         message: `${e.code}: ${e.msg}`,
-        type: 'error'
+        type: 'error',
+        duration: 1500
       });
     }
+  }
+
+  verify() {
+    new Verify(this.verifiedInfo);
+    // 成功更新用户的真实信息。
+  }
+
+  validateForm(usernameValue, passwordValue, phoneNumValue, emailValue) {
+    // false 表示没有通过。
+    const usernameInfo = Verification.validateUsername(usernameValue);
+    if (usernameInfo !== undefined) {
+      message({
+        message: usernameInfo,
+        type: "warning",
+        duration: 1500,
+      });
+      return false;
+    }
+
+    const passwordInfo = Verification.validatePassword(passwordValue);
+    if (passwordInfo !== undefined) {
+      message({
+        message: passwordInfo,
+        type: "warning",
+        duration: 1500,
+      });
+      return false;
+    }
+
+    const phoneNumInfo = Verification.validatePhoneNum(phoneNumValue);
+    if (phoneNumInfo !== undefined) {
+      message({
+        message: phoneNumInfo,
+        type: "warning",
+        duration: 1500,
+      });
+      return false;
+    }
+
+    const file = this.avatarInput.files[0], validateInfo = Verification.validateAvatar(file);
+    if (validateInfo !== undefined) {
+      message({
+        message: validateInfo,
+        type: "warning",
+        duration: 1500,
+      });
+      return false;
+    }
+
+    // 因为 email 可以为空，因此这里需要额外判断一下。
+    if (emailValue.length !== 0) {
+      const emailInfo = Verification.validateEmail(emailValue);
+      if (emailInfo !== undefined) {
+        message({
+          message: emailInfo,
+          type: "warning",
+          duration: 1500,
+        });
+        return false;
+      }
+    }
+
+    return true;
   }
 }

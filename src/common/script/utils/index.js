@@ -1,7 +1,6 @@
 // 放置一些公共的方法。
 function throttle (fn, delay) {
   let timer = null
-
   return function () {
     if (timer) {
       return
@@ -9,7 +8,7 @@ function throttle (fn, delay) {
     fn()
     timer = setTimeout(() => {
       timer = null
-    }, delay)
+    }, delay);
   }
 }
 

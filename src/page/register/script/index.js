@@ -10,8 +10,10 @@ import $ from 'jquery';
 import Register from "./register";
 
 $(document).ready(() => {
+  document.querySelector('.web-logo .web-logo-img').addEventListener('click', () => {
+    window.location.href = 'http://localhost:8899/html/index.html';
+  }); // logo 跳转链接。
+
   new Register();
-
-
 
 });

@@ -22,7 +22,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 40px;
+    top: 20px;
     left: 140px;
 
     .web-logo-img {
@@ -75,7 +75,6 @@ body {
       font-family: serif;
       font-size: 34px;
       color: #ffffff;
-
     }
 
   }
@@ -91,52 +90,52 @@ body {
     justify-content: center;
     align-items: center;
 
+    .verify-form-mask {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      min-width: 1100px;
+      min-height: 700px;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: none;
+      z-index: 1;
+
+      &.active {
+        display: block;
+      }
+
+    }
+
     .register-form {
-      position: relative;
+      position: absolute;
       width: 100%;
       height: 100%;
       border-radius: 10px;
-      box-shadow: 5px 5px 20px 0 #101010;
-      overflow: hidden;
-      display: none;
+      box-shadow: 0 0 20px 0 #FFFFFf;
+      display: flex;
       justify-content: space-around;
       align-items: center;
       flex-direction: column;
-      opacity: 1;
-      visibility: visible;
+      opacity: 0;
+      visibility: hidden;
 
       &.active {
-        display: flex;
+        opacity: 1;
+        visibility: visible;
+        background-color: transparent;
+        z-index: 2;
       }
 
-      .register-form-bg {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        filter: blur(10px);
-        z-index: -1;
-      }
-
-      .loading-gif {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 700px;
-        transform: translate(calc(-50% + 15px), -50%);
-        opacity: 0;
-        visibility: hidden;
-        &.active {
-          opacity: 1;
-          visibility: visible;
-        }
+      &.core-register-form {
+        opacity: 1;
+        visibility: visible;
+        background-color: rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0 20px 0 #101010;
       }
 
       .validate-result {
         position: relative;
         z-index: 1;
-        opacity: 0;
-        visibility: hidden;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -177,18 +176,25 @@ body {
       .register-form-input {
         position: relative;
 
+        &:not(.not-necessary) {
+          label::after {
+            content: ' *';
+            color: red;
+          }
+        }
+
         svg {
           position: absolute;
           width: 40px;
           left: 0;
           bottom: 5px;
-          fill: darken(#DDDDDD, 10%);
+          fill: #FFFFFf;
           transition: fill .5s;
         }
 
         input {
           all: unset;
-          border-bottom: 2px solid darken(#DDDDDD, 10%);
+          border-bottom: 2px solid #FFFFFF;
           transition: border-color .5s;
           width: 300px;
           padding-bottom: 10px;
@@ -199,41 +205,22 @@ body {
           letter-spacing: 1px;
           color: #ffffff;
 
-          &:focus {
-            border-color: #ffffff;
+          &:focus, &:valid {
             & + label {
               transform: translateY(-30px);
               font-size: 16px;
-              color: #ffffff;
-              & + svg {
-                fill: #ffffff;
-              }
             }
           }
-
-          &:valid {
-            border-color: #ffffff;
-            & + label {
-              transform: translateY(-30px);
-              font-size: 16px;
-              color: #ffffff;
-              & + svg {
-                fill: #ffffff;
-              }
-            }
-          }
-
         }
 
         label {
           position: absolute;
           width: 300px;
-          color: darken(#DDDDDD, 10%);
+          color: #FFFFFF;
           bottom: 10px;
           left: 45px;
-          z-index: -1;
           font-size: 18px;
-          transition: transform .5s, font-size .5s, color .5s;
+          transition: transform .5s, font-size .5s;
           transform-origin: left;
         }
 
@@ -245,6 +232,7 @@ body {
         justify-content: space-around;
         align-items: center;
         width: 100%;
+        position: relative;
 
         .register-form-btn {
           all: unset;
@@ -272,6 +260,21 @@ body {
 
         }
 
+        .verify-link {
+          position: absolute;
+          text-decoration: underline;
+          color: #c4c4c4;
+          right: 25px;
+          cursor: pointer;
+          transition: color.5s;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          &:hover {
+            color: #FFFFFF;
+          }
+        }
+
       }
 
       &:last-child {
@@ -293,14 +296,14 @@ body {
 
           svg {
             width: 40px;
-            fill: #c4c4c4;
+            fill: #FFFFFf;
             transition: fill .5s;
           }
 
           .avatar-title {
             position: absolute;
             left: 15%;
-            color: #c4c4c4;
+            color: #FFFFFf;
             font-size: 18px;
             transition: color .5s;
           }
@@ -310,13 +313,6 @@ body {
             clip: rect(0, 0, 0, 0);
 
             &:valid {
-              ~ svg {
-                fill: #ffffff;
-              }
-              ~ .avatar-title {
-                color: #ffffff;
-              }
-
               ~ label {
                 padding: 3px;
               }
@@ -325,7 +321,7 @@ body {
           }
 
           label {
-            border: 3px dashed #c4c4c4;
+            border: 3px dashed #FFFFFf;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -341,7 +337,7 @@ body {
 
           .avatar-tips {
             font-size: 12px;
-            color: #c4c4c4;
+            color: #FFFFFf;
             width: 65px;
             word-break: break-word;
           }

@@ -1,6 +1,6 @@
 /* 放置一些公共的方法。*/
 
-// 函数防抖。
+// （自己写的）函数防抖，没有利用到闭包。
 function debounce(fn, args, delay) {
   if ("debounceTimer" in fn) {
     // 如果 fn 有 debounceTimer 属性。
