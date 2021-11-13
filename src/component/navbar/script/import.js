@@ -19,10 +19,11 @@ export default function () {
     window.location.href = 'http://localhost:8899/html/index.html'
   });
   if (getCookie("token") !== undefined) {
-    // localStorage 返回的数据全部都是字符串。
     const avatarImg = document.querySelector('.avatar .image');
-    avatarImg.src = window.$store.userAvatar
+    avatarImg.src = window.$store.userAvatarGetter();
     avatarImg.classList.add('trueAvatar');
+    document.querySelector('.avatar .panel .brief-info .stu-name span').textContent = window.$store.truenameGetter();
+    document.querySelector('.avatar .panel .brief-info .stu-id span').textContent = window.$store.snoGetter();
   }
   document.querySelector('.quit-btn').addEventListener('click', () => {
     removeCookie("token");

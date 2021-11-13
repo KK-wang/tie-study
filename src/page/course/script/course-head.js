@@ -2,6 +2,7 @@ import $ from 'jquery';
 import {getQuery} from "../../../common/script/utils/commonUtils";
 import getCourseHeadData from "../../../api/course/getCourseHead";
 import addCourseToCart from "../../../api/course/addCourseToCart";
+import message from "../../../common/script/utils/message";
 
 function collection() {
   const collection = $('.collection');
@@ -15,10 +16,17 @@ function collection() {
 function cart(courseId) {
   document.querySelector('.add-cart').addEventListener('click', async () => {
     try {
-      const res = await addCourseToCart(courseId);
-      console.log(res);
+      await addCourseToCart(courseId);
+      message({
+        message: "添加成功",
+        type: "success",
+        duration: 1500
+      });
     } catch (e) {
-      console.log(e);
+      message({
+        message: `${e.code}: ${e.msg}`,
+        type: 'error',
+      });
     }
   });
 }

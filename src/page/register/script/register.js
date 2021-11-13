@@ -2,6 +2,7 @@ import {registerInfo, uploadAvatar} from "../../../api/register/finishRegister";
 import message from "../../../common/script/utils/message";
 import Verify from "./verify";
 import Verification from "../../../common/script/utils/verification";
+import {loginByStuID} from "../../../api/login/loginByStuID";
 
 export default class Register {
   constructor() {
@@ -18,7 +19,6 @@ export default class Register {
       majorClass: undefined,
       // axios 不会发送 undefined 的数据。
     };
-
     this.avatarInput.addEventListener("change", this.previewAvatar.bind(this));
     // 图片上传触发 change 事件。
     /* 这是使用 bind 是为了强制绑定 this。*/
@@ -51,6 +51,7 @@ export default class Register {
       phoneNumValue = document.querySelector('#phoneNum').value,
       avatarFormData = new FormData();
     if (!this.validateForm(usernameValue, passwordValue, phoneNumValue, emailValue)) return;
+
     try {
       avatarFormData.append("sno", this.verifiedInfo.sno);
       /* 虽然网站接入了外部用户，但是用户主键依然是学号，非外校用户会生成一个学号。*/
@@ -71,12 +72,17 @@ export default class Register {
       await registerInfo(userInfo);
       // 注册成功。
       message({
-        message: "注册成功",
+        message: "注册成功，正在跳转...",
         type: "success",
-        onclose() {
-          window.location.href = 'http://localhost:8899/html/index.html';
-        }
+        duration: 2000,
       });
+      /* 这里的注册完成后的登录逻辑在后期需要更改。*/
+      const res = await loginByStuID(userInfo.son, userInfo.password);
+      window.$store.userAvatarSetter(res.data.avatar);
+      window.$store.snoSetter(res.data.sno);
+      window.$store.truenameSetter(res.data.truename);
+      // 写入头像数据。
+      window.location.href = 'http://localhost:8899/html/index.html';
     } catch (e) {
       // 在这里给出注册异常。
       message({
