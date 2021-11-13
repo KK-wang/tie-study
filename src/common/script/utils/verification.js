@@ -28,4 +28,19 @@ export default class Verification {
     if (!/^\.(jpe?g|png)$/.test(fileType)) return `只支持 jpg 和 png 格式，不支持 ${fileType} 格式`;
     if (size > 256) return `图片大小应在 256KB 以下，当前图片大小为 ${size.toFixed(2)}KB`;
   }
+
+  static validateIsEmpty(str) {
+    // 最基本的表单判断，判断是否为空，即 str.length === 0。
+    if (!/./.test(str)) return "不能为空";
+  }
+
+  static validateStuID(stuId) {
+    // 检验学号是否合法。
+    if (!/^\d+$/.test(stuId)) return "学号不能为空且应由纯数字构成";
+  }
+
+  static validateVerificationCode(code) {
+    // 检验手机验证码是否合法。
+    if (!/^\d{6}$/.test(code)) return "验证码应是 6 位数字"
+  }
 }
