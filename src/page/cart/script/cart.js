@@ -1,6 +1,7 @@
 import {throttle, format} from "../../../common/script/utils";
 import {getCartItems} from "../../../api/cart/getCartItems";
 import {clearCart, deleteCartItem} from "../../../api/cart/deleteCartItem";
+import showMessage from "../../../common/script/utils/message";
 
 let selectAllBtn = document.querySelector('.select-all')
 let checkBtn = document.querySelector('.check')
@@ -26,11 +27,22 @@ function calcSum(value) {
 }
 
 async function generateCartItems() {
+  //获取用户购物车
   let res = await getCartItems({
     headTime: time1,
     pageNum: 1,
     pageSize: 10
   })
+
+  //获取购物车内容失败
+  if(res.code !== 200) {
+    showMessage({
+      message: '获取购物车内容失败',
+      duration: 700,
+      type: 'error'
+    })
+    return
+  }
   cartItems = res.data.cartItemVOList
 
   //生成购物车中的商品
@@ -122,6 +134,15 @@ async function generateCartItems() {
       courseNum.innerHTML = cartItems.length
       checkboxes = document.querySelectorAll('.select')
       opts = document.querySelectorAll('.opt')
+      showMessage({
+        message: '删除成功',
+        type: 'success'
+      })
+    } else {
+      showMessage({
+        message: '删除失败',
+        type: 'error'
+      })
     }
 
   }, 1000))
@@ -142,6 +163,16 @@ async function generateCartItems() {
         courseNum.innerHTML = cartItems.length
         checkboxes = document.querySelectorAll('.select')
         opts = document.querySelectorAll('.opt')
+
+        showMessage({
+          message: '删除成功',
+          type: 'success'
+        })
+      } else {
+        showMessage({
+          message: '删除失败',
+          type: 'error'
+        })
       }
     }
   }
