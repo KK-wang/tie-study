@@ -76,7 +76,7 @@ export default class Verify {
         validateResultRightBtn = validateResult.querySelector('.register-form-btn:last-child'),
         rightBtnFunc = () => {
           this.verifiedInfo.sno = stuIDValue;
-          this.verifiedInfo.truename = res.data.trueName;
+          this.verifiedInfo.truename = res.data.truename;
           this.verifiedInfo.academy = res.data.academy;
           this.verifiedInfo.majorClass = res.data.majorClass;
           this.modifyRegister();
