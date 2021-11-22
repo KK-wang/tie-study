@@ -71,7 +71,7 @@ async function generateChapterAndLesson() {
       for (let j = 0; j < lessonData.length; j++) {
         const lesson = document.createElement('a');
         lesson.classList.add('class-li');
-        lesson.setAttribute("href", `http://localhost:8899/html/video.html?lessonId=${lessonData[j].lessonId}&courseId=${courseId}`);
+        lesson.setAttribute("href", `http://${process.env.STATIC_SERVER}/html/video.html?lessonId=${lessonData[j].lessonId}&courseId=${courseId}`);
         // 这里应当设置一个自定义属性，保存一下 lessonId。
         lesson.innerHTML = `
           <span>课时</span>

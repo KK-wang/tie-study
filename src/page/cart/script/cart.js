@@ -1,4 +1,4 @@
-import {throttle, format} from "../../../common/script/utils";
+import {throttle, format} from "../../../common/script/utils/commonUtils";
 import {getCartItems} from "../../../api/cart/getCartItems";
 import {clearCart, deleteCartItem} from "../../../api/cart/deleteCartItem";
 import showMessage from "../../../common/script/utils/message";
@@ -99,7 +99,7 @@ async function generateCartItems() {
         const res = await clearCart();
         // 将要生成订单，因此需要清空购物车。
         console.log(res);
-        window.location.href = 'http://localhost:8899/html/payment.html';
+        window.location.href = `http://${process.env.STATIC_SERVER}/html/payment.html`;
       } catch (e) {
         console.log(e);
       }

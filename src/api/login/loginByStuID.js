@@ -1,9 +1,9 @@
-import request from '@/common/script/utils/request';
+import request from "../../common/script/utils/ajax";
 export function loginByStuID(sno, password) {
   return request({
     url: '/api/user/token',
     method: 'post',
-    data: {
+    payload: {
       sno,
       password
     }

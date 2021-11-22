@@ -1,10 +1,8 @@
 import morePic from '@/assets/img/index/arrow.png';
-import {getSystems, getCoursesInSys} from "../../../api/index/system";
-import {format} from "../../../common/script/utils";
+import {getSystems} from "../../../api/index/system";
 
 let response
 let systems
-let allCoursesInfo = []
 async function generateSystems() {
   try {
     response = await getSystems()
@@ -62,7 +60,7 @@ async function generateSystems() {
       if(coursesInfo[0] !== null) {
         for(let courseInfo of coursesInfo) {
           let link = document.createElement('a')
-          link.href = `http://localhost:8899/html/course.html?courseId=${courseInfo.courseId}`
+          link.href = `http://${process.env.STATIC_SERVER}/html/course.html?courseId=${courseInfo.courseId}`
 
           let classBox = document.createElement('div')
           classBox.classList.add('classbox')

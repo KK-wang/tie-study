@@ -1,9 +1,10 @@
-import request from '@/common/script/utils/request';
+import request from "../../common/script/utils/ajax";
+
 export function realInfoVerification(sno, password) {
   return request({
     url: '/api/user/approval',
     method: 'post',
-    data: {
+    payload: {
       sno,
       password
     }

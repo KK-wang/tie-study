@@ -9,6 +9,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { DefinePlugin } = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const Dotenv = require('dotenv-webpack');
 
 function getHtmlPlugin(option) {
   return new HtmlWebpackPlugin({
@@ -39,7 +40,8 @@ function commonConfig(isProduction) {
       register: './src/page/register/script/index.js',
       video: './src/page/video/script/index.js',
       cart: './src/page/cart/script/index.js',
-      payment: './src/page/payment/script/index.js'
+      payment: './src/page/payment/script/index.js',
+      mycourse: './src/page/mycourse/script/index.js'
     },
     output: {
       filename: 'js/[name].[hash:6].bundle.js',
@@ -86,15 +88,22 @@ function commonConfig(isProduction) {
         path: 'page/payment/index.html',
         chunk: 'payment'
       }),
+      getHtmlPlugin({
+        path: 'page/mycourse/index.html',
+        chunk: 'mycourse'
+      }),
       new DefinePlugin({
         BASE_URL: "'../'",
       }),
       // 用来定义全局变量的插件，暂且还不需要，
+      /* 其实还是需要的，只不过一直都没有注意到罢了。*/
+      new Dotenv(),
+      // 我们使用 dotenv-webpack 来从 .env 文件中读取环境变量。
       new CopyWebpackPlugin({
         patterns: [
           { from: './src/public' }
         ]
-      })
+      }),
     ],
     module: {
       rules: [

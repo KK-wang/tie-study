@@ -56,7 +56,7 @@ export default class Verify {
             </tr>
             <tr>
               <td>姓名</td>
-              <td>${res.data.trueName}</td>
+              <td>${res.data.truename}</td>
             </tr>
           </table>
           <div class="btn-group">

@@ -82,7 +82,7 @@ export default class Register {
       window.$store.snoSetter(res.data.sno);
       window.$store.truenameSetter(res.data.truename);
       // 写入头像数据。
-      window.location.href = 'http://localhost:8899/html/index.html';
+      // window.location.href = `http://${process.env.STATIC_SERVER}/html/index.html`;
     } catch (e) {
       // 在这里给出注册异常。
       message({

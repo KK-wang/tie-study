@@ -6,7 +6,5 @@ window.addEventListener('load', () => {
     contents[0].style.display = 'none'
     contents[1].style.display = 'none'
     contents[2].style.display = 'block'
-
-
   })
 })

@@ -6,17 +6,22 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // 优化打包后的文件的体积。
-
-import $ from 'jquery';
 import '@/store/index'
 import {getCookie, removeCookie} from "../../../common/script/utils/cookie";
 
 export default function () {
-  $('.web-logo').on('click', () => {
-    window.location.href = 'http://localhost:8899/html/index.html';
+  document.querySelector('.web-logo').addEventListener('click', () => {
+    window.location.href = `http://${process.env.STATIC_SERVER}/html/index.html`;
   });
-  $('.course').on('click', () => {
-    window.location.href = 'http://localhost:8899/html/index.html'
+  document.querySelector('.course').addEventListener('click', () => {
+    window.location.href = `http://${process.env.STATIC_SERVER}/html/index.html`;
+  });
+  document.querySelector('span.my-course.btn').addEventListener('click', () => {
+    window.location.href = `http://${process.env.STATIC_SERVER}/html/mycourse.html`;
+  });
+  document.querySelector('.quit-btn').addEventListener('click', () => {
+    removeCookie("token");
+    window.location.href = `http://${process.env.STATIC_SERVER}/html/index.html`;
   });
   if (getCookie("token") !== undefined) {
     const avatarImg = document.querySelector('.avatar .image');
@@ -25,8 +30,4 @@ export default function () {
     document.querySelector('.avatar .panel .brief-info .stu-name span').textContent = window.$store.truenameGetter();
     document.querySelector('.avatar .panel .brief-info .stu-id span').textContent = window.$store.snoGetter();
   }
-  document.querySelector('.quit-btn').addEventListener('click', () => {
-    removeCookie("token");
-    window.location.href = "http://localhost:8899/html/index.html";
-  });
 }

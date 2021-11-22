@@ -1,9 +1,9 @@
-import request from "../../common/script/utils/request";
+import request from "../../common/script/utils/ajax";
 
-export default function generateOrder(data) {
+export default function generateOrder(payload) {
   return request({
     url: '/api/order',
     method: 'post',
-    data
+    payload
   });
 }

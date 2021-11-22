@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'development') {
 
 $(document).ready(() => {
   if (getCookie('token') === undefined) {
-    $('#login-container').load('http://localhost:8899/html/login.html #login', undefined, () => {
+    $('#login-container').load(`http://${process.env.STATIC_SERVER}/html/login.html #login`, undefined, () => {
       loginJS();
     });
   }

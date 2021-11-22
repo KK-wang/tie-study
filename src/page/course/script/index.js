@@ -17,18 +17,18 @@ import fillDataInfo from './course-head';
 
 $(document).ready(() => {
   if (getCookie('token') === undefined) {
-    $('#login-container').load('http://localhost:8899/html/login.html #login', undefined, () => {
+    $('#login-container').load(`http://${process.env.STATIC_SERVER}/html/login.html #login`, undefined, () => {
       loginJS();
     });
   }
-  $('#nav-bar-container').load('http://localhost:8899/html/navbar.html #nav-bar', undefined, () => {
+  $('#nav-bar-container').load(`http://${process.env.STATIC_SERVER}/html/navbar.html #nav-bar`, undefined, () => {
     navbarJS();
   });
   /* jquery 的 load 方法会自动略去 html 中的 js 脚本，因此需要我们额外引入。*/
-  $('#side-bar-container').load('http://localhost:8899/html/sidebar.html #side-bar', undefined, () => {
+  $('#side-bar-container').load(`http://${process.env.STATIC_SERVER}/html/sidebar.html #side-bar`, undefined, () => {
     sidebarJS();
   });
-  $('#footer-container').load('http://localhost:8899/html/footer.html #footer', undefined, () => {
+  $('#footer-container').load(`http://${process.env.STATIC_SERVER}/html/footer.html #footer`, undefined, () => {
     footerJS();
   });
   fillDataInfo().then();

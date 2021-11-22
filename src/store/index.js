@@ -2,10 +2,11 @@ import {getCookie} from "../common/script/utils/cookie";
 
 class Store {
   // 此时的状态存储到了内存中。
-  constructor({ userAvatar, sno, truename }) {
+  constructor({ userAvatar, sno, truename, sign }) {
     this.userAvatar = userAvatar;
     this.sno = sno;
     this.truename = truename;
+    this.sign = sign;
   }
 
   userAvatarSetter(userAvatar) {
@@ -21,6 +22,10 @@ class Store {
     this.truename = truename;
   }
 
+  signSetter(sign) {
+    this.sign = sign;
+  }
+
   userAvatarGetter() {
     return this.userAvatar;
   }
@@ -31,6 +36,10 @@ class Store {
 
   truenameGetter() {
     return this.truename;
+  }
+
+  signGetter() {
+    return this.sign;
   }
 }
 

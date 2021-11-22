@@ -47,7 +47,7 @@ async function generateDirectory(courseId) {
       for (let j = 0; j < lessonData.length; j++) {
         // 这里的渲染还有一些问题，需要我们给当前播放的 <a> 一个高亮标识。
         chapterEleChildrenHTML += `
-          <a class="lesson" href="http://localhost:8899/html/video.html?lessonId=${lessonData[j].lessonId}&courseId=${courseId}" lessonId=${lessonData[j].lessonId}>
+          <a class="lesson" href="http://${process.env.STATIC_SERVER}/html/video.html?lessonId=${lessonData[j].lessonId}&courseId=${courseId}" lessonId=${lessonData[j].lessonId}>
             <span class="order">课时${wholeLessonIndex}</span>
             <span class="circle ${lessonData[j].isStudied === 2 ? 'full' : lessonData[j].isStudied === 1 ? 'half-full' : '' }"></span>
             <span class="title">${lessonData[j].title}</span>

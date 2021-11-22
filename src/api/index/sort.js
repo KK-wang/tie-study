@@ -1,9 +1,9 @@
-import request from "../../common/script/utils/request";
+import request from "../../common/script/utils/ajax";
 
-export function getSort(params) {
+export function getSort(query) {
   return request({
     url: '/api/course/category/list',
     method: 'get',
-    params
-  })
+    query
+  });
 }

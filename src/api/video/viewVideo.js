@@ -1,10 +1,10 @@
-import request from '@/common/script/utils/request';
+import request from "../../common/script/utils/ajax";
 
 export default function viewVideo(lessonId) {
   return request({
     url: '/api/oss/lesson',
     method: 'get',
-    params: {
+    query: {
       lessonId
     }
   });

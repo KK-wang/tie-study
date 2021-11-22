@@ -26,7 +26,7 @@ async function fillPaymentDataAndGenerateOrder() {
   const paymentData = JSON.parse(sessionStorage.getItem("paymentData"));
   for (let item of paymentData) {
     const course = document.createElement('a');
-    course.href = `http://localhost:8899/html/course.html?courseId=${item.courseId}`;
+    course.href = `http://${process.env.STATIC_SERVER}/html/course.html?courseId=${item.courseId}`;
     course.classList.add('course');
     course.innerHTML = `
       <img class="cover" src="${item.courseCover}" alt=""/>

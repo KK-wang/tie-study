@@ -1,9 +1,9 @@
-import request from "../../common/script/utils/request";
+import request from "../../common/script/utils/ajax";
 
-export function getCartItems(params) {
+export function getCartItems(query) {
   return request({
     url: '/api/cart',
     method: 'get',
-    params
-  })
+    query
+  });
 }

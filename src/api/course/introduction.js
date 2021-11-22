@@ -1,11 +1,10 @@
-import request from '@/common/script/utils/request';
+import request from "../../common/script/utils/ajax";
 
-function getCourseEvaluation(params) {
+function getCourseEvaluation(query) {
   return request({
     url: '/api/course/comment/list',
     method: 'get',
-    params
-    // params 和 data 一定要传对象过去。
+    query
   });
 }
 

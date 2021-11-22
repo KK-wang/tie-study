@@ -17,17 +17,17 @@ import footerJS from '@/component/footer/script/import.js';
 import './payment';
 $(document).ready(() => {
   if (getCookie('token') === undefined) {
-    $('#login-container').load('http://localhost:8899/html/login.html #login', undefined, () => {
+    $('#login-container').load(`http://${process.env.STATIC_SERVER}/html/login.html #login`, undefined, () => {
       loginJS();
     });
   }
-  $('.footer').load('http://localhost:8899/html/footer.html #footer', undefined, () => {
+  $('.footer').load(`http://${process.env.STATIC_SERVER}/html/footer.html #footer`, undefined, () => {
     footerJS();
   });
-  $('.nav-bar').load('http://localhost:8899/html/navbar.html #nav-bar', undefined, () => {
+  $('.nav-bar').load(`http://${process.env.STATIC_SERVER}/html/navbar.html #nav-bar`, undefined, () => {
     navbarJS()
   });
-  $('.side-bar').load('http://localhost:8899/html/sidebar.html #side-bar', undefined, () => {
+  $('.side-bar').load(`http://${process.env.STATIC_SERVER}/html/sidebar.html #side-bar`, undefined, () => {
     sidebarJS();
   });
 })

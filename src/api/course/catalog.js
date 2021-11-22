@@ -1,10 +1,10 @@
-import request from '@/common/script/utils/request';
+import request from "../../common/script/utils/ajax";
 
 function getChapter(courseId) {
   return request({
     url: '/api/course/chapter',
     method: 'get',
-    params: {
+    query: {
       courseId
     }
   });
@@ -14,7 +14,7 @@ function getLesson(chapterId) {
   return request({
     url: '/api/course/chapter/lesson',
     method: 'get',
-    params: {
+    query: {
       chapterId
     }
   });
@@ -24,7 +24,7 @@ function submitEva(courseId, content, stars) {
   return request({
     url: '/api/course/comment',
     method: 'post',
-    data: {
+    payload: {
       courseId,
       content,
       stars

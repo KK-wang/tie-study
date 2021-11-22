@@ -89,6 +89,7 @@ export default class {
           window.$store.userAvatarSetter(res.data.avatar);
           window.$store.snoSetter(res.data.sno);
           window.$store.truenameSetter(res.data.truename);
+          window.$store.signSetter(res.data.sign);
           window.location.reload();
         }
       });

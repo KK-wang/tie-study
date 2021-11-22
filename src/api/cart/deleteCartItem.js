@@ -1,16 +1,16 @@
-import request from "../../common/script/utils/request";
+import request from "../../common/script/utils/ajax";
 
-export function deleteCartItem(params) {
+export function deleteCartItem(query) {
   return request({
     url: '/api/cart/items',
     method: 'delete',
-    params
+    query
   });
 }
 
 export function clearCart() {
   return request({
     url: '/api/cart',
-    method: 'delete',
+    method: 'delete'
   });
 }
