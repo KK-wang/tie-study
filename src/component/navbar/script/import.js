@@ -27,7 +27,7 @@ export default function () {
     const avatarImg = document.querySelector('.avatar .image');
     avatarImg.src = window.$store.userAvatarGetter();
     avatarImg.classList.add('trueAvatar');
-    document.querySelector('.avatar .panel .brief-info .stu-name span').textContent = window.$store.truenameGetter();
+    document.querySelector('.avatar .panel .brief-info .stu-name span').textContent = `${window.$store.nicknameGetter()}(${window.$store.truenameGetter() === null ? '未实名' : window.$store.truenameGetter()})`;
     document.querySelector('.avatar .panel .brief-info .stu-id span').textContent = window.$store.snoGetter();
   }
 }

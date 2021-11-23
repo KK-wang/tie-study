@@ -4,10 +4,6 @@ function uploadAvatar(formData) {
   return request({
     url: '/api/user/image',
     method: 'post',
-    headers: {
-      'Content-Type': 'multipart/form-data'
-      // 配置请求头信息。
-    },
     payload: formData
   });
 }

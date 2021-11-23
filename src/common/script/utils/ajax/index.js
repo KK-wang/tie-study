@@ -68,7 +68,7 @@ function request({url,
 
     try {
       // 请求拦截器。
-      await interceptReq(xhr, url, headers);
+      await interceptReq(xhr, url, payload, headers);
       xhr.send(newPayload === undefined ? null : newPayload);
       // 停掉超时请求。
       timeoutID = setTimeout(() => {

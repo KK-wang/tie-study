@@ -8,7 +8,7 @@ const tokenFree = [
   '/api/user/approval'
 ];
 
-function interceptReq(xhr, url, headers) {
+function interceptReq(xhr, url, payload, headers) {
   try {
     if (!tokenFree.includes(url)) {
       xhr.setRequestHeader("token", Cookie.get('token'));
@@ -20,8 +20,12 @@ function interceptReq(xhr, url, headers) {
       /* 请求头的设置必须在 xhr 打开之后，并且在 send 之前。*/
       // 添加自定义请求头。
     });
-    if (!headersKey.includes("Content-Type")) {
-      // 设置默认的 Content-Type 请求头。
+    if (!(payload instanceof FormData)) {
+      // 设置默认的 Content-Type 请求头，记着给 payload instanceof FormData 加括号。
+      /* 需要注意的是，当我们传入的 payload 参数为 FormData 的实例时，
+      不能去手动修改 Request Headers 中的 Content-Type 属性为 "multipart/form-data"，
+      因为正确的请求头还应该加上分隔符 boundary=----WebKitFormBoundaryQuWFbaIxEuRYlpSW(例)。
+      而分隔符只有在 HTTP 发出请求时才能够确定，因此我们不能手动修改，xhr 能够识别 FormData 实例并配置响应的请求头。*/
       xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     }
     return Promise.resolve();

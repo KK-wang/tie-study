@@ -53,11 +53,10 @@ export default class Register {
     if (!this.validateForm(usernameValue, passwordValue, phoneNumValue, emailValue)) return;
 
     try {
-      avatarFormData.append("sno", this.verifiedInfo.sno);
-      /* 虽然网站接入了外部用户，但是用户主键依然是学号，非外校用户会生成一个学号。*/
       avatarFormData.append("multipartFile", this.avatarInput.files[0]);
       // 通过 append 给 FormData 对象传入属性是该对象私有的，无法直接访问。
       const avatarURL = await uploadAvatar(avatarFormData);
+      /* 虽然网站接入了外部用户，但是用户主键依然是学号，非外校用户会生成一个学号。*/
       const userInfo = {
         son: this.verifiedInfo.sno,
         truename: this.verifiedInfo.truename,
@@ -69,20 +68,21 @@ export default class Register {
         phone: phoneNumValue,
         avatar: avatarURL.msg
       };
-      await registerInfo(userInfo);
+      const info = await registerInfo(userInfo);
       // 注册成功。
       message({
         message: "注册成功，正在跳转...",
         type: "success",
         duration: 2000,
       });
-      /* 这里的注册完成后的登录逻辑在后期需要更改。*/
-      const res = await loginByStuID(userInfo.son, userInfo.password);
+      const res = await loginByStuID(info.data.sno, userInfo.password);
       window.$store.userAvatarSetter(res.data.avatar);
-      window.$store.snoSetter(res.data.sno);
+      window.$store.snoSetter(info.data.sno);
       window.$store.truenameSetter(res.data.truename);
+      window.$store.nicknameSetter(res.data.nickname);
+      window.$store.signSetter(res.data.sign);
       // 写入头像数据。
-      // window.location.href = `${process.env.STATIC_SERVER}/html/index.html`;
+      window.location.href = `${process.env.STATIC_SERVER}/html/index.html`;
     } catch (e) {
       // 在这里给出注册异常。
       message({
