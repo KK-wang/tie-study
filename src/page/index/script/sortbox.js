@@ -60,7 +60,7 @@ async function generateSystems() {
       if(coursesInfo[0] !== null) {
         for(let courseInfo of coursesInfo) {
           let link = document.createElement('a')
-          link.href = `http://${process.env.STATIC_SERVER}/html/course.html?courseId=${courseInfo.courseId}`
+          link.href = `${process.env.STATIC_SERVER}/html/course.html?courseId=${courseInfo.courseId}`
 
           let classBox = document.createElement('div')
           classBox.classList.add('classbox')

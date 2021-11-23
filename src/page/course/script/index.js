@@ -1,5 +1,3 @@
-import {getCookie} from "../../../common/script/utils/cookie";
-
 if (process.env.NODE_ENV === 'development') {
   /* 这是用来实现 HMR 的代码，JS 模块中只有存在了这段代码才会开启 HMR。 */
   module.hot.accept((err) => {
@@ -8,50 +6,49 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 import '../style/main.scss';
-import $ from 'jquery';
-import navbarJS from '@/component/navbar/script/import.js';
-import sidebarJS from '@/component/sidebar/script/import.js';
-import footerJS from '@/component/footer/script/import.js';
-import loginJS from '@/component/login/script/import.js';
 import fillDataInfo from './course-head';
+import loadComponent from "../../../common/script/repeated/loadComponent";
 
-$(document).ready(() => {
-  if (getCookie('token') === undefined) {
-    $('#login-container').load(`http://${process.env.STATIC_SERVER}/html/login.html #login`, undefined, () => {
-      loginJS();
-    });
-  }
-  $('#nav-bar-container').load(`http://${process.env.STATIC_SERVER}/html/navbar.html #nav-bar`, undefined, () => {
-    navbarJS();
+document.addEventListener("DOMContentLoaded", () => {
+  loadComponent(document, {
+    isLoadLogin: true,
+    isLoadNavBar: true,
+    isLoadSideBar: true,
+    isLoadFooter: true,
   });
-  /* jquery 的 load 方法会自动略去 html 中的 js 脚本，因此需要我们额外引入。*/
-  $('#side-bar-container').load(`http://${process.env.STATIC_SERVER}/html/sidebar.html #side-bar`, undefined, () => {
-    sidebarJS();
-  });
-  $('#footer-container').load(`http://${process.env.STATIC_SERVER}/html/footer.html #footer`, undefined, () => {
-    footerJS();
-  });
+
+  /* 0.加载课程 head 部分。*/
   fillDataInfo().then();
   // 为了减少加快初次渲染的速度，采用 import()。
   /* 1.介绍模块。*/
   const introduceATag = document.querySelector('a[href="#introduce"]'), introduceATagFunc = async () => {
-    const module = await import('./course-body/introduce-part-script');
+    const module = await import(
+      /* webpackChunkName: "course.introduce" */
+      /* webpackPrefetch: true */
+      './course-body/introduce-part-script');
     module.default().then();
+    // 防止重复 import() 加载和渲染。
     introduceATag.removeEventListener('click', introduceATagFunc);
   };
   introduceATag.addEventListener('click', introduceATagFunc);
 
   /* 2.目录模块。*/
   const catalogATag = document.querySelector('a[href="#catalog"]'), catalogATagFunc = async () => {
-    const module = await import('./course-body/catalog-part-script');
+    const module = await import(
+      /* webpackChunkName: "course.catalog" */
+      /* webpackPrefetch: true */
+      './course-body/catalog-part-script');
     // module.default() 即为导入模块默认导出的东西。
     module.default();
     catalogATag.removeEventListener('click', catalogATagFunc);
   };
   catalogATag.addEventListener('click', catalogATagFunc);
+
   /* 3.笔记模块。*/
   /* 4.问答模块。*/
   /* 5.公告模块。*/
+
+  // 自动触发 click 事件，使得 import() 懒加载能够生效。
   const fakeClickEvent = document.createEvent("MouseEvents");
   fakeClickEvent.initMouseEvent("click", true, true, document.defaultView,
     0, 0, 0, 0, 0, false, false,

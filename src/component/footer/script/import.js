@@ -5,8 +5,6 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
-import $ from 'jquery';
-
 export default function () {
 
 }

@@ -6,13 +6,12 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 import '../style/main.scss'
-import $ from 'jquery';
 import Register from "./register";
 import '@/store/index';
 
-$(document).ready(() => {
+document.addEventListener("DOMContentLoaded", () => {
   document.querySelector('.web-logo .web-logo-img').addEventListener('click', () => {
-    window.location.href = `http://${process.env.STATIC_SERVER}/html/index.html`;
+    window.location.href = `${process.env.STATIC_SERVER}/html/index.html`;
   }); // logo 跳转链接。
   new Register();
 });

@@ -1,12 +1,11 @@
-import $ from 'jquery';
 import {getQuery} from "../../../common/script/utils/commonUtils";
 import getCourseHeadData from "../../../api/course/getCourseHead";
 import addCourseToCart from "../../../api/course/addCourseToCart";
 import message from "../../../common/script/utils/message";
 
 function collection() {
-  const collection = $('.collection');
-  collection.on('click', () => {
+  const collection = document.querySelector('.collection');
+  collection.addEventListener('click', () => {
     const classList = collection.attr('class').split(" ");
     if (classList.indexOf('active') !== -1) collection.removeClass('active');
     else collection.addClass('active');

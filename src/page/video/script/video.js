@@ -6,7 +6,7 @@ import {getChapter} from "../../../api/course/catalog";
 window.addEventListener('load', async () => {
   const { courseId, lessonId } = getQuery(), backToCourseBtn = document.querySelector('.back-to-course');
   backToCourseBtn.addEventListener('click', () => {
-    window.location.href = `http://${process.env.STATIC_SERVER}/html/course.html?courseId=${courseId}#catalog`;
+    window.location.href = `${process.env.STATIC_SERVER}/html/course.html?courseId=${courseId}#catalog`;
   });
   try {
     const videoRes = await viewVideo(parseInt(lessonId));

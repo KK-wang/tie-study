@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "serve": "webpack serve --config ./config/webpack.common.js --env development",
-    "build": "webpack --config ./config//webpack.common.js --env production"
+    "build": "webpack --config ./config/webpack.common.js --env production"
   },
   "author": "",
   "license": "ISC",
@@ -41,7 +41,6 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
-    "jquery": "^3.6.0",
     "js-cookie": "^3.0.1"
   }
 }

@@ -47,13 +47,13 @@ async function generateDirectory(courseId) {
       for (let j = 0; j < lessonData.length; j++) {
         // 这里的渲染还有一些问题，需要我们给当前播放的 <a> 一个高亮标识。
         chapterEleChildrenHTML += `
-          <a class="lesson" href="http://${process.env.STATIC_SERVER}/html/video.html?lessonId=${lessonData[j].lessonId}&courseId=${courseId}" lessonId=${lessonData[j].lessonId}>
+          <a class="lesson" href="${process.env.STATIC_SERVER}/html/video.html?lessonId=${lessonData[j].lessonId}&courseId=${courseId}" lessonId=${lessonData[j].lessonId}>
             <span class="order">课时${wholeLessonIndex}</span>
             <span class="circle ${lessonData[j].isStudied === 2 ? 'full' : lessonData[j].isStudied === 1 ? 'half-full' : '' }"></span>
             <span class="title">${lessonData[j].title}</span>
             <span class="time">
                 ${lessonData[j].length}
-                <svg t="1634370043637" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5776" width="25" height="25"><path d="M204.8 236.8A19.2 19.2 0 0 0 185.6 256v512c0 10.5984 8.6016 19.2 19.2 19.2h614.4a19.2 19.2 0 0 0 19.2-19.2V256A19.2 19.2 0 0 0 819.2 236.8H204.8z m0-64h614.4c45.9264 0 83.2 37.2736 83.2 83.2v512c0 45.9264-37.2736 83.2-83.2 83.2H204.8A83.2 83.2 0 0 1 121.6 768V256c0-45.9264 37.2736-83.2 83.2-83.2z" p-id="5777" fill="#999B9C"></path><path d="M670.7712 485.0176a52.48 52.48 0 0 1-17.9712 71.9872l-195.7376 117.4016a52.48 52.48 0 0 1-79.4624-44.9536V394.5472a52.48 52.48 0 0 1 79.4624-44.9536L652.8 466.944c7.3728 4.4544 13.568 10.5984 17.9712 18.0224z m-229.1712-70.144v194.2016L603.392 512l-161.792-97.0752z" p-id="5778" fill="#999B9C"></path></svg>
+                <svg t="1634370043637" class="icon" viewBox="0 0 1024 1024" p-id="5776" width="25" height="25"><path d="M204.8 236.8A19.2 19.2 0 0 0 185.6 256v512c0 10.5984 8.6016 19.2 19.2 19.2h614.4a19.2 19.2 0 0 0 19.2-19.2V256A19.2 19.2 0 0 0 819.2 236.8H204.8z m0-64h614.4c45.9264 0 83.2 37.2736 83.2 83.2v512c0 45.9264-37.2736 83.2-83.2 83.2H204.8A83.2 83.2 0 0 1 121.6 768V256c0-45.9264 37.2736-83.2 83.2-83.2z" p-id="5777" fill="#999B9C"></path><path d="M670.7712 485.0176a52.48 52.48 0 0 1-17.9712 71.9872l-195.7376 117.4016a52.48 52.48 0 0 1-79.4624-44.9536V394.5472a52.48 52.48 0 0 1 79.4624-44.9536L652.8 466.944c7.3728 4.4544 13.568 10.5984 17.9712 18.0224z m-229.1712-70.144v194.2016L603.392 512l-161.792-97.0752z" p-id="5778" fill="#999B9C"></path></svg>
             </span>
           </a>
         `;

@@ -8,21 +8,13 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
-import $ from 'jquery';
-import navbarJS from '@/component/navbar/script/import.js';
-import loginJS from '@/component/login/script/import.js';
-import footerJS from '@/component/footer/script/import.js';
-import {getCookie} from "../../../common/script/utils/cookie";
-$(document).ready(() => {
-  if (getCookie('token') === undefined) {
-    $('#login-container').load(`http://${process.env.STATIC_SERVER}/html/login.html #login`, undefined, () => {
-      loginJS();
-    });
-  }
-  $('.footer').load(`http://${process.env.STATIC_SERVER}/html/footer.html #footer`, undefined, () => {
-    footerJS();
-  });
-  $('.nav-bar').load(`http://${process.env.STATIC_SERVER}/html/navbar.html #nav-bar`, undefined, () => {
-    navbarJS();
+
+import loadComponent from "../../../common/script/repeated/loadComponent";
+
+window.addEventListener("DOMContentLoaded", () => {
+  loadComponent(document, {
+    isLoadLogin: true,
+    isLoadNavBar: true,
+    isLoadFooter: true,
   });
 });

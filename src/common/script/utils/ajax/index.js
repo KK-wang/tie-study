@@ -13,7 +13,13 @@ import message from "../message";
  */
 
 // 自定义的 Ajax 的核心函数：
-function request({url, method, query = null, payload = null, timeout = 5000, headers = {}}) {
+function request({url,
+                 method,
+                 query = null,
+                 payload = null,
+                 timeout = 5000,
+                 headers = {},
+                 responseType = 'json'}) {
   // 这里的 headers 默认值取空对象 {} 的原因是 Object.keys(headers) 在 headers === null 时报 convert 错误。
   return new Promise(async (resolve, reject) => {
     const xhr = new XMLHttpRequest(),
@@ -54,9 +60,9 @@ function request({url, method, query = null, payload = null, timeout = 5000, hea
       }
     }
 
-    xhr.open(method, newQuery === undefined? newUrl : newUrl + newQuery, true);
-    /* xhr.responseType 是一个枚举字符串值，用于指定响应中包含的数据类型，这里指定响应的数据类型为 json。*/
-    xhr.responseType = "json";
+    xhr.open(method, newQuery === undefined ? newUrl : newUrl + newQuery, true);
+    /* xhr.responseType 是一个枚举字符串值，用于指定响应中包含的数据类型，默认为 json。*/
+    xhr.responseType = responseType;
     /* 禁止 xhr 发送 Cookie。*/
     xhr.withCredentials = false;
 

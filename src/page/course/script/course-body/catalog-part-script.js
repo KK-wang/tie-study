@@ -1,11 +1,10 @@
-import $ from 'jquery';
 import { getChapter, getLesson, submitEva } from "../../../../api/course/catalog";
 import {getQuery} from "../../../../common/script/utils/commonUtils";
 import {debounce} from "../../../../common/script/utils/commonUtils";
 
 function changeIsGiveStarsActive() {
-  const giveStars = $('.give-stars'), labels = $('.give-stars label');
-  labels.on('click', () => {
+  const giveStars = document.querySelector('.give-stars'), labels = document.querySelector('.give-stars label');
+  labels.addEventListener('click', () => {
     const classList = giveStars.attr('class').split(" ");
     if (classList.indexOf('active') === -1) giveStars.addClass('active');
   });
@@ -71,7 +70,7 @@ async function generateChapterAndLesson() {
       for (let j = 0; j < lessonData.length; j++) {
         const lesson = document.createElement('a');
         lesson.classList.add('class-li');
-        lesson.setAttribute("href", `http://${process.env.STATIC_SERVER}/html/video.html?lessonId=${lessonData[j].lessonId}&courseId=${courseId}`);
+        lesson.setAttribute("href", `${process.env.STATIC_SERVER}/html/video.html?lessonId=${lessonData[j].lessonId}&courseId=${courseId}`);
         // 这里应当设置一个自定义属性，保存一下 lessonId。
         lesson.innerHTML = `
           <span>课时</span>

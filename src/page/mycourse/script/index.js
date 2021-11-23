@@ -7,8 +7,7 @@ if (process.env.NODE_ENV === 'development') {
 
 import "@/common/script/utils/module.js"
 // 为了使用自己封装的模块化方法，必须引入这个文件。
-
-// import navbarJS from '@/component/navbar/script/import.js';
+import loadComponent from "../../../common/script/repeated/loadComponent";
 
 document.addEventListener('DOMContentLoaded', () => {
   // DOMContentLoaded 是 HTML 页面的其中一个生命周期，他代表的含义如下：
@@ -16,11 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
    * 但像 <img> 和样式表之类的外部资源可能尚未加载完成，
    * 因此处理程序可以查找 DOM 节点，并初始化接口。
    * */
-  console.log(document.querySelector('.wxh'));
-
-  document.querySelector('.wxh').load(`http://${process.env.STATIC_SERVER}/html/navbar.html #nav-bar`, () => {
-    console.log('wxh');
+  loadComponent(document, {
+    isLoadLogin: true,
+    isLoadNavBar: true,
+    isLoadSideBar: true,
+    isLoadFooter: true,
   });
-
-
 });

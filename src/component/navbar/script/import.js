@@ -11,17 +11,17 @@ import {getCookie, removeCookie} from "../../../common/script/utils/cookie";
 
 export default function () {
   document.querySelector('.web-logo').addEventListener('click', () => {
-    window.location.href = `http://${process.env.STATIC_SERVER}/html/index.html`;
+    window.location.href = `${process.env.STATIC_SERVER}/html/index.html`;
   });
   document.querySelector('.course').addEventListener('click', () => {
-    window.location.href = `http://${process.env.STATIC_SERVER}/html/index.html`;
+    window.location.href = `${process.env.STATIC_SERVER}/html/index.html`;
   });
   document.querySelector('span.my-course.btn').addEventListener('click', () => {
-    window.location.href = `http://${process.env.STATIC_SERVER}/html/mycourse.html`;
+    window.location.href = `${process.env.STATIC_SERVER}/html/mycourse.html`;
   });
   document.querySelector('.quit-btn').addEventListener('click', () => {
     removeCookie("token");
-    window.location.href = `http://${process.env.STATIC_SERVER}/html/index.html`;
+    window.location.href = `${process.env.STATIC_SERVER}/html/index.html`;
   });
   if (getCookie("token") !== undefined) {
     const avatarImg = document.querySelector('.avatar .image');
