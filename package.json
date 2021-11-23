@@ -40,7 +40,5 @@
     "webpack-dev-server": "^4.2.1",
     "webpack-merge": "^5.8.0"
   },
-  "dependencies": {
-    "js-cookie": "^3.0.1"
-  }
+  "dependencies": {}
 }

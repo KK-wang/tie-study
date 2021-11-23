@@ -1,4 +1,4 @@
-import {getCookie} from "../common/script/utils/cookie";
+import Cookie from "../common/script/utils/cookie";
 
 class Store {
   // 此时的状态存储到了内存中。
@@ -43,7 +43,7 @@ class Store {
   }
 }
 
-if (getCookie("token")) {
+if (Cookie.get("token") !== undefined) {
   // token 存储到了 Cookie 中，用户状态保存到了 localStorage 中，方法保存到了内存中。
   const storeProperty = JSON.parse(localStorage.getItem("store"));
   window.$store = new Store(storeProperty);

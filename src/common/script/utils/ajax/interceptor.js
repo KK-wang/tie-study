@@ -1,4 +1,4 @@
-import { getCookie, setCookie } from "../cookie";
+import Cookie from "../cookie";
 import message from "../message";
 
 const tokenFree = [
@@ -11,7 +11,7 @@ const tokenFree = [
 function interceptReq(xhr, url, headers) {
   try {
     if (!tokenFree.includes(url)) {
-      xhr.setRequestHeader("token", getCookie('token'));
+      xhr.setRequestHeader("token", Cookie.get('token'));
       // 如果请求的 URL 不是 /api/user/token 的话，加上 token。
     }
     const headersKey = Object.keys(headers);
@@ -52,7 +52,7 @@ function interceptRes(xhr) {
         const token = xhr.getResponseHeader("authorization");
         if (token !== null) {
           // 设置 Token。
-          setCookie('token', token, 7);
+          Cookie.set('token', token, 7);
         }
         return Promise.resolve(res);
       }

@@ -7,7 +7,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // 优化打包后的文件的体积。
 import '@/store/index'
-import {getCookie, removeCookie} from "../../../common/script/utils/cookie";
+import Cookie from "../../../common/script/utils/cookie";
 
 export default function () {
   document.querySelector('.web-logo').addEventListener('click', () => {
@@ -20,10 +20,10 @@ export default function () {
     window.location.href = `${process.env.STATIC_SERVER}/html/mycourse.html`;
   });
   document.querySelector('.quit-btn').addEventListener('click', () => {
-    removeCookie("token");
+    Cookie.remove("token");
     window.location.href = `${process.env.STATIC_SERVER}/html/index.html`;
   });
-  if (getCookie("token") !== undefined) {
+  if (Cookie.get("token") !== undefined) {
     const avatarImg = document.querySelector('.avatar .image');
     avatarImg.src = window.$store.userAvatarGetter();
     avatarImg.classList.add('trueAvatar');

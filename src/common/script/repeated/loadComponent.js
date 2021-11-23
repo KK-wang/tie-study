@@ -1,12 +1,12 @@
 import "../utils/module";
-import {getCookie} from "../utils/cookie";
+import Cookie from "../utils/cookie";
 
 export default function loadComponent(document, {isLoadLogin = false,
                                                  isLoadNavBar = false,
                                                  isLoadSideBar = false,
                                                  isLoadFooter = false,}) {
   if (isLoadLogin) {
-    if (getCookie("token") === undefined) {
+    if (Cookie.get("token") === undefined) {
       document.querySelector('.login-container').load(`${process.env.STATIC_SERVER}/html/login.html #login`, async () => {
         const module = await import( /* webpackChunkName: "login.import" */ '../../../component/login/script/import');
         module.default();
