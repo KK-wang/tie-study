@@ -2,12 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>铁思汇</title>
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
 </head>
 <body>
 <div class="login-container"></div>
 <div class="nav-bar-container"></div>
-
+<div class="main-container">
+  <div class="banner">
+    <div class="banner-content">
+      <img src="<%= require('@/assets/svg/navbar/user-avatar.svg').default %>" alt="">
+      <div class="user-info">
+        <div>王兴浩，下午好</div>
+        <div>stay hungry, stay foolish</div>
+      </div>
+      <a class="view-tech" href="#">查看自己的技术栈</a>
+    </div>
+  </div>
+  <div class="content-wrapper">
+    <i id="course"></i>
+    <i id="collection"></i>
+    <i id="order"></i>
+    <div class="content-choice">
+      <a href="#course">课程</a>
+      <a href="#collection">收藏夹</a>
+      <a href="#order">课程订单</a>
+      <input type="text" placeholder="搜索我的课程">
+      <img src="<%= require('@/assets/svg/mycourse/search.svg').default %>" alt="">
+    </div>
+    <div class="main-content">
+      <div class="course-content">
+        这是我的课程。
+      </div>
+      <div class="collection-content">
+        这是我的收藏。
+      </div>
+      <div class="order-content">
+        这是我的订单。
+      </div>
+    </div>
+  </div>
+</div>
 <div class="side-bar-container"></div>
 <div class="footer-container"></div>
 </body>

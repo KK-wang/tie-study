@@ -14,6 +14,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const HtmlSkipAssetsPlugin = require('html-webpack-skip-assets-plugin').HtmlWebpackSkipAssetsPlugin;
 // const InlineChunkHtmlPlugin = require('react-dev-utils/InlineChunkHtmlPlugin');
 // const HtmlWebpackPlugin = require("html-webpack-plugin");
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: "production",
@@ -52,6 +53,9 @@ module.exports = {
      * 它能够指定某些 webpack 输出的文件不被 html-webpack-plugin 自动注入进生成的 html 中。
      * 显然这可以防止一些无效注入，减少 HTTP 请求，譬如这次生成的空的 navbar.**.js 文件等。
      */
+    new Dotenv({
+      path: './prod.env'
+    }),
   ],
   optimization: {
     chunkIds: 'deterministic', // 分包的命名，测试打包可以改为 named，

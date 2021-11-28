@@ -1,0 +1,147 @@
+@import "@/common/style/base";
+
+.main-container {
+  min-height: calc(100vh - 320px);
+  height: auto;
+  // 父元素中的 height: 设置为 auto 是没法继承的。
+
+  .banner {
+    width: 100%;
+    background-color: rgb(98, 166, 232);
+    position: relative;
+    height: 150px;
+
+    .banner-content {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      transform: translateY(-50%);
+      padding-left: 80px;
+      padding-right: 80px;
+
+      img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        float: left;
+        margin-right: 30px;
+      }
+
+      .user-info {
+        margin-top: 11px;
+        text-align: center;
+        float: left;
+        color: #FFFFFf;
+
+        div:first-child {
+          font-size: 22px;
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+
+        div:last-child {
+          font-size: 14px;
+        }
+
+      }
+
+      .view-tech {
+        all: unset;
+        float: right;
+        background-color: rgb(252, 217, 8);
+        width: 160px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        border-radius: 20px;
+        margin-top: 15px;
+        cursor: pointer;
+      }
+
+    }
+
+  }
+
+  .content-wrapper {
+    padding-left: 100px;
+    padding-right: 100px;
+
+    #collection:not(:target) + #order:not(:target) ~ .content-choice a:nth-child(1),
+    #collection:target ~ .content-choice a:nth-child(2),
+    #order:target ~ .content-choice a:nth-child(3) {
+      font-weight: bold;
+      color: $themeColor;
+      border-bottom: $themeColor solid 3px;
+    }
+
+    #collection:not(:target) + #order:not(:target) ~ .main-content .course-content,
+    #collection:target ~ .main-content .collection-content,
+    #order:target ~ .main-content .order-content {
+      display: block;
+    }
+
+    .content-choice {
+      position: relative;
+      margin-top: 20px;
+
+      a {
+        all: unset;
+        cursor: pointer;
+        padding-bottom: 10px;
+        &:not(:nth-child(3)) {
+          margin-right: 60px;
+        }
+      }
+
+      input {
+        all: unset;
+        position: absolute;
+        right: 0;
+        border: 1px solid rgb(98, 166, 232);
+        height: 35px;
+        width: 200px;
+        padding-left: 10px;
+        padding-right: 30px;
+        color: rgb(98, 166, 232);
+
+        &::placeholder {
+          color: #8B8D92;
+        }
+
+      }
+
+      img {
+        position: absolute;
+        width: 25px;
+        right: 5px;
+        top: 5px;
+      }
+
+    }
+
+    .main-content {
+      margin-top: 30px;
+
+      .course-content {
+        display: none;
+      }
+
+      .collection-content {
+        display: none;
+      }
+
+      .order-content {
+        display: none;
+      }
+
+    }
+
+  }
+
+}
+
+.footer-container {
+  position: relative;
+}

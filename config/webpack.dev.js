@@ -1,6 +1,14 @@
+const Dotenv = require('dotenv-webpack');
+
 module.exports = {
   mode: "development",
   devtool: 'cheap-module-source-map',
+  plugins: [
+    new Dotenv({
+      path: './dev.env'
+    }),
+    // 我们使用 dotenv-webpack 来从 .env 文件中读取环境变量。
+  ],
   devServer: {
     /* 需要注意一下，现在使用的 webpack-dev-server 版本已经是 v4 了，
     很多配置都改变了，需要我们重新阅读一下官方文档。 */

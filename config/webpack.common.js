@@ -9,7 +9,6 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { DefinePlugin } = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const Dotenv = require('dotenv-webpack');
 
 function getHtmlPlugin(option) {
   return new HtmlWebpackPlugin({
@@ -97,8 +96,6 @@ function commonConfig(isProduction) {
       }),
       // 用来定义全局变量的插件，暂且还不需要，
       /* 其实还是需要的，只不过一直都没有注意到罢了。*/
-      new Dotenv(),
-      // 我们使用 dotenv-webpack 来从 .env 文件中读取环境变量。
       new CopyWebpackPlugin({
         patterns: [
           { from: './src/public' }

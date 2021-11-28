@@ -1,3 +1,5 @@
+import '../style/main.scss';
+
 if (process.env.NODE_ENV === 'development') {
   /* 这是用来实现 HMR 的代码，JS 模块中只有存在了这段代码才会开启 HMR。 */
   module.hot.accept((err) => {
@@ -20,5 +22,21 @@ document.addEventListener('DOMContentLoaded', () => {
     isLoadNavBar: true,
     isLoadSideBar: true,
     isLoadFooter: true,
+  }, () => {
+    const avatar = document.querySelector('.banner-content img'),
+      hour = parseInt(new String(new Date()).match(/\d{2}(?=:)/));
+    avatar.src = window.$store.userAvatarGetter();
+    avatar.nextElementSibling.innerHTML = `
+      <div>${window.$store.truenameGetter()}，${
+        hour >= 0 && hour <= 6 ? '晚上' : hour >= 7 && hour <= 11 ? '上午' : hour >= 12 && hour <= 13 ? '中午' : 
+        hour >= 14 && hour <= 18 ? '下午' : '晚上'
+      }好。</div>
+      <div>${window.$store.signGetter() ? window.$store.signGetter() : '设计您的个性签名，展示不一样的自己!'}</div>
+    `;
   });
+
+
+
+
+
 });
