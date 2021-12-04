@@ -8,6 +8,17 @@ function getCourseEvaluation(query) {
   });
 }
 
+function getCourseDescn(courseId) {
+  return request({
+    url: '/api/course/descn',
+    method: 'get',
+    query: {
+      courseId
+    }
+  });
+}
+
 export {
-  getCourseEvaluation
+  getCourseEvaluation,
+  getCourseDescn
 }

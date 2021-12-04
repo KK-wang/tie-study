@@ -21,7 +21,7 @@ module.exports = {
     // 监视项目中的 .html 文件，当它们发生变化时，自动去刷新页面。
     proxy: {
       "/innerDevAPI": {
-        target: "http://192.168.2.20:8088",
+        target: "http://192.168.2.156:8080",
         pathRewrite: {
           "^/innerDevAPI": ""
         },

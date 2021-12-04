@@ -65,6 +65,26 @@
       <div class="register-form">
         <div class="validate-result"></div>
       </div>
+      <div class="register-form register-result">
+        <div class="register-result-title">
+          注册成功，您的铁思汇账号为：
+          <span style="font-weight: bold" class="userID"></span>
+          <span class="copy">
+            <img src="<%= require('@/assets/svg/register/copy.svg').default %>" alt="">
+            （点击复制）
+          </span>
+        </div>
+        <div class="">该账号为用户身份标识的唯一凭证，请牢记!</div>
+        <div class="btn-group">
+          <button class="register-form-btn btn-in-register-result">
+            <a href="<%= process.env.STATIC_SERVER %>/html/index.html">
+              前往铁丝汇主页
+              <img src="<%= require('@/assets/svg/register/jump.svg').default %>" alt="">
+              <!-- 由于 HtmlWebpackPlugin 本质上是对 ejs 的操作，因此可以直接在 html 中写 ejs 语法。-->
+            </a>
+          </button>
+        </div>
+      </div>
       <div class="register-form core-register-form">
         <div class="third-register-form-title">
           请填写您的个人信息

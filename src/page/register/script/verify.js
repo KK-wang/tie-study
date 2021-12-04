@@ -1,6 +1,5 @@
 import message from "../../../common/script/utils/message";
 import { realInfoVerification } from "../../../api/register/realInfoVerification";
-import Verification from "../../../common/script/utils/verification";
 
 export default class Verify {
   constructor(verifiedInfo) {
@@ -14,7 +13,6 @@ export default class Verify {
 
     // 验证实名要绑定的函数 function。
     const submitVerifyFunc = this.submitVerify.bind(this);
-
 
     // 属性行为。
     this.verifyForm.classList.add('active');

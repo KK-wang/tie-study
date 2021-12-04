@@ -4,7 +4,7 @@ import Cookie from "../utils/cookie";
 export default function loadComponent(document, {isLoadLogin = false,
                                                  isLoadNavBar = false,
                                                  isLoadSideBar = false,
-                                                 isLoadFooter = false}, callback) {
+                                                 isLoadFooter = false}, callback = null) {
   // callback 为自定义回调函数，会在全部加载完公有组件之后执行。
   Promise.all([
     new Promise(resolve => {

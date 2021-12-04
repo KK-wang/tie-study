@@ -1,5 +1,4 @@
 import Cookie from "../cookie";
-import message from "../message";
 
 const tokenFree = [
   '/api/user/token',
@@ -20,7 +19,7 @@ function interceptReq(xhr, url, payload, headers) {
       /* 请求头的设置必须在 xhr 打开之后，并且在 send 之前。*/
       // 添加自定义请求头。
     });
-    if (!(payload instanceof FormData)) {
+    if (!(payload instanceof FormData) && !("Content-Type" in headers)) {
       // 设置默认的 Content-Type 请求头，记着给 payload instanceof FormData 加括号。
       /* 需要注意的是，当我们传入的 payload 参数为 FormData 的实例时，
       不能去手动修改 Request Headers 中的 Content-Type 属性为 "multipart/form-data"，
@@ -30,19 +29,17 @@ function interceptReq(xhr, url, payload, headers) {
     }
     return Promise.resolve();
   } catch (e) {
-    return Promise.reject(e);
+    return Promise.reject({
+      code: 60002,
+      msg: e,
+    });
   }
 }
 
 function interceptRes(xhr) {
   try {
     if (xhr.status !== 200) {
-      // 服务端响应非 200（例如 500）=>
-      message({
-        // 技术错误在这里处理。
-        message: `${xhr.status}: ${xhr.statusText}`,
-        type: 'error'
-      });
+      // 在这里处理技术错误，服务端响应非 200（例如 500）=>
       return Promise.reject({
         code: xhr.status,
         msg: xhr.statusText
@@ -62,7 +59,10 @@ function interceptRes(xhr) {
       }
     }
   } catch (e) {
-    return Promise.reject(e);
+    return Promise.reject({
+      code: 60003,
+      msg: e
+    });
   }
 }
 

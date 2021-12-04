@@ -1,6 +1,5 @@
 import { interceptReq, interceptRes } from "./interceptor";
 import message from "../message";
-
 /* 基于原生的 XHR 封装一个自己的支持 Promise 的 Ajax 实现 */
 /*
  * 核心函数 request 的 option 包括:
@@ -11,7 +10,7 @@ import message from "../message";
  * timeout(Number): 网络请求的最长请求时间。
  * headers(Object): 所发送的网络请求的额外请求头。
  */
-
+/* 需要注意的是，GET 方法并没有进行 stringify 的转化，因此要保证传给 GET 方法的 query 中的属性全部为值类型。*/
 // 自定义的 Ajax 的核心函数：
 function request({url,
                  method,
@@ -40,6 +39,12 @@ function request({url,
     if (payload !== null) {
       if (payload instanceof FormData) {
         newPayload = payload;
+      } else if (headers['Content-Type'] === 'application/x-www-form-urlencoded') {
+        newPayload = '';
+        for (const property in payload) {
+          newPayload += `${property}=${payload[property]}&`
+        }
+        newPayload = newPayload.slice(0, newPayload.length - 1);
       } else {
         newPayload = JSON.stringify(payload);
       }
@@ -60,11 +65,12 @@ function request({url,
       }
     }
 
-    xhr.open(method, newQuery === undefined ? newUrl : newUrl + newQuery, true);
-    /* xhr.responseType 是一个枚举字符串值，用于指定响应中包含的数据类型，默认为 json。*/
+    xhr.open(method.toUpperCase(), newQuery === undefined ? newUrl : newUrl + newQuery, true);
+    /* method 需要大写字符。*/
     xhr.responseType = responseType;
-    /* 禁止 xhr 发送 Cookie。*/
+    /* xhr.responseType 是一个枚举字符串值，用于指定响应中包含的数据类型，默认为 json。*/
     xhr.withCredentials = false;
+    /* 禁止 xhr 发送 Cookie。*/
 
     try {
       // 请求拦截器。
@@ -73,14 +79,14 @@ function request({url,
       // 停掉超时请求。
       timeoutID = setTimeout(() => {
         xhr.abort();
-        throw "网络请求超时...";
+        message({
+          message: '网络请求超时...',
+          duration: 1500,
+          type: 'error',
+        });
       }, timeout);
     } catch (e) {
-      // 技术错误在这里进行统一处理。
-      message({
-        message: e,
-        type: 'error'
-      });
+      // 网络请求发送时的技术错误在这里进行统一处理。
       reject(e);
     }
   });

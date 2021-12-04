@@ -1,0 +1,34 @@
+@import "@/common/style/base";
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+
+  .main-container-content {
+    height: 450px;
+    width: 900px;
+    background-color: #EFEFEF;
+
+    #technology:not(:target) + #question-and-answer:not(:target) ~ .main-container-content .tab-bar a:nth-child(1), {
+
+
+    }
+
+    .tab-bar {
+      a {
+        all: unset;
+
+
+      }
+    }
+
+
+
+
+  }
+
+
+
+}

@@ -1,8 +1,9 @@
 import request from "../../common/script/utils/ajax";
 
-export function getSort() {
+export default function getMyCollection(query) {
   return request({
-    url: '/api/course/category/list',
+    url: '/api/userInfo/collection',
     method: 'get',
+    query
   });
 }

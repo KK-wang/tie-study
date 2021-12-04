@@ -1,6 +1,7 @@
 import { loginByPhone, getVerificationCode } from "../../../../api/login/loginByPhone";
 import message from "../../../../common/script/utils/message";
 import Verification from "../../../../common/script/utils/verification";
+import recordUserInfo from "../../../../common/script/repeated/recordUserInfo";
 
 export default class {
 
@@ -86,11 +87,7 @@ export default class {
         message: '登录成功',
         type: 'success',
         onclose() {
-          window.$store.userAvatarSetter(res.data.avatar);
-          window.$store.snoSetter(res.data.sno);
-          window.$store.truenameSetter(res.data.truename);
-          window.$store.nicknameSetter(res.data.nickname);
-          window.$store.signSetter(res.data.sign);
+          recordUserInfo(res.data);
           window.location.reload();
         }
       });

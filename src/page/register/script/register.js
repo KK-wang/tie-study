@@ -2,7 +2,7 @@ import {registerInfo, uploadAvatar} from "../../../api/register/finishRegister";
 import message from "../../../common/script/utils/message";
 import Verify from "./verify";
 import Verification from "../../../common/script/utils/verification";
-import {loginByStuID} from "../../../api/login/loginByStuID";
+import ViewUserID from "./viewUserID";
 
 export default class Register {
   constructor() {
@@ -53,10 +53,15 @@ export default class Register {
     if (!this.validateForm(usernameValue, passwordValue, phoneNumValue, emailValue)) return;
 
     try {
+      message({
+        message: "注册已发送，正在等待响应...",
+        type: "info",
+        duration: 1500,
+      });
       avatarFormData.append("multipartFile", this.avatarInput.files[0]);
       // 通过 append 给 FormData 对象传入属性是该对象私有的，无法直接访问。
       const avatarURL = await uploadAvatar(avatarFormData);
-      /* 虽然网站接入了外部用户，但是用户主键依然是学号，非外校用户会生成一个学号。*/
+      /* 网站接入了外部用户，因此校内用户的主键也不再是学号，而是由系统生产的账号。*/
       const userInfo = {
         son: this.verifiedInfo.sno,
         truename: this.verifiedInfo.truename,
@@ -70,19 +75,7 @@ export default class Register {
       };
       const info = await registerInfo(userInfo);
       // 注册成功。
-      message({
-        message: "注册成功，正在跳转...",
-        type: "success",
-        duration: 2000,
-      });
-      const res = await loginByStuID(info.data.sno, userInfo.password);
-      window.$store.userAvatarSetter(res.data.avatar);
-      window.$store.snoSetter(info.data.sno);
-      window.$store.truenameSetter(res.data.truename);
-      window.$store.nicknameSetter(res.data.nickname);
-      window.$store.signSetter(res.data.sign);
-      // 写入头像数据。
-      window.location.href = `${process.env.STATIC_SERVER}/html/index.html`;
+      this.viewUserID(info.data.sno, userInfo.password);
     } catch (e) {
       // 在这里给出注册异常。
       message({
@@ -155,4 +148,11 @@ export default class Register {
 
     return true;
   }
+
+  viewUserID(userID, password) {
+    // userID 即为用户的账号，password 为用户输入的密码。
+    new ViewUserID(userID, password);
+    // 用户注册成功之后，向用户显示由系统生成的铁丝汇账号。
+  }
+
 }
