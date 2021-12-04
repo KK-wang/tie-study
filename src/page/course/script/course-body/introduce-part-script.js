@@ -63,7 +63,7 @@ async function evaluation() {
 
 async function renderIntroduction() {
   const res = await getCourseDescn(parseInt(getQuery().courseId));
-  document.querySelector('.panel-li:nth-child(1) .panel-li-introduce-container .panel-li-introduce').innerHTML = `${res.data.descn}`;
+  document.querySelector('.panel-li:nth-child(1) .panel-li-introduce-container .panel-li-introduce').innerHTML = `${res.data}`;
 }
 
 export default function () {

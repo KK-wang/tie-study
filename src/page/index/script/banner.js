@@ -9,7 +9,9 @@ window.addEventListener('load', () => {
     let activeIndex = 0
     let banners = res.data
     let menu = document.querySelector('.menu')
-    let menuItems = []
+    let menuItems = [];
+    link.href = origin + '/html/course.html?courseId=' + banners[0].courseId
+    img.src = banners[0].cover
 
     banners.forEach((banner, index) => {
       if(banner.show) {
