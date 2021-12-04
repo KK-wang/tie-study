@@ -4,7 +4,7 @@ function aliPay(payload) {
   return request({
     url: '/api/order/ali/h5',
     method: 'post',
-    payload
+    payload,
   });
 }
 

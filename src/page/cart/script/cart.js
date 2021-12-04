@@ -99,17 +99,21 @@ async function generateCartItems() {
     if (itemsInfo.length !== 0) {
       sessionStorage.setItem("paymentData", JSON.stringify(itemsInfo));
       try {
-        console.log(itemsInfo);
         const payPayload = {
           orderItemList: itemsInfo.map(val => parseInt(val.courseId)),
           totalPrice: itemsInfo.reduce((sum, val) => sum + parseInt(val.price), 0)
         }
-        console.log(payPayload);
-        const order = await aliPay(payPayload);
-        console.log(order);
-        // await clearCart();
+        /* 下面对回调回来的数据进行规范化。*/
+        const order = await aliPay(payPayload), tempEl = document.createElement('div');
+        tempEl.innerHTML = order.data;
+        tempEl.removeChild(tempEl.querySelector('script'));
+        const form = tempEl.querySelector('form');
+        form.setAttribute("accept-charset", "gbk");
+        form.querySelector('input[type="submit"]').removeAttribute("style");
+        sessionStorage.setItem("orderInfo", tempEl.innerHTML);
+        await clearCart();
         // 将要生成订单，因此需要清空购物车。
-        // window.location.href = `${process.env.STATIC_SERVER}/html/payment.html`;
+        window.location.href = `${process.env.STATIC_SERVER}/html/payment.html`;
       } catch (e) {
         message({
           message: e.code ? `${e.code} ${e.msg}` : e,

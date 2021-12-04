@@ -1,4 +1,4 @@
-import generateOrder from "../../../api/order/generateOrder";
+import message from "../../../common/script/utils/message";
 
 window.addEventListener('DOMContentLoaded', () => {
   document.querySelector('.payment-avatar').src = window.$store.userAvatarGetter();
@@ -14,6 +14,17 @@ window.addEventListener('DOMContentLoaded', () => {
       folder.textContent = '展开'
     }
   });
+
+  if (!(sessionStorage.getItem("orderInfo"))) {
+    console.log(1);
+    message({
+      message: '支付失败，订单不保存，请重新购买!',
+      type: 'error',
+      duration: 5000
+    });
+    return;
+  }
+
   if (sessionStorage.getItem("paymentData")) fillPaymentDataAndGenerateOrder().then();
 });
 
@@ -40,12 +51,8 @@ async function fillPaymentDataAndGenerateOrder() {
   }
   document.querySelector('.pay-num span:last-child').textContent = `￥${totalPrice}`;
   sessionStorage.removeItem("paymentData");
-  try {
-    // 创建订单。
-    const res = await generateOrder({ orderItemList: courseIds, totalPrice });
-    // 创建订单 500 了。
-    console.log(res);
-  } catch (e) {
-    console.log(e);
-  }
+
+  const payBtn = document.querySelector('.pay-btn');
+  payBtn.innerHTML = sessionStorage.getItem('orderInfo');
+  sessionStorage.removeItem("orderInfo");
 }
