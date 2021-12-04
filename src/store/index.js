@@ -1,54 +1,58 @@
 import Cookie from "../common/script/utils/cookie";
 
+const privateWeakMap = new WeakMap();
+// 利用 weakMap 实现 Class 私有成员。
+
 class Store {
   // 此时的状态存储到了内存中。
   constructor({ userAvatar, sno, truename, nickname, sign }) {
-    this.userAvatar = userAvatar;
-    this.sno = sno;
-    this.truename = truename;
-    this.nickname = nickname;
-    this.sign = sign;
+    privateWeakMap.set(this, {
+      userAvatar,
+      sno,
+      truename,
+      nickname,
+      sign,
+    });
   }
 
   userAvatarSetter(userAvatar) {
-    this.userAvatar = userAvatar;
-    // 全局状态管理不能用代理，代理是 proxy 的改变会走 handler，被 proxy 的对象不会走 handler。
+    privateWeakMap.get(this).userAvatar = userAvatar;
   }
 
   snoSetter(sno) {
-    this.sno = sno;
+    privateWeakMap.get(this).sno = sno;
   }
 
   truenameSetter(truename) {
-    this.truename = truename;
+    privateWeakMap.get(this).truename = truename;
   }
 
   nicknameSetter(nickname) {
-    this.nickname = nickname;
+    privateWeakMap.get(this).nickname = nickname;
   }
 
   signSetter(sign) {
-    this.sign = sign;
+    privateWeakMap.get(this).sign = sign;
   }
 
   userAvatarGetter() {
-    return this.userAvatar;
+    return privateWeakMap.get(this).userAvatar;
   }
 
   snoGetter() {
-    return this.sno;
+    return privateWeakMap.get(this).sno;
   }
 
   truenameGetter() {
-    return this.truename;
+    return privateWeakMap.get(this).truename;
   }
 
   nicknameGetter() {
-    return this.nickname;
+    return privateWeakMap.get(this).nickname;
   }
 
   signGetter() {
-    return this.sign;
+    return privateWeakMap.get(this).sign;
   }
 
 }
@@ -62,5 +66,5 @@ if (Cookie.get("token") !== undefined) {
 }
 
 window.addEventListener('beforeunload', (e) => {
-  localStorage.setItem("store", JSON.stringify(window.$store));
+  localStorage.setItem("store", JSON.stringify(privateWeakMap.get(window.$store)));
 });

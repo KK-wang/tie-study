@@ -1,7 +1,9 @@
 import {throttle, format} from "../../../common/script/utils/commonUtils";
 import {getCartItems} from "../../../api/cart/getCartItems";
 import {clearCart, deleteCartItem} from "../../../api/cart/deleteCartItem";
+import {aliPay} from "../../../api/payment/pay";
 import showMessage from "../../../common/script/utils/message";
+import message from "../../../common/script/utils/message";
 
 let selectAllBtn = document.querySelector('.select-all')
 let checkBtn = document.querySelector('.check')
@@ -28,21 +30,22 @@ function calcSum(value) {
 
 async function generateCartItems() {
   //获取用户购物车
-  let res = await getCartItems({
-    headTime: time1,
-    pageNum: 1,
-    pageSize: 10
-  })
-
-  //获取购物车内容失败
-  if(res.code !== 200) {
+  let res;
+  try {
+    res = await getCartItems({
+      headTime: time1,
+      pageNum: 1,
+      pageSize: 10
+    })
+  } catch (e) {
     showMessage({
-      message: '获取购物车内容失败',
+      message: `${e.code} ${e.msg}`,
       duration: 700,
       type: 'error'
-    })
-    return
+    });
+    return;
   }
+
   cartItems = res.data.cartItemVOList
 
   //生成购物车中的商品
@@ -96,15 +99,29 @@ async function generateCartItems() {
     if (itemsInfo.length !== 0) {
       sessionStorage.setItem("paymentData", JSON.stringify(itemsInfo));
       try {
-        const res = await clearCart();
+        console.log(itemsInfo);
+        const payPayload = {
+          orderItemList: itemsInfo.map(val => parseInt(val.courseId)),
+          totalPrice: itemsInfo.reduce((sum, val) => sum + parseInt(val.price), 0)
+        }
+        console.log(payPayload);
+        const order = await aliPay(payPayload);
+        console.log(order);
+        // await clearCart();
         // 将要生成订单，因此需要清空购物车。
-        console.log(res);
-        window.location.href = `${process.env.STATIC_SERVER}/html/payment.html`;
+        // window.location.href = `${process.env.STATIC_SERVER}/html/payment.html`;
       } catch (e) {
-        console.log(e);
+        message({
+          message: e.code ? `${e.code} ${e.msg}` : e,
+          type: 'error',
+          duration: 1500,
+        });
       }
     } else {
-      console.log('没有商品');
+      message({
+        message: '购物车没有商品!',
+        type: 'error'
+      })
     }
   }, 1000));
 
@@ -179,7 +196,5 @@ async function generateCartItems() {
 }
 
 window.addEventListener('load', () => {
-
-  generateCartItems().then(r => {});
-
+  generateCartItems().then();
 })

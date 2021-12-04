@@ -24,7 +24,8 @@ export default class Verification {
     if (avatar === undefined) return "请上传头像";
     const size = avatar.size / 1024,
       // file.size 是以 Byte 为单位的。
-      fileType = avatar.name.match(/\.[a-z]+$/)[0];
+      fileType = avatar.name.toLowerCase().match(/\.[a-z]+$/)[0];
+      // 图片后缀名可能是大写，因此在这里需要进行大小写的转化。
     if (!/^\.(jpe?g|png)$/.test(fileType)) return `只支持 jpg 和 png 格式，不支持 ${fileType} 格式`;
     if (size > 256) return `图片大小应在 256KB 以下，当前图片大小为 ${size.toFixed(2)}KB`;
   }

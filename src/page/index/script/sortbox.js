@@ -5,24 +5,32 @@ let response
 let systems
 async function generateSystems() {
   try {
-    response = await getSystems()
+    response = await getSystems();
     systems = response.data.slice(0, 6)
-    console.log(systems)
 
     let systemNav = document.getElementsByClassName('system-nav')[0]
     let content = document.getElementsByClassName('sort-content')[0]
 
-    let roundboxFragment = document.createDocumentFragment()
+    let roundboxFragment = document.createDocumentFragment();
 
+    const colors = [
+      '#2B9B27',
+      '#2845E1',
+      '#03035C',
+      '#3E0DA7',
+      '#E87B17',
+      '#E51C23',
+    ];
 
     //推荐的体系
-    for(let system of systems) {
+    for(let index in systems) {
       let link = document.createElement('a')
-      link.href = `#${system.title}`
+      link.style.cssText = `background-color: ${colors[index]}`;
+      link.href = `#${systems[index].title}`
       //系统化学习
       let roundBox = document.createElement('div')
       link.classList.add('round-box')
-      let text = document.createTextNode(system.title)
+      let text = document.createTextNode(systems[index].title)
       roundBox.appendChild(text)
       link.appendChild(roundBox)
       roundboxFragment.appendChild(link)
@@ -54,16 +62,15 @@ async function generateSystems() {
       sortTitle.appendChild(titleSpan)
       sortTitle.appendChild(moreSpan)
       courses.appendChild(sortTitle)
-
       //具体课程
-      let coursesInfo = system.courses
-      if(coursesInfo[0] !== null) {
+      let coursesInfo = system.courses;
+      if(coursesInfo.length !== 0) {
         for(let courseInfo of coursesInfo) {
           let link = document.createElement('a')
           link.href = `${process.env.STATIC_SERVER}/html/course.html?courseId=${courseInfo.courseId}`
 
           let classBox = document.createElement('div')
-          classBox.classList.add('classbox')
+          classBox.classList.add('classbox');
 
           //课程封面
           let classPic = document.createElement('div')
@@ -90,7 +97,6 @@ async function generateSystems() {
           classBox.appendChild(classnameSpan)
           classBox.appendChild(classintroSpan)
           classBox.appendChild(priceSpan)
-
           courses.appendChild(classBox)
         }
       } else {

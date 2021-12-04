@@ -1,7 +1,8 @@
 import generateOrder from "../../../api/order/generateOrder";
 
-window.addEventListener('load', () => {
-  document.querySelector('.payment-avatar').src = window.$store.userAvatar
+window.addEventListener('DOMContentLoaded', () => {
+  document.querySelector('.payment-avatar').src = window.$store.userAvatarGetter();
+  document.querySelector('.account-info').innerHTML = `购买账号：<span>${window.$store.truenameGetter() ? window.$store.nicknameGetter() + '(' + window.$store.truenameGetter() + ')' : window.$store.nicknameGetter()}<span class="num">（${window.$store.snoGetter()}）</span></span>`;
   let folder = document.querySelector('.folder')
   let methods = document.querySelector('.others')
   folder.addEventListener('click', () => {

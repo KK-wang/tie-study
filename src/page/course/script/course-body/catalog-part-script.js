@@ -1,12 +1,12 @@
 import { getChapter, getLesson, submitEva } from "../../../../api/course/catalog";
 import {getQuery} from "../../../../common/script/utils/commonUtils";
 import {debounce} from "../../../../common/script/utils/commonUtils";
+import message from "../../../../common/script/utils/message";
 
 function changeIsGiveStarsActive() {
-  const giveStars = document.querySelector('.give-stars'), labels = document.querySelector('.give-stars label');
-  labels.addEventListener('click', () => {
-    const classList = giveStars.attr('class').split(" ");
-    if (classList.indexOf('active') === -1) giveStars.addClass('active');
+  const giveStars = document.querySelector('.give-stars');
+  giveStars.addEventListener('click', () => {
+    if (giveStars.classList.length !== 2) giveStars.classList.add('active');
   });
 }
 
@@ -22,13 +22,12 @@ function renderProgressBar(halfFull, full, total, continueTitle) {
   learningProgressBarNext.innerHTML = `下一课时 : <span>${continueTitle}</span>`;
 }
 
-async function generateChapterAndLesson() {
+async function generateChapterAndLesson(isBought) {
   try {
     const courseId = parseInt(getQuery().courseId);
     const res = await getChapter(courseId);
     // getChapter 获取章节。
     const data = res.data;
-    console.log(data, "chapter");
     /* 通过 sort 给 data 进行排序。*/
     data.sort((a, b) => parseInt(a.sort) - parseInt(b.sort));
 
@@ -36,6 +35,16 @@ async function generateChapterAndLesson() {
     // full 为上完了多少课时，total 为一共有多少课时。
     // 使用 innerHTML 添加 DOM。
     const chapterParent = document.querySelector('.catalog-and-evaluate .panel-li-catalog-container .panel-li-catalog');
+    if (!isBought) chapterParent.addEventListener('click', (e) => {
+      // 事件委托。
+      if (e.target.tagName === 'A' && e.target.classList[0] === 'class-li') {
+        message({
+          message: '请先购买课程!',
+          type: 'error',
+          duration: 1500,
+        });
+      }
+    });
 
     for (let i = 0; i < data.length; i++) {
       /* await 也会阻塞 for 循环的执行，只有在 await 等到结果之后，for 循环才会再继续下去。*/
@@ -56,7 +65,6 @@ async function generateChapterAndLesson() {
       const lessonRes = await getLesson(checkbox.value);
       // getLesson 获取课时。
       const lessonData = lessonRes.data;
-      console.log(lessonData, "lesson");
       /* 通过 sort 给 lessonData 进行排序。*/
       lessonData.sort((a, b) => parseInt(a.sort) - parseInt(b.sort));
 
@@ -70,8 +78,10 @@ async function generateChapterAndLesson() {
       for (let j = 0; j < lessonData.length; j++) {
         const lesson = document.createElement('a');
         lesson.classList.add('class-li');
-        lesson.setAttribute("href", `${process.env.STATIC_SERVER}/html/video.html?lessonId=${lessonData[j].lessonId}&courseId=${courseId}`);
-        // 这里应当设置一个自定义属性，保存一下 lessonId。
+        if (isBought) lesson.setAttribute("href", `${process.env.STATIC_SERVER}/html/video.html?lessonId=${lessonData[j].lessonId}&courseId=${courseId}`);
+        // 课程已购买。
+        else lesson.setAttribute("href", 'javascript:void(0);');
+        // 课程未购买。
         lesson.innerHTML = `
           <span>课时</span>
           <div class="class-li-state ${lessonData[j].isStudied === 2 ? 'full' : lessonData[j].isStudied === 1 ? 'half-full' : '' }"></div>
@@ -84,11 +94,14 @@ async function generateChapterAndLesson() {
         if (lessonData[j].isStudied !== 0) continueTitle = lessonData[j].title;
       }
     }
-
     renderProgressBar(halfFull, full, total, continueTitle);
     // 渲染进程条。
   } catch (e) {
-    console.log(e);
+    message({
+      message: e.code ? `${e.code} ${e.msg}` : e,
+      type: 'error',
+      duration: 1500,
+    })
   }
 }
 
@@ -113,16 +126,28 @@ function submitEvaluation() {
   // 提交课程评论。
   const commitEva = document.querySelector('.commit-btn'),
     commitEvaEventFunc = async (e) => {
-      commitEva.removeEventListener('click', commitEvaEventFunc);
-      const res = await submitEva(parseInt(query.courseId), content, parseInt(star));
-      console.log(res);
+      try {
+        await submitEva(parseInt(query.courseId), content, parseInt(star));
+        message({
+          message: '评价提交成功',
+          type: 'success',
+          duration: 1500,
+        });
+        commitEva.removeEventListener('click', commitEvaEventFunc);
+      } catch (e) {
+        message({
+          message: `${e.code} ${e.msg}`,
+          type: 'error',
+          duration: 1500,
+        })
+      }
     };
   commitEva.addEventListener('click', commitEvaEventFunc);
 }
 
-export default function () {
+export default function (isBought) {
   // 执行所有的代码。
   changeIsGiveStarsActive();
-  generateChapterAndLesson().then();
+  generateChapterAndLesson(isBought).then();
   submitEvaluation();
 }

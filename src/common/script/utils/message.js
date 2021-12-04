@@ -89,7 +89,7 @@ export default function ({ message, duration = 1000, type = 'info', onclose }) {
   `; // login 界面的 z-index 是 9999。
   messageContainer.classList.add("message-container");
   document.body.insertBefore(messageContainer, document.body.firstChild);
-  setTimeout((onclose) => {
+  setTimeout(() => {
     try {
       // 为了防止 onclose 中出现异步操作，需要使用 await 阻塞一下。
       const container = shadowMessage.querySelector('.container');
@@ -101,14 +101,12 @@ export default function ({ message, duration = 1000, type = 'info', onclose }) {
     } catch (e) {
       console.log(e);
     }
-  }, duration, onclose);
+  }, duration);
 }
 
 const info = `<svg class="icon" viewBox="0 0 1024 1024" ><path d="M512 64a448 448 0 110 896.064A448 448 0 01512 64zm67.2 275.072c33.28 0 60.288-23.104 60.288-57.344s-27.072-57.344-60.288-57.344c-33.28 0-60.16 23.104-60.16 57.344s26.88 57.344 60.16 57.344zM590.912 699.2c0-6.848 2.368-24.64 1.024-34.752l-52.608 60.544c-10.88 11.456-24.512 19.392-30.912 17.28a12.992 12.992 0 01-8.256-14.72l87.68-276.992c7.168-35.136-12.544-67.2-54.336-71.296-44.096 0-108.992 44.736-148.48 101.504 0 6.784-1.28 23.68.064 33.792l52.544-60.608c10.88-11.328 23.552-19.328 29.952-17.152a12.8 12.8 0 017.808 16.128L388.48 728.576c-10.048 32.256 8.96 63.872 55.04 71.04 67.84 0 107.904-43.648 147.456-100.416z"/></svg>`
 
-
 const success = `<svg class="icon" viewBox="0 0 1024 1024" ><path d="M512 64a448 448 0 110 896 448 448 0 010-896zm-55.808 536.384l-99.52-99.584a38.4 38.4 0 10-54.336 54.336l126.72 126.72a38.272 38.272 0 0054.336 0l262.4-262.464a38.4 38.4 0 10-54.272-54.336L456.192 600.384z"/></svg>`;
-
 
 const warning = `<svg class="icon" viewBox="0 0 1024 1024" ><path d="M512 64a448 448 0 110 896 448 448 0 010-896zm0 192a58.432 58.432 0 00-58.24 63.744l23.36 256.384a35.072 35.072 0 0069.76 0l23.296-256.384A58.432 58.432 0 00512 256zm0 512a51.2 51.2 0 100-102.4 51.2 51.2 0 000 102.4z"/></svg>`;
 

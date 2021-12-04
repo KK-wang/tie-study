@@ -19,6 +19,9 @@ export default function () {
   document.querySelector('span.my-course.btn').addEventListener('click', () => {
     window.location.href = `${process.env.STATIC_SERVER}/html/mycourse.html`;
   });
+  document.querySelector('span.profile.btn').addEventListener('click', () => {
+    window.location.href = `${process.env.STATIC_SERVER}/html/profile.html`;
+  });
   document.querySelector('.quit-btn').addEventListener('click', () => {
     Cookie.remove("token");
     window.location.href = `${process.env.STATIC_SERVER}/html/index.html`;

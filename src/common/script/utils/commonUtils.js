@@ -2,29 +2,33 @@
 
 // （自己写的）函数防抖，没有利用到闭包。
 function debounce(fn, args, delay) {
-  if ("debounceTimer" in fn) {
-    // 如果 fn 有 debounceTimer 属性。
-    clearTimeout(fn.debounceTimer);
-    fn.debounceTimer = setTimeout(() => {
-      fn(args);
-    }, delay);
-  } else {
-    // 如果没有 debounceTimer 属性。
-    fn.debounceTimer = setTimeout(() => {
-      fn(args);
-    }, delay);
+  let timer = null;
+  return function () {
+    if (timer !== null) {
+      // 如果 timer 不是 null。
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        fn(args);
+      }, delay);
+    } else {
+      // 如果 timer 是 null。
+      timer = setTimeout(() => {
+        fn(args);
+        /* 函数防抖会在 delay 时间到的时候再执行。*/
+      }, delay);
+    }
   }
 }
 
 
 // 函数节流。
 function throttle (fn, delay) {
-  let timer = null
+  let timer = null;
   return function () {
     if (timer !== null) {
       return;
     }
-    fn();
+    fn(); /* 函数节流会立即执行一次。*/
     timer = setTimeout(() => {
       timer = null;
     }, delay)
@@ -45,13 +49,12 @@ function getQuery () {
 //日期格式化
 function format(date, fmt) {
   let o = {
-    "M+" : date.getMonth()+1,                 //月份
-    "d+" : date.getDate(),                    //日
-    "h+" : date.getHours(),                   //小时
-    "m+" : date.getMinutes(),                 //分
-    "s+" : date.getSeconds(),                 //秒
-    "q+" : Math.floor((date.getMonth()+3)/3), //季度
-    "S"  : date.getMilliseconds()             //毫秒
+    "M+" : date.getMonth() + 1,               // 月份。
+    "d+" : date.getDate(),                    // 日。
+    "h+" : date.getHours(),                   // 小时。
+    "m+" : date.getMinutes(),                 // 分。
+    "s+" : date.getSeconds(),                 // 秒。
+    "S"  : date.getMilliseconds()             // 毫秒。
   };
   if(/(y+)/.test(fmt)) {
     fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length));

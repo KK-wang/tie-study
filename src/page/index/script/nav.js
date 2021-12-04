@@ -1,8 +1,8 @@
 import '../../../component/footer/script/index'
 import {getSort} from "../../../api/index/sort";
 
-getSort({}).then(res => {
-  console.log(res)
+getSort().then(res => {
+  console.log('分类还没有完成!')
 }).catch(err => {
   console.log(err);
   // 分类还没有去做。
