@@ -1,30 +1,32 @@
-import img1 from '../../../assets/img/index/1.png'
-import img2 from '../../../assets/img/index/2.png'
-import img3 from '../../../assets/img/index/3.png'
 import {getBanners} from "../../../api/index/system";
 import loadingFail from '@/assets/svg/index/loading-fail.svg';
 
 window.addEventListener('load', () => {
   getBanners().then(res => {
-    let arr = [img1, img2, img3, img1, img2, img3, img1]
-    let index = 0
     let img = document.querySelector(".bannerimg")
-    img.src = arr[index]
+    let link = document.querySelector('.banner-content a')
+    let origin = window.location.origin
     let activeIndex = 0
     let banners = res.data
     let menu = document.querySelector('.menu')
     let menuItems = []
+
     banners.forEach((banner, index) => {
       if(banner.show) {
         let a = document.createElement('a')
+
         if(index === 0) a.classList.add('active')
         a.classList.add('menu-item')
-        a.appendChild(document.createTextNode(banner.title))
+        let span = document.createElement('span')
+        span.appendChild(document.createTextNode(banner.title))
+        a.appendChild(span)
+
         a.addEventListener('click', () => {
           menuItems[activeIndex].classList.remove('active')
           activeIndex = index
           menuItems[activeIndex].classList.add('active')
-          img.src = arr[activeIndex]
+          link.href = origin + '/html/course.html?courseId=' + banners[activeIndex].courseId
+          img.src = banner.cover
         })
         menuItems.push(a)
       }
@@ -36,8 +38,9 @@ window.addEventListener('load', () => {
     window.setInterval(() => {
       menuItems[activeIndex].classList.remove('active')
       activeIndex = (activeIndex + 1)%banners.length
+      link.href = origin + '/html/course.html?courseId=' + banners[activeIndex].courseId
       menuItems[activeIndex].classList.add('active')
-      img.src = arr[activeIndex]
+      img.src = banners[activeIndex].cover
     }, 3000)
   }).catch(() => {
     document.querySelector(".bannerimg").src = loadingFail;
