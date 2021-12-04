@@ -39,7 +39,7 @@
     height: 412px;
     width: 1152px;
     position: relative;
-    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0px -1px 2px -2px rgba(0,0,0, 0.16), 0px 3px 6px 0px rgba(0, 0, 0, 0.12), 0px 5px 12px 4px rgba(0, 0, 0, 0.09);
     border-radius: 0 0 8px 8px;
 
     .drop-menu {
@@ -90,45 +90,64 @@
     }
 
     img {
+      border-radius: 5px;
       margin-top: 0;
       width: 1152px;
       height: 412px;
     }
 
     .menu {
+
       margin-top: 0;
       position: absolute;
       top: 40px;
       right: 20px;
       width: 240px;
-      opacity: 0.6;
-      background-color:black;
+
 
       .menu-item + .menu-item {
-        border-top: 1px solid #bbbbbb;
+        margin-top: 1px;
       }
 
       .menu-item {
+        box-shadow: 0px -1px 2px -2px rgba(0,0,0, 0.16), 0px 3px 6px 0px rgba(0, 0, 0, 0.12), 0px 5px 12px 4px rgba(0, 0, 0, 0.09);
+        border-radius: 5px;
+        background-color: #ffffff;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 45px;
-        color: white;
+        color: black;
         text-align: center;
         width: 100%;
         z-index: 99;
-      }
 
-      .active {
-        color: mediumblue;
+        span {
+          width: 80%;
+          text-align: center;
+        }
 
         &::before {
           content: "";
           display: block;
           margin-left: 5px;
-          padding: 0px;
+          padding: 0;
           border: 10px solid transparent;
-          border-left: 10px solid mediumblue;
+          float: right;
+        }
+      }
+
+      .active {
+        color: rgb(66,139,202);
+        background-color: #e6f7ff;
+
+        &::before {
+          content: "";
+          display: block;
+          margin-left: 5px;
+          padding: 0;
+          border: 10px solid transparent;
+          border-left: 10px solid rgb(66,139,202);
           float: right;
         }
       }
@@ -196,12 +215,14 @@
       width: calc((100% - 4.5em) / 4);
 
       .classpic {
-        border-radius: 5px;
-
         img {
           border-radius: 5px;
           height: 161px;
           width: 100%;
+
+          &:hover {
+            box-shadow: 0px -1px 2px -2px rgba(0,0,0, 0.16), 0px 3px 6px 0px rgba(0, 0, 0, 0.12), 0px 5px 12px 4px rgba(0, 0, 0, 0.09);
+          }
         }
 
       }
