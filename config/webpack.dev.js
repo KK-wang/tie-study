@@ -29,7 +29,7 @@ module.exports = {
         changeOrigin: true
       },
       "/outerDevAPI": {
-        target: "http://project.sumixer.com:8088",
+        target: "https://project.sumixer.com:8081",
         pathRewrite: {
           "^/outerDevAPI": ""
         },

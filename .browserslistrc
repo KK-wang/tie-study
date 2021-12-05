@@ -1,3 +1,19 @@
 > 1%
 last 2 versions
 not dead
+not IE 11
+not and_chr 93
+not and_ff 92
+not and_qq 10.4
+not and_uc 12.12
+not android 93
+not baidu 7.12
+not ios_saf 14.5-14.7
+not ios_saf 14.0-14.4
+not kaios 2.5
+not op_mini all
+not op_mob 64
+not samsung 14.0
+not samsung 13.0
+
+

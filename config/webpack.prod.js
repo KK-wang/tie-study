@@ -1,5 +1,6 @@
 /* 自己封装的工具 */
 const resolveApp = require('./path');
+const AutoUploadPlugin = require('./plugin/AutoUploadPlugin');
 
 /* 第三方库 */
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
@@ -56,6 +57,12 @@ module.exports = {
     new Dotenv({
       path: './prod.env'
     }),
+    new AutoUploadPlugin({
+      host: "47.100.108.123",
+      username: "root",
+      password: "Sumixer@2020",
+      remotePath: "/usr/local/nginx/html/tie",
+    }),
   ],
   optimization: {
     chunkIds: 'deterministic', // 分包的命名，测试打包可以改为 named，
@@ -64,7 +71,12 @@ module.exports = {
     // minimizer 使用 webpack 默认配置的 minimizer，不需要编写 terser 文件。
     minimizer: [
       new TerserPlugin({
-        extractComments: false
+        extractComments: true,
+        terserOptions: {
+          compress: {
+            drop_console: true,
+          },
+        }
       })
     ],
     runtimeChunk: {

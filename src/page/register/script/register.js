@@ -71,7 +71,7 @@ export default class Register {
         password: passwordValue,
         email: emailValue,
         phone: phoneNumValue,
-        avatar: avatarURL.msg
+        avatar: avatarURL.data,
       };
       const info = await registerInfo(userInfo);
       // 注册成功。

@@ -26,6 +26,7 @@
     "html-webpack-skip-assets-plugin": "^1.0.2",
     "mini-css-extract-plugin": "^2.3.0",
     "node-sass": "^6.0.1",
+    "node-ssh": "^12.0.2",
     "postcss-loader": "^6.1.1",
     "postcss-preset-env": "^6.7.0",
     "purgecss-webpack-plugin": "^4.0.3",
@@ -39,6 +40,5 @@
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^4.2.1",
     "webpack-merge": "^5.8.0"
-  },
-  "dependencies": {}
+  }
 }

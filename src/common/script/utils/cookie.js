@@ -38,7 +38,7 @@ export default class Cookie {
 
   static remove(key) {
     // 没有直接删除已有 cookie 的方法。只能再次设置同名 cookie（包括相同路径、域和安全选项），但要将其过期时间设置为某个过去的时间。
-    Cookie.set(key, "", new Date(0));
+    this.set(key, "", -1);
   }
 
 }

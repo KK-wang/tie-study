@@ -6,7 +6,6 @@ import collectionInvoker from "../../../api/course/collection";
 
 function collection(isCollect, courseId) {
   const collection = document.querySelector('.collection');
-  console.log(collection);
   if (isCollect) collection.classList.add('active');
   collection.addEventListener('click', async function () {
     try {
@@ -100,7 +99,7 @@ export default async function fillDataInfo() {
 
     // 获取多少人学过。
     const learnedNums = document.querySelector('.learned-nums');
-    learnedNums.textContent = data.saleNum;
+    learnedNums.textContent = `有 ${data.saleNum} 人学过`;
 
     // 获取课程评价星级。
     const stars = document.querySelector('.stars');

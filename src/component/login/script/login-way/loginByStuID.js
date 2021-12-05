@@ -19,7 +19,7 @@ export default class {
   async loginByStuIDInvoker() {
     this.stuIDLoginPanelBtn.removeEventListener('click', this.loginByStuIDInvokerWithThis);
     // 防止用户多次点击后，出现重复发送登录请求的状况。
-    const stuIdInput = document.querySelector('.stuID-login-panel .enter-info-input[type="text"]'),
+    const stuIdInput = document.querySelector('.stuID-login-panel .enter-info-input'),
       passwordInput = document.querySelector('.stuID-login-panel .enter-info-input[type="password"]');
     let stuID = stuIdInput.value, password = passwordInput.value;
 

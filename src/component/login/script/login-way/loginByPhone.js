@@ -28,7 +28,7 @@ export default class {
     return async () => {
       if (timer !== null) return;
       try {
-        const phoneValue = document.querySelector('.phoneNum-login-panel .enter-info-input[type="text"]').value;
+        const phoneValue = document.querySelector('.phoneNum-login-panel .enter-info-input').value;
         const phoneInfo = Verification.validatePhoneNum(phoneValue);
         if (phoneInfo !== undefined) throw { msg: phoneInfo };
         // phoneValue 必须是合法的。
@@ -75,8 +75,8 @@ export default class {
   async loginByPhoneInvoker() {
     this.phoneLoginPanelBtn.removeEventListener("click", this.loginByPhoneInvokerWithThis);
     try {
-      const phoneValue = document.querySelector('.phoneNum-login-panel .enter-info-input-with-svg:first-child .enter-info-input[type="text"]').value,
-        codeValue = document.querySelector('.phoneNum-login-panel .message-verification .enter-info-input[type="text"]').value;
+      const phoneValue = document.querySelector('.phoneNum-login-panel .enter-info-input-with-svg:first-child .enter-info-input').value,
+        codeValue = document.querySelector('.phoneNum-login-panel .message-verification .enter-info-input').value;
       const phoneInfo = Verification.validatePhoneNum(phoneValue);
       if (phoneInfo !== undefined) throw { msg: phoneInfo };
       const codeInfo = Verification.validateVerificationCode(codeValue);
