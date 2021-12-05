@@ -60,7 +60,7 @@ module.exports = {
     new AutoUploadPlugin({
       host: "47.100.108.123",
       username: "root",
-      password: "Sumixer@2020",
+      password: "",
       remotePath: "/usr/local/nginx/html/tie",
     }),
   ],
