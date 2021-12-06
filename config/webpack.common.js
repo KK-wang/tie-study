@@ -1,7 +1,7 @@
 /* 自己封装的工具 */
 const prodConfig = require('./webpack.prod');
 const devConfig = require('./webpack.dev');
-const resolveApp = require('./path');
+const resolveApp = require('./tools/path');
 
 /* 第三方库 */
 const { merge } = require('webpack-merge');
@@ -43,6 +43,8 @@ function commonConfig(isProduction) {
       mycourse: './src/page/mycourse/script/index.js',
       profile: './src/page/profile/script/index.js'
     },
+    stats: 'errors-only',
+    // 该配置能够使得 webpack 不输出 bundle 信息。
     output: {
       filename: 'js/[name].[hash:6].bundle.js',
       path: resolveApp('./dist'),

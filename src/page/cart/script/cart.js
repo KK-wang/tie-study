@@ -30,29 +30,21 @@ function calcSum(value) {
 
 async function generateCartItems() {
   //获取用户购物车
-  let res;
   try {
-    res = await getCartItems({
+    let res = await getCartItems({
       headTime: time1,
       pageNum: 1,
       pageSize: 10
-    })
-  } catch (e) {
-    showMessage({
-      message: `${e.code} ${e.msg}`,
-      duration: 700,
-      type: 'error'
     });
-    return;
-  }
 
-  cartItems = res.data.cartItemVOList
+    cartItems = res.data.cartItemVOList;
+    console.log(cartItems);
 
-  //生成购物车中的商品
-  let formHTML = ""
-  for(let cartItem of cartItems) {
-    money = (money * 1000 + cartItem.price * 1000) / 1000
-    formHTML += `<div class="cart-row cart-item">
+    //生成购物车中的商品
+    let formHTML = ""
+    for(let cartItem of cartItems) {
+      money = (money * 1000 + cartItem.price * 1000) / 1000
+      formHTML += `<div class="cart-row cart-item">
         <label>
           <input class="select" type="checkbox" value="${cartItem.courseId}">
         </label>
@@ -64,13 +56,20 @@ async function generateCartItems() {
           <svg t="1634461628889" class="icon" viewBox="0 0 1024 1024" p-id="5217" width="20" height="20"><path d="M840 288H688v-56c0-40-32-72-72-72h-208C368 160 336 192 336 232V288h-152c-12.8 0-24 11.2-24 24s11.2 24 24 24h656c12.8 0 24-11.2 24-24s-11.2-24-24-24zM384 288v-56c0-12.8 11.2-24 24-24h208c12.8 0 24 11.2 24 24V288H384zM758.4 384c-12.8 0-24 11.2-24 24v363.2c0 24-19.2 44.8-44.8 44.8H332.8c-24 0-44.8-19.2-44.8-44.8V408c0-12.8-11.2-24-24-24s-24 11.2-24 24v363.2c0 51.2 41.6 92.8 92.8 92.8h358.4c51.2 0 92.8-41.6 92.8-92.8V408c-1.6-12.8-12.8-24-25.6-24z" p-id="5218" fill="#8F8E94"></path><path d="M444.8 744v-336c0-12.8-11.2-24-24-24s-24 11.2-24 24v336c0 12.8 11.2 24 24 24s24-11.2 24-24zM627.2 744v-336c0-12.8-11.2-24-24-24s-24 11.2-24 24v336c0 12.8 11.2 24 24 24s24-11.2 24-24z" p-id="5219" fill="#8F8E94"></path></svg>
         </div>
 </div>`
-  }
-  cartItemsDiv.innerHTML = formHTML
-  sum.innerHTML = money
-  courseNum.innerHTML = cartItems.length
+    }
+    cartItemsDiv.innerHTML = formHTML
+    sum.innerHTML = money
+    courseNum.innerHTML = cartItems.length
 
-  if(cartItems.length) {
-    emptyCart.style.display = 'none'
+    if(cartItems.length) {
+      emptyCart.style.display = 'none'
+    }
+  } catch (e) {
+    showMessage({
+      message: `${e.code} ${e.msg}`,
+      duration: 700,
+      type: 'error'
+    });
   }
 
   opts = document.querySelectorAll('.opt')
@@ -101,7 +100,7 @@ async function generateCartItems() {
       try {
         const payPayload = {
           orderItemList: itemsInfo.map(val => parseInt(val.courseId)),
-          totalPrice: itemsInfo.reduce((sum, val) => sum + parseInt(val.price), 0)
+          totalPrice: itemsInfo.reduce((sum, val) => sum + val.price, 0)
         }
         /* 下面对回调回来的数据进行规范化。*/
         const order = await aliPay(payPayload), tempEl = document.createElement('div');
@@ -146,8 +145,8 @@ async function generateCartItems() {
       let len = deleteNodes.length
       //删除节点
       for(let i = 0; i < len; i++) {
-        calcSum(deleteItems[i])
-        deleteNodes.shift().remove()
+        calcSum(deleteItems[i]);
+        deleteNodes.shift().remove();
       }
       if(!cartItems.length) {
         emptyCart.style.display = 'flex'
@@ -158,12 +157,12 @@ async function generateCartItems() {
       showMessage({
         message: '删除成功',
         type: 'success'
-      })
+      });
     } else {
       showMessage({
         message: '删除失败',
         type: 'error'
-      })
+      });
     }
 
   }, 1000))

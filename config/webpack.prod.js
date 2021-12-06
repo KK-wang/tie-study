@@ -1,5 +1,5 @@
 /* 自己封装的工具 */
-const resolveApp = require('./path');
+const resolveApp = require('./tools/path');
 const AutoUploadPlugin = require('./plugin/AutoUploadPlugin');
 
 /* 第三方库 */
@@ -43,7 +43,7 @@ module.exports = {
     new BundleAnalyzerPlugin({
       openAnalyzer: false,
     }),
-    // 用来进行打包分析，只会分析 js 代码。
+    // 用来进行打包分析，只会分析 js 代码，其回调函数被挂载到了 hooks.done 上了。
     // new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime.+[.]js/]),
     // 将 runtime.js 文件内嵌到 html 中，减少 HTTP 的请求次数。
     /* 上述配置无法将 runtime 内嵌到 html 中，现在先略去吧。*/
@@ -60,7 +60,6 @@ module.exports = {
     new AutoUploadPlugin({
       host: "47.100.108.123",
       username: "root",
-      password: "",
       remotePath: "/usr/local/nginx/html/tie",
     }),
   ],
