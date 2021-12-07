@@ -57,12 +57,11 @@ class AutoUploadPlugin {
       console.log("--------------------<<AutoUploadPlugin---Start>>--------------------".blue.bold);
       const isUpload = readlineSync.keyInYN(`Do you want to upload the result of this packaging to the server? (just ${'[y]'.green.bold} or ${'[n]'.red.bold}, without ${'[Enter]'.white.bold})`);
       if (isUpload) {
-        this.password = readlineSync.question(`Please enter the password of the ${this.options.username} user whose IP address is ${this.options.host} >>> `.white.bold, {
+        this.password = readlineSync.question(`Please enter the password of the ${this.options.username} user whose IP address is ${this.options.host} ([Enter]to end) >>> `.white.bold, {
           hideEchoBack: true,
           mask: "*"
         });
       }
-      console.log("---------------------<<AutoUploadPlugin---End>>---------------------".blue.bold);
       return true;
     });
 
@@ -71,19 +70,36 @@ class AutoUploadPlugin {
     compiler.hooks.afterEmit.tapAsync("AutoUpload", async (compilation, callback) => {
       if (this.password === null) {
         callback();
+        console.log("---------------------<<AutoUploadPlugin---End>>---------------------".blue.bold);
         return;
       }
 
       // 1.获取输出的文件夹。
       const outputPath = compilation.outputOptions.path;
 
-      try {
-        // 2.使用 SSH 连接远程服务器。
-        await this.connectServer();
-        /* 只有 await async function 之后，从 async function 中 throw 出来的 error 才能够被 catch 到。*/
-      } catch (e) {
-        console.log("Failure: Password incorrect, please try again".red.bold);
-        process.exit(0);
+
+      // 2.使用 SSH 连接远程服务器。
+      let isUploadSuccess = true;
+      while (isUploadSuccess) {
+        // 密码输入错误之后允许用户重新输入。
+        try {
+          await this.connectServer();
+          /* 只有 await async function 之后，从 async function 中 throw 出来的 error 才能够被 catch 到。*/
+          isUploadSuccess = false;
+        } catch (e) {
+          const isContinue = readlineSync.keyInYN(`${'Failure: Password incorrect'.red.bold}, do you want to try again? (just ${'[y]'.green.bold} or ${'[n]'.red.bold}, without ${'[Enter]'.white.bold})`);
+          if (isContinue) {
+            this.password = readlineSync.question(`Please enter the password of the ${this.options.username} user whose IP address is ${this.options.host} ([Enter] to end) >>> `.white.bold, {
+              hideEchoBack: true,
+              mask: "*"
+            });
+          } else {
+            console.log("Information: Stop uploading to the server".white.bold);
+            callback();
+            console.log("---------------------<<AutoUploadPlugin---End>>---------------------".blue.bold);
+            return;
+          }
+        }
       }
 
       // 3.删除原来目录中的内容。
@@ -99,6 +115,7 @@ class AutoUploadPlugin {
 
       // 执行结束回调，表示完成异步操作。
       callback();
+      console.log("---------------------<<AutoUploadPlugin---End>>---------------------".blue.bold);
     });
   }
 }
