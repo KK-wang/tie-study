@@ -9,6 +9,8 @@ Cookie 有一个特性：
 
 另外，这里澄清一下 Cookie domain 属性的作用：
 
-domain 指定了 cookie 将要被发送至哪个或哪些域中。默认情况下，domain会被设置为创建该 cookie 的页面所在的域名，所以当给相同域名发送请求时该 cookie 会被发送至服务器。显示的指定 domain 选项可用来扩充 cookie 可发送域的数量。
+domain 指定了 cookie 将要被发送至哪个或哪些域中。默认情况下，domain 会被设置为创建该 cookie 的页面所在的域名，所以当给相同域名发送请求时该 cookie 会被发送至服务器。显示的指定 domain 选项可用来扩充 cookie 可发送域的数量。
 
 > 也正是因为上面所叙述的原因，CORS 才会默认不支持传递 Cookie 属性。
+
+对于 Cookie 中比较容易混淆的概念，可以看这里的[这篇文章](https://juejin.cn/post/6958413563799011365#heading-14) 。

@@ -11,6 +11,9 @@ const readlineSync = require('readline-sync');
 require('colors');
 // colors 使得 console.log() 输出的字符具有样式，这里不需要导出变量，只需要执行即可。
 
+const ora = require("ora");
+// 最新版的 ora 不支持 CommonJS，所以需要降版本到 v5.4.1。
+
 // const deasync = require('deasync');
 // deasync 可以使得异步变同步，本质上是通过事件循环实现的。
 /* 遗憾地是，目前这个应用场景没办法使用这个库，因为 webpack build 执行期间是一个黑盒，
@@ -29,6 +32,12 @@ class AutoUploadPlugin {
     this.ssh = new NodeSSH(); // 创建 ssh 实例。
     this.options = options; // 用户传入的选项，其中包括 remotePath、host、username。
     this.password = null;
+    this.validatePasswordOra = null;
+    this.uploadFilesOra = ora({
+      text: "Files uploading...".white.bold,
+      spinner: "aesthetic",
+      color: "yellow",
+    })
   }
 
   async connectServer() {
@@ -83,10 +92,19 @@ class AutoUploadPlugin {
       while (isUploadSuccess) {
         // 密码输入错误之后允许用户重新输入。
         try {
+          this.validatePasswordOra = ora({
+            text: "Password verifying...".white.bold,
+            spinner: "aesthetic",
+            color: "yellow",
+          });
+          this.validatePasswordOra.start();
           await this.connectServer();
           /* 只有 await async function 之后，从 async function 中 throw 出来的 error 才能够被 catch 到。*/
           isUploadSuccess = false;
+          this.validatePasswordOra.succeed();
+          console.log(`${'Success: Password incorrect'.green.bold}, start uploading files to the server:`);
         } catch (e) {
+          this.validatePasswordOra.fail();
           const isContinue = readlineSync.keyInYN(`${'Failure: Password incorrect'.red.bold}, do you want to try again? (just ${'[y]'.green.bold} or ${'[n]'.red.bold}, without ${'[Enter]'.white.bold})`);
           if (isContinue) {
             this.password = readlineSync.question(`Please enter the password of the ${this.options.username} user whose IP address is ${this.options.host} ([Enter] to end) >>> `.white.bold, {
@@ -102,6 +120,7 @@ class AutoUploadPlugin {
         }
       }
 
+      this.uploadFilesOra.start();
       // 3.删除原来目录中的内容。
       const serverDir = this.options.remotePath;
       await this.ssh.execCommand(`rm -rf ${serverDir}/*`);
@@ -111,6 +130,7 @@ class AutoUploadPlugin {
 
       // 5.关闭 ssh 连接。
       this.ssh.dispose();
+      this.uploadFilesOra.succeed();
       console.log("Success: Uploaded to the server".green.bold);
 
       // 执行结束回调，表示完成异步操作。

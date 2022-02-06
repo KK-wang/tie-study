@@ -28,6 +28,7 @@
     "mini-css-extract-plugin": "^2.3.0",
     "node-sass": "^6.0.1",
     "node-ssh": "^12.0.2",
+    "ora": "^5.4.1",
     "postcss-loader": "^6.1.1",
     "postcss-preset-env": "^6.7.0",
     "purgecss-webpack-plugin": "^4.0.3",
